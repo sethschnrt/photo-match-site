@@ -1,521 +1,396 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { useRef, useEffect, useState } from 'react'
 
-// Components
-const Logo = () => (
-  <svg 
-    viewBox="0 0 400 80" 
-    className="w-full h-full"
-    fill="none" 
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <text
-      x="50"
-      y="50"
-      fontSize="28"
-      fontWeight="700"
-      className="neon-glow pulse-glow"
-      fill="currentColor"
-    >
-      Photo
-    </text>
-    <g className="neon-glow pulse-glow">
-      <path
-        d="M200 35 L210 25 L220 35 L210 45 Z"
-        fill="currentColor"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-    </g>
-    <text
-      x="250"
-      y="50"
-      fontSize="28"
-      fontWeight="700"
-      className="neon-glow pulse-glow"
-      fill="currentColor"
-    >
-      Match
-    </text>
-  </svg>
-)
-
-const Counter = ({ end, duration = 2000 }: { end: number; duration?: number }) => {
+function Counter({ end, suffix = '', label }: { end: number; suffix?: string; label: string }) {
   const [count, setCount] = useState(0)
-  
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+
   useEffect(() => {
-    let startTime: number
-    let animationId: number
-    
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp
-      const progress = Math.min((timestamp - startTime) / duration, 1)
-      
+    if (!isInView) return
+    let start = 0
+    const duration = 2000
+    const step = (timestamp: number) => {
+      if (!start) start = timestamp
+      const progress = Math.min((timestamp - start) / duration, 1)
       setCount(Math.floor(progress * end))
-      
-      if (progress < 1) {
-        animationId = requestAnimationFrame(animate)
-      }
+      if (progress < 1) requestAnimationFrame(step)
     }
-    
-    animationId = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(animationId)
-  }, [end, duration])
-  
-  return <span className="counter">{count.toLocaleString()}</span>
+    requestAnimationFrame(step)
+  }, [isInView, end])
+
+  return (
+    <div ref={ref} className="text-center">
+      <div className="text-4xl md:text-5xl font-bold text-neon-pink font-mono tracking-tight">
+        {count.toLocaleString()}{suffix}
+      </div>
+      <div className="text-zinc-400 mt-2 text-sm uppercase tracking-widest">{label}</div>
+    </div>
+  )
+}
+
+function Section({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  return (
+    <motion.section
+      ref={ref}
+      initial={{ opacity: 0, y: 60 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className={className}
+    >
+      {children}
+    </motion.section>
+  )
+}
+
+function NeonLogo({ size = 'large' }: { size?: 'large' | 'small' }) {
+  const isLarge = size === 'large'
+  return (
+    <div className={`flex items-center justify-center gap-3 ${isLarge ? 'text-5xl md:text-7xl lg:text-8xl' : 'text-2xl'}`}>
+      <span className="font-bold neon-glow pulse-glow" style={{ fontStyle: 'italic' }}>Photo</span>
+      <span className="text-neon-pink neon-glow pulse-glow" style={{ fontSize: isLarge ? '0.6em' : '0.8em' }}>♥</span>
+      <span className="font-bold neon-glow pulse-glow" style={{ fontStyle: 'italic' }}>Match</span>
+    </div>
+  )
+}
+
+function HowItWorksStep({ number, emoji, title, desc }: { number: number; emoji: string; title: string; desc: string }) {
+  return (
+    <div className="relative group">
+      <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-neon-pink/20 border border-neon-pink/50 flex items-center justify-center text-xs font-mono text-neon-pink">
+        {number}
+      </div>
+      <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 md:p-8 hover:border-neon-pink/50 transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(255,0,110,0.15)] h-full">
+        <div className="text-4xl mb-4">{emoji}</div>
+        <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+        <p className="text-zinc-400 text-sm leading-relaxed">{desc}</p>
+      </div>
+    </div>
+  )
 }
 
 export default function Home() {
+  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; size: number; duration: number; delay: number }>>([])
+
+  useEffect(() => {
+    setParticles(
+      Array.from({ length: 30 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 3 + 1,
+        duration: Math.random() * 8 + 4,
+        delay: Math.random() * 5,
+      }))
+    )
+  }, [])
+
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 gradient-noise bg-noise opacity-30"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/50 to-black/80"></div>
-        
-        <div className="relative z-10 text-center max-w-4xl px-4">
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="mb-8"
+    <main className="bg-black text-white min-h-screen">
+      {/* ═══════════════════ HERO ═══════════════════ */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+        {/* Gradient background */}
+        <div className="absolute inset-0 gradient-noise" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,0,110,0.08)_0%,transparent_70%)]" />
+
+        {/* Floating particles */}
+        {particles.map((p) => (
+          <motion.div
+            key={p.id}
+            className="absolute rounded-full bg-neon-pink/30"
+            style={{ left: `${p.x}%`, top: `${p.y}%`, width: p.size, height: p.size }}
+            animate={{ y: [-20, 20, -20], opacity: [0.2, 0.6, 0.2] }}
+            transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        ))}
+
+        {/* Content */}
+        <div className="relative z-10 text-center max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <div className="w-96 h-20 mx-auto mb-6">
-              <Logo />
-            </div>
+            <NeonLogo />
           </motion.div>
-          
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-            className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
-          >
-            Get Matched.<br />
-            <span className="text-neon-pink-bright">Get Memories.</span>
-          </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-            className="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed"
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="text-3xl md:text-5xl font-bold mt-8 mb-4 tracking-tight"
           >
-            Austin's hottest nightlife experience. Pay $5, snap photos, answer questions, and get matched with someone special at the venue.
+            Get Matched. Get Memories.
           </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.9, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-6 justify-center"
+            transition={{ delay: 0.7, duration: 0.8 }}
+            className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto mb-10"
           >
-            <button className="neon-button px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform">
+            Pay $5. Snap photos. Answer a few questions. Get matched with someone at the venue. Keep the photo reel.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.8 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <a href="#how-it-works" className="neon-button px-8 py-4 rounded-full text-lg font-semibold tracking-wide">
               Find a Booth
-            </button>
-            <button className="bg-white/10 border-2 border-white/30 px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/20 transition-colors">
+            </a>
+            <a href="#venues" className="px-8 py-4 rounded-full text-lg font-semibold border border-zinc-700 text-zinc-300 hover:border-zinc-500 hover:text-white transition-all">
               Host a Booth
-            </button>
+            </a>
           </motion.div>
         </div>
-        
-        {/* Floating particles */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-neon-pink rounded-full opacity-50"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -100, 0],
-                opacity: [0.5, 1, 0.5],
-              }}
-              transition={{
-                duration: 4 + Math.random() * 4,
-                repeat: Infinity,
-                delay: Math.random() * 4,
-              }}
-            />
-          ))}
-        </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="w-6 h-10 border-2 border-zinc-700 rounded-full flex justify-center pt-2"
+          >
+            <div className="w-1.5 h-1.5 bg-neon-pink rounded-full" />
+          </motion.div>
+        </motion.div>
       </section>
 
-      {/* How It Works */}
-      <section className="section-padding relative">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.h2
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-center mb-16"
-          >
-            How It <span className="neon-glow">Works</span>
-          </motion.h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Walk Up",
-                description: "Find a Photo Match booth at your favorite Austin venue",
-                icon: "👋",
-              },
-              {
-                step: "02", 
-                title: "Snap Photos",
-                description: "Pay $5 and take fun photos for your printed reel",
-                icon: "📸",
-              },
-              {
-                step: "03",
-                title: "Answer Questions", 
-                description: "Quick personality questions help us find your perfect match",
-                icon: "💭",
-              },
-              {
-                step: "04",
-                title: "Get Matched",
-                description: "Connect with someone special at the same venue tonight",
-                icon: "💕",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center group"
-              >
-                <div className="relative mb-6">
-                  <div className="w-20 h-20 mx-auto bg-gradient-to-br from-neon-pink/20 to-neon-pink-bright/20 rounded-full flex items-center justify-center text-4xl mb-4 border border-neon-pink/30 group-hover:neon-box transition-all duration-300">
-                    {item.icon}
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-neon-pink rounded-full flex items-center justify-center text-sm font-bold text-black">
-                    {item.step}
-                  </div>
-                </div>
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-neon-pink-bright transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-gray-400 leading-relaxed">
-                  {item.description}
-                </p>
-              </motion.div>
-            ))}
+      {/* ═══════════════════ HOW IT WORKS ═══════════════════ */}
+      <Section className="section-padding px-6" delay={0}>
+        <div id="how-it-works" className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-neon-pink font-mono text-sm uppercase tracking-[0.3em] mb-4">How It Works</p>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Four steps to your next connection</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <HowItWorksStep number={1} emoji="📸" title="Walk Up" desc="Find a Photo Match booth at any partner bar or club on 6th Street. No app download needed to start." />
+            <HowItWorksStep number={2} emoji="🎞️" title="Strike a Pose" desc="Step in, get your photos taken. You walk away with a printed photo reel regardless." />
+            <HowItWorksStep number={3} emoji="💬" title="Quick Questions" desc="Answer 3 rapid-fire questions about your vibe tonight. Takes 15 seconds." />
+            <HowItWorksStep number={4} emoji="🔥" title="Get Your Match" desc="Our algorithm pairs you with someone at the same venue. Both of you get notified." />
           </div>
         </div>
-      </section>
+      </Section>
 
-      {/* The App */}
-      <section className="section-padding relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-neon-pink/5 to-transparent"></div>
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8">
-                See Where The <span className="neon-glow">Action</span> Is.
-                <br />
-                <span className="text-neon-pink-bright">In Real Time.</span>
+      {/* ═══════════════════ THE APP ═══════════════════ */}
+      <Section className="section-padding px-6" delay={0.1}>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left: Text */}
+            <div>
+              <p className="text-neon-pink font-mono text-sm uppercase tracking-[0.3em] mb-4">The App</p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+                See where the action is.{' '}
+                <span className="text-neon-pink">In real time.</span>
               </h2>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                Our mobile app shows live heat maps of booth activity across 6th Street. 
-                See which venues are buzzing and where the matches are happening right now.
+              <p className="text-zinc-400 text-lg leading-relaxed mb-8">
+                The Photo Match app shows you a live heat map of every booth on 6th Street. See which venues are popping off right now, how many people are getting matched, and head to where the energy is.
               </p>
-              <ul className="space-y-4 text-lg text-gray-300">
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-neon-pink rounded-full neon-glow"></div>
-                  Live venue activity tracking
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-neon-pink rounded-full neon-glow"></div>
-                  Real-time match notifications
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-neon-pink rounded-full neon-glow"></div>
-                  6th Street venue directory
-                </li>
-              </ul>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="phone-mockup"
-            >
-              <div className="phone-screen w-80 h-160 mx-auto p-4 relative">
-                <div className="w-full h-full bg-black rounded-xl p-6 relative overflow-hidden">
-                  <div className="text-center mb-6">
-                    <h3 className="text-white text-lg font-semibold">6th Street Heat Map</h3>
-                    <p className="text-gray-400 text-sm">Live Activity</p>
-                  </div>
-                  <div className="relative bg-gray-900 rounded-lg h-80 overflow-hidden">
-                    {/* Map background */}
-                    <div className="absolute inset-0 bg-gray-800 opacity-50"></div>
-                    {/* Heat spots */}
-                    {[
-                      { top: '20%', left: '30%', intensity: 'high' },
-                      { top: '40%', left: '60%', intensity: 'medium' },
-                      { top: '60%', left: '25%', intensity: 'high' },
-                      { top: '70%', left: '70%', intensity: 'low' },
-                      { top: '30%', left: '80%', intensity: 'medium' },
-                    ].map((spot, i) => (
-                      <div
-                        key={i}
-                        className={`absolute w-8 h-8 rounded-full ${
-                          spot.intensity === 'high' 
-                            ? 'bg-neon-pink neon-glow' 
-                            : spot.intensity === 'medium'
-                            ? 'bg-neon-pink-bright/70'
-                            : 'bg-neon-pink-dim/50'
-                        } animate-pulse`}
-                        style={{ top: spot.top, left: spot.left }}
-                      ></div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex items-center gap-3 text-zinc-300">
+                  <div className="w-10 h-10 rounded-full bg-neon-pink/10 border border-neon-pink/30 flex items-center justify-center text-sm">🗺️</div>
+                  <span>Live heat map</span>
+                </div>
+                <div className="flex items-center gap-3 text-zinc-300">
+                  <div className="w-10 h-10 rounded-full bg-neon-pink/10 border border-neon-pink/30 flex items-center justify-center text-sm">⚡</div>
+                  <span>Real-time activity</span>
+                </div>
+                <div className="flex items-center gap-3 text-zinc-300">
+                  <div className="w-10 h-10 rounded-full bg-neon-pink/10 border border-neon-pink/30 flex items-center justify-center text-sm">📍</div>
+                  <span>Venue finder</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Phone Mockup */}
+            <div className="flex justify-center phone-mockup">
+              <div className="phone-screen w-[280px] h-[560px] md:w-[300px] md:h-[600px] p-4 relative overflow-hidden">
+                {/* Status bar */}
+                <div className="flex justify-between items-center text-[10px] text-zinc-500 mb-4 px-2">
+                  <span>9:41</span>
+                  <span>⚡ 87%</span>
+                </div>
+                {/* App header */}
+                <div className="text-center mb-4">
+                  <div className="text-neon-pink font-bold text-lg">Photo ♥ Match</div>
+                  <div className="text-zinc-500 text-xs">6th Street, Austin</div>
+                </div>
+                {/* Heat map placeholder */}
+                <div className="bg-zinc-900 rounded-xl h-[280px] md:h-[320px] relative overflow-hidden">
+                  {/* Map grid lines */}
+                  <div className="absolute inset-0 opacity-10">
+                    {[...Array(8)].map((_, i) => (
+                      <div key={`h${i}`} className="absolute w-full h-px bg-zinc-500" style={{ top: `${(i + 1) * 12.5}%` }} />
                     ))}
-                    {/* Street labels */}
-                    <div className="absolute bottom-4 left-4 text-white text-xs">
-                      E 6th Street
-                    </div>
+                    {[...Array(8)].map((_, i) => (
+                      <div key={`v${i}`} className="absolute h-full w-px bg-zinc-500" style={{ left: `${(i + 1) * 12.5}%` }} />
+                    ))}
+                  </div>
+                  {/* Street label */}
+                  <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2">
+                    <div className="h-[2px] bg-zinc-700 mx-4" />
+                    <div className="text-[8px] text-zinc-600 text-center mt-1">E 6TH STREET</div>
+                  </div>
+                  {/* Heat spots */}
+                  <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }} transition={{ duration: 2, repeat: Infinity }}
+                    className="absolute w-12 h-12 rounded-full bg-neon-pink/40 blur-md" style={{ top: '35%', left: '25%' }} />
+                  <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.8, 0.4] }} transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }}
+                    className="absolute w-16 h-16 rounded-full bg-neon-pink/50 blur-md" style={{ top: '40%', left: '55%' }} />
+                  <motion.div animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.6, 0.3] }} transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+                    className="absolute w-10 h-10 rounded-full bg-neon-pink/30 blur-md" style={{ top: '30%', left: '75%' }} />
+                  {/* Booth pins */}
+                  <div className="absolute w-3 h-3 rounded-full bg-neon-pink border-2 border-white shadow-[0_0_8px_rgba(255,0,110,0.8)]" style={{ top: '38%', left: '30%' }} />
+                  <div className="absolute w-3 h-3 rounded-full bg-neon-pink border-2 border-white shadow-[0_0_8px_rgba(255,0,110,0.8)]" style={{ top: '43%', left: '62%' }} />
+                  <div className="absolute w-3 h-3 rounded-full bg-neon-pink border-2 border-white shadow-[0_0_8px_rgba(255,0,110,0.8)]" style={{ top: '33%', left: '78%' }} />
+                </div>
+                {/* Bottom stats */}
+                <div className="flex justify-between mt-4 px-2">
+                  <div className="text-center">
+                    <div className="text-neon-pink font-bold text-lg font-mono">127</div>
+                    <div className="text-zinc-500 text-[10px]">Active now</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-neon-pink font-bold text-lg font-mono">34</div>
+                    <div className="text-zinc-500 text-[10px]">Matches tonight</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-neon-pink font-bold text-lg font-mono">8</div>
+                    <div className="text-zinc-500 text-[10px]">Booths live</div>
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
-      </section>
+      </Section>
 
-      {/* For Venues */}
-      <section className="section-padding bg-gradient-to-br from-gray-900/50 to-black">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              For <span className="text-neon-pink-bright">Venues</span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Transform your venue into Austin's next hotspot. Photo Match drives traffic, 
-              keeps customers longer, and creates buzz that gets shared across social media.
-            </p>
-          </motion.div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "More Foot Traffic",
-                description: "Photo Match locations see 35% increase in new customers seeking the experience",
-                icon: "🚶‍♀️",
-                stat: "+35%",
-              },
-              {
-                title: "Longer Stays",
-                description: "Customers stay 50% longer while waiting for matches and taking photos",
-                icon: "⏰",
-                stat: "+50%",
-              },
-              {
-                title: "Social Media Buzz",
-                description: "Every photo reel gets shared, putting your venue in front of thousands",
-                icon: "📱",
-                stat: "2.8K",
-              },
-              {
-                title: "Revenue Share",
-                description: "Earn 40% of every $5 transaction plus increased bar sales",
-                icon: "💰",
-                stat: "40%",
-              },
-              {
-                title: "Zero Effort",
-                description: "We handle everything - setup, maintenance, customer support",
-                icon: "✨",
-                stat: "0",
-              },
-              {
-                title: "Analytics Dashboard",
-                description: "Track booth performance, peak hours, and customer demographics",
-                icon: "📊",
-                stat: "24/7",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-neon-pink/50 transition-all duration-300 group"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="text-3xl">{item.icon}</div>
-                  <div className="text-2xl font-bold text-neon-pink-bright group-hover:neon-glow transition-all">
-                    {item.stat}
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                <p className="text-gray-400">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <button className="neon-button px-10 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform">
-              Partner With Us
-            </button>
-          </motion.div>
+      {/* ═══════════════════ STATS ═══════════════════ */}
+      <Section className="section-padding-sm px-6 border-y border-zinc-900" delay={0}>
+        <div className="max-w-4xl mx-auto grid grid-cols-3 gap-8">
+          <Counter end={2847} label="Matches Made" />
+          <Counter end={47} label="Partner Venues" />
+          <Counter end={89} suffix="%" label="Match Rate" />
         </div>
-      </section>
+      </Section>
 
-      {/* Social Proof */}
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.h2
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-center mb-16"
-          >
-            Austin's <span className="neon-glow">#1</span> Nightlife Experience
-          </motion.h2>
-          
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {[
-              { number: 2847, label: "Matches Made", suffix: "" },
-              { number: 47, label: "Partner Venues", suffix: "" },
-              { number: 89, label: "Success Rate", suffix: "%" },
-            ].map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: i * 0.2 }}
-                viewport={{ once: true }}
-                className="text-center group"
-              >
-                <div className="text-5xl md:text-6xl font-bold text-neon-pink-bright mb-2 group-hover:neon-glow transition-all">
-                  <Counter end={stat.number} />{stat.suffix}
-                </div>
-                <div className="text-xl text-gray-300 font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                name: "Sarah & Jake",
-                text: "Met at Chupacabra on 6th Street through Photo Match. Dating for 3 months now!",
-                venue: "Chupacabra",
-              },
-              {
-                name: "Alex T.",
-                text: "Bar owner here. Photo Match brings in 20+ new customers every Friday night.",
-                venue: "Venue Owner",
-              },
-              {
-                name: "Maria & Chris", 
-                text: "The photos are so fun and the matching actually works. Best $5 I've ever spent!",
-                venue: "Lucky Lounge",
-              },
-            ].map((testimonial, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-neon-pink/30 transition-all duration-300"
-              >
-                <p className="text-gray-300 mb-4 italic">"{testimonial.text}"</p>
-                <div className="flex justify-between items-center">
-                  <div className="font-semibold text-white">{testimonial.name}</div>
-                  <div className="text-sm text-neon-pink">{testimonial.venue}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-black/80 border-t border-white/10 py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="col-span-2">
-              <div className="w-48 h-12 mb-4">
-                <Logo />
+      {/* ═══════════════════ FOR VENUES ═══════════════════ */}
+      <Section className="section-padding px-6" delay={0}>
+        <div id="venues" className="max-w-6xl mx-auto">
+          <div className="bg-gradient-to-br from-zinc-950 via-zinc-950 to-zinc-900 rounded-3xl border border-zinc-800 p-8 md:p-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <p className="text-neon-pink font-mono text-sm uppercase tracking-[0.3em] mb-4">For Venues</p>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+                  Turn your bar into <span className="text-neon-pink">the place to be</span>
+                </h2>
+                <p className="text-zinc-400 text-lg leading-relaxed mb-8">
+                  Photo Match brings people in and keeps them longer. Customers stay for their match. They come back because they had fun. Zero effort on your end.
+                </p>
+                <a href="#contact" className="neon-button inline-block px-8 py-4 rounded-full text-lg font-semibold">
+                  Partner With Us
+                </a>
               </div>
-              <p className="text-gray-400 mb-4">
-                Austin's premier nightlife photo booth experience.
-              </p>
-              <p className="text-neon-pink font-semibold">
-                Coming to 6th Street, Austin TX
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-white mb-4">For Users</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-neon-pink transition-colors">Find a Booth</a></li>
-                <li><a href="#" className="hover:text-neon-pink transition-colors">Download App</a></li>
-                <li><a href="#" className="hover:text-neon-pink transition-colors">How It Works</a></li>
-                <li><a href="#" className="hover:text-neon-pink transition-colors">Support</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-white mb-4">For Venues</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-neon-pink transition-colors">Partner With Us</a></li>
-                <li><a href="#" className="hover:text-neon-pink transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-neon-pink transition-colors">Analytics</a></li>
-                <li><a href="#" className="hover:text-neon-pink transition-colors">Contact Sales</a></li>
-              </ul>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { stat: '+35%', label: 'Foot traffic increase' },
+                  { stat: '+22min', label: 'Avg. longer stays' },
+                  { stat: '0', label: 'Setup effort' },
+                  { stat: '$$', label: 'Revenue share included' },
+                ].map((item, i) => (
+                  <div key={i} className="bg-black/50 border border-zinc-800 rounded-xl p-6 text-center hover:border-neon-pink/30 transition-all duration-300">
+                    <div className="text-2xl md:text-3xl font-bold text-neon-pink font-mono">{item.stat}</div>
+                    <div className="text-zinc-500 text-xs mt-2 uppercase tracking-wider">{item.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          
-          <div className="border-t border-white/10 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
-              © 2024 Photo Match. All rights reserved.
-            </p>
-            <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-neon-pink transition-colors">
-                Instagram
-              </a>
-              <a href="#" className="text-gray-400 hover:text-neon-pink transition-colors">
-                TikTok
-              </a>
-              <a href="#" className="text-gray-400 hover:text-neon-pink transition-colors">
-                Twitter
-              </a>
+        </div>
+      </Section>
+
+      {/* ═══════════════════ TESTIMONIALS ═══════════════════ */}
+      <Section className="section-padding px-6" delay={0}>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-neon-pink font-mono text-sm uppercase tracking-[0.3em] mb-4">What People Are Saying</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { quote: "We met at Maggie Mae's through Photo Match. Been dating for 3 months now. Best $5 I ever spent.", name: 'Sarah & Jake', detail: 'Matched on 6th Street' },
+              { quote: "Our Thursday nights went from slow to packed after we got a Photo Match booth. People literally come in asking for it.", name: 'Marcus Rivera', detail: 'Bar owner, Dirty Sixth' },
+              { quote: "Way less awkward than walking up to someone. The photo reel is a sick keepsake even if you don\'t match.", name: 'Daniela Torres', detail: 'UT Austin senior' },
+            ].map((t, i) => (
+              <div key={i} className="bg-zinc-950 border border-zinc-800 rounded-2xl p-8 hover:border-neon-pink/30 transition-all duration-500">
+                <p className="text-zinc-300 leading-relaxed mb-6">&ldquo;{t.quote}&rdquo;</p>
+                <div>
+                  <div className="font-semibold text-white">{t.name}</div>
+                  <div className="text-zinc-500 text-sm">{t.detail}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* ═══════════════════ CTA ═══════════════════ */}
+      <Section className="section-padding px-6" delay={0}>
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+            Ready to find your match?
+          </h2>
+          <p className="text-zinc-400 text-lg mb-10">
+            Coming to 6th Street, Austin TX. Download the app to find a booth near you.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#" className="neon-button px-8 py-4 rounded-full text-lg font-semibold">
+              Download the App
+            </a>
+            <a href="#venues" className="px-8 py-4 rounded-full text-lg font-semibold border border-zinc-700 text-zinc-300 hover:border-zinc-500 hover:text-white transition-all">
+              Venue Partnerships
+            </a>
+          </div>
+        </div>
+      </Section>
+
+      {/* ═══════════════════ FOOTER ═══════════════════ */}
+      <footer className="border-t border-zinc-900 py-12 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <div>
+              <NeonLogo size="small" />
+              <p className="text-zinc-600 text-sm mt-2">Coming to 6th Street, Austin TX</p>
+            </div>
+            <div className="flex gap-8 text-sm text-zinc-500">
+              <a href="#how-it-works" className="hover:text-white transition-colors">How It Works</a>
+              <a href="#venues" className="hover:text-white transition-colors">For Venues</a>
+              <a href="#" className="hover:text-white transition-colors">The App</a>
+              <a href="#" className="hover:text-white transition-colors">Contact</a>
+            </div>
+          </div>
+          <div className="mt-8 pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-zinc-700 text-xs">&copy; 2026 Photo Match. All rights reserved.</p>
+            <div className="flex gap-6 text-zinc-600 text-sm">
+              <a href="#" className="hover:text-neon-pink transition-colors">Instagram</a>
+              <a href="#" className="hover:text-neon-pink transition-colors">TikTok</a>
+              <a href="#" className="hover:text-neon-pink transition-colors">Twitter</a>
             </div>
           </div>
         </div>
       </footer>
-    </div>
+    </main>
   )
 }
