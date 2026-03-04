@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Variables */
+:root {
+  --neon-pink: #FF006E;
+  --neon-pink-bright: #FF2D7B;
+  --neon-pink-dim: #CC0056;
+  --bg-black: #000000;
+}
+
+/* Typography Setup */
+@layer base {
+  html {
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  }
+  
+  .font-mono {
+    font-family: var(--font-jetbrains), monospace;
+  }
+}
+
+/* Neon Glow Effects - Multiple Layers for Realistic LED Look */
+@layer components {
+  .neon-glow {
+    text-shadow: 
+      0 0 5px var(--neon-pink),
+      0 0 10px var(--neon-pink),
+      0 0 15px var(--neon-pink),
+      0 0 20px var(--neon-pink),
+      0 0 35px var(--neon-pink),
+      0 0 40px var(--neon-pink);
+    color: var(--neon-pink-bright);
+  }
+  
+  .neon-box {
+    box-shadow: 
+      0 0 5px var(--neon-pink),
+      0 0 10px var(--neon-pink),
+      0 0 15px var(--neon-pink),
+      0 0 20px rgba(255, 0, 110, 0.5),
+      inset 0 0 15px rgba(255, 0, 110, 0.1);
+    border: 1px solid var(--neon-pink);
+  }
+  
+  .neon-button {
+    background: rgba(255, 0, 110, 0.1);
+    border: 2px solid var(--neon-pink);
+    box-shadow: 
+      0 0 10px var(--neon-pink),
+      0 0 20px rgba(255, 0, 110, 0.5),
+      inset 0 0 20px rgba(255, 0, 110, 0.1);
+    color: var(--neon-pink-bright);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .neon-button:hover {
+    background: rgba(255, 0, 110, 0.2);
+    box-shadow: 
+      0 0 15px var(--neon-pink),
+      0 0 30px var(--neon-pink),
+      0 0 45px rgba(255, 0, 110, 0.7),
+      inset 0 0 30px rgba(255, 0, 110, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes pulseGlow {
+    from {
+      text-shadow: 
+        0 0 5px var(--neon-pink),
+        0 0 10px var(--neon-pink),
+        0 0 15px var(--neon-pink),
+        0 0 20px var(--neon-pink);
+    }
+    to {
+      text-shadow: 
+        0 0 10px var(--neon-pink),
+        0 0 20px var(--neon-pink),
+        0 0 30px var(--neon-pink),
+        0 0 40px var(--neon-pink),
+        0 0 50px var(--neon-pink);
+    }
+  }
+  
+  .gradient-noise {
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(255, 0, 110, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 45, 123, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(255, 0, 110, 0.1) 0%, transparent 50%);
+  }
+  
+  .phone-mockup {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+  
+  .phone-screen {
+    transform: rotateY(-15deg) rotateX(5deg);
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    border-radius: 2rem;
+    border: 4px solid #333;
+    box-shadow: 
+      0 20px 40px rgba(0,0,0,0.8),
+      0 0 20px rgba(255, 0, 110, 0.3);
+  }
+  
+  .counter {
+    font-family: var(--font-jetbrains), monospace;
+    font-weight: 600;
+  }
+  
+  .section-padding {
+    padding: 6rem 0;
+  }
+  
+  .section-padding-sm {
+    padding: 4rem 0;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-pink);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-pink-bright);
+}
+
+/* Selection */
+::selection {
+  background: var(--neon-pink);
+  color: white;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
