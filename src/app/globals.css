@@ -1,6 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-neon-pink: #FF006E;
+  --color-neon-pink-bright: #FF2D7B;
+  --color-neon-pink-dim: #CC0056;
+}
 
 /* Custom CSS Variables */
 :root {
