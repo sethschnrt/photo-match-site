@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
-import { Inter, Tilt_Neon } from 'next/font/google'
+import { Inter, Righteous } from 'next/font/google'
 import './globals.css'
 
-const tiltNeon = Tilt_Neon({
+const righteous = Righteous({
   subsets: ['latin'],
   variable: '--font-display',
+  weight: '400',
 })
 
 const inter = Inter({ 
@@ -30,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${tiltNeon.variable} ${inter.variable} antialiased`}>
+      <body className={`${righteous.variable} ${inter.variable} antialiased`}>
         {children}
       </body>
     </html>
