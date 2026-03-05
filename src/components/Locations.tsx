@@ -49,13 +49,16 @@ export default function Locations() {
               </div>
               <div className="flex items-center gap-2">
                 {venue.hot && (
-                  <motion.span
-                    animate={{ scale: [1, 1.2, 1] }}
+                  <motion.div
+                    animate={{ scale: [1, 1.15, 1] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
-                    className="text-sm"
+                    className="text-accent"
                   >
-                    🔥
-                  </motion.span>
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                      <path d="M12 22c4-4 8-7.5 8-12a8 8 0 00-16 0c0 4.5 4 8 8 12z" opacity="0.3" />
+                      <path d="M12 22c-1.5-2-3-3.5-3-6a3 3 0 016 0c0 2.5-1.5 4-3 6z" />
+                    </svg>
+                  </motion.div>
                 )}
                 <span
                   className={`text-xs font-[family-name:var(--font-mono)] px-3 py-1 rounded-full ${

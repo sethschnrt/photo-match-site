@@ -77,13 +77,16 @@ export default function ForVenues() {
           >
             <div className="glass-card aspect-[4/5] rounded-2xl flex items-center justify-center relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
-              <div className="text-center relative z-10 px-8">
-                <div className="text-6xl mb-4">🎪</div>
-                <p className="text-zinc-500 text-sm font-[family-name:var(--font-mono)] uppercase tracking-wider">
-                  Booth Preview
-                </p>
-                <p className="text-zinc-600 text-xs mt-2">
-                  Sleek, modern, fits any venue aesthetic
+              {/* Abstract booth visualization */}
+              <div className="relative z-10 w-full h-full flex flex-col items-center justify-center gap-6 px-8">
+                <div className="w-32 h-44 rounded-xl border border-zinc-800 bg-zinc-900/50 flex flex-col items-center justify-center gap-2 relative">
+                  <div className="w-8 h-8 rounded-full border-2 border-accent/40" />
+                  <div className="w-16 h-1 bg-zinc-800 rounded" />
+                  <div className="w-12 h-1 bg-zinc-800 rounded" />
+                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-20 h-1.5 bg-accent/20 rounded-full blur-sm" />
+                </div>
+                <p className="text-zinc-600 text-xs font-[family-name:var(--font-mono)] uppercase tracking-wider">
+                  Sleek. Modern. On-brand.
                 </p>
               </div>
             </div>

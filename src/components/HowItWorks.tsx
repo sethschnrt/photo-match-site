@@ -1,35 +1,36 @@
 'use client'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { IconBooth, IconFlash, IconHeart, IconSpark } from './Icons'
 
 const steps = [
   {
     num: '01',
     title: 'Step up to the booth',
     desc: 'Find a Photo Match booth at your favorite bar or club. They\'re hard to miss.',
-    icon: '📸',
+    Icon: IconBooth,
   },
   {
     num: '02',
     title: 'Strike a pose',
     desc: 'Get your photo reel printed. It\'s yours to keep — the night\'s best souvenir.',
-    icon: '⚡',
+    Icon: IconFlash,
   },
   {
     num: '03',
     title: 'Get matched',
     desc: 'Our algorithm pairs you with someone at this venue based on your vibe.',
-    icon: '💗',
+    Icon: IconHeart,
   },
   {
     num: '04',
     title: 'Meet your match',
     desc: 'Both of you get notified. The rest is up to you. No pressure, just connection.',
-    icon: '✨',
+    Icon: IconSpark,
   },
 ]
 
-function StepCard({ step, index }: { step: typeof steps[0]; index: number }) {
+function StepCard({ step, index }: { step: { num: string; title: string; desc: string; Icon: React.ComponentType<{ className?: string }> }; index: number }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
@@ -48,7 +49,9 @@ function StepCard({ step, index }: { step: typeof steps[0]; index: number }) {
         </span>
 
         {/* Icon */}
-        <div className="text-4xl mb-6">{step.icon}</div>
+        <div className="mb-6 text-accent">
+          <step.Icon className="w-8 h-8" />
+        </div>
 
         {/* Content */}
         <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 relative z-10">
