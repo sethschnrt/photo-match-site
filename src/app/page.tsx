@@ -1,8 +1,8 @@
 import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
+import SocialProof from '@/components/SocialProof'
 import HowItWorks from '@/components/HowItWorks'
 import Experience from '@/components/Experience'
-import SocialProof from '@/components/SocialProof'
 import ForVenues from '@/components/ForVenues'
 import AppPreview from '@/components/AppPreview'
 import Locations from '@/components/Locations'
@@ -13,9 +13,9 @@ export default function Home() {
     <main className="grain-overlay overflow-x-hidden">
       <Navigation />
       <Hero />
+      <SocialProof />
       <HowItWorks />
       <Experience />
-      <SocialProof />
       <ForVenues />
       <AppPreview />
       <Locations />
