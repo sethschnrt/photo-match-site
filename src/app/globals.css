@@ -14,13 +14,13 @@
 
 /* Font declarations outside @layer so they can't be overridden by Tailwind preflight */
 html {
-  font-family: var(--font-body), 'Inter', system-ui, sans-serif !important;
   background: #050505;
   color: #e5e5e5;
   overflow-x: hidden;
 }
 
 body {
+  font-family: var(--font-body), 'Inter', system-ui, sans-serif !important;
   overflow-x: hidden;
 }
 
