@@ -30,7 +30,8 @@ const steps = [
   },
 ]
 
-function StepCard({ step, index }: { step: { num: string; title: string; desc: string; Icon: React.ComponentType<{ className?: string }> }; index: number }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function StepCard({ step, index }: { step: { num: string; title: string; desc: string; Icon: any }; index: number }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
@@ -50,7 +51,7 @@ function StepCard({ step, index }: { step: { num: string; title: string; desc: s
 
         {/* Icon */}
         <div className="mb-6 text-accent">
-          <step.Icon className="w-8 h-8" />
+          <step.Icon size={36} weight="duotone" />
         </div>
 
         {/* Content */}
