@@ -6,9 +6,24 @@ const headlineWords = ['Find', 'Your', 'Match.', 'Tonight.']
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background gradient */}
+      {/* Layered backgrounds for depth */}
       <div className="absolute inset-0 bg-[#050505]" />
       <div className="absolute inset-0 gradient-mesh" />
+      
+      {/* Radial glow behind headline */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-accent/[0.04] blur-[120px] pointer-events-none" />
+      
+      {/* Grid pattern overlay for texture */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }}
+      />
+      
+      {/* Top gradient fade */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#050505] to-transparent z-20 pointer-events-none" />
       
       {/* Floating photo strip elements */}
       <motion.div
@@ -43,16 +58,16 @@ export default function Hero() {
         </motion.div>
 
         {/* Headline */}
-        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tight mb-8">
+        <h1 className="text-[3.5rem] sm:text-7xl md:text-[5.5rem] lg:text-[7rem] xl:text-[8rem] font-extrabold tracking-tighter mb-8 leading-[0.95]">
           {headlineWords.map((word, i) => (
             <motion.span
               key={word}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 + i * 0.12 }}
-              className={`inline-block mr-4 ${
+              initial={{ opacity: 0, y: 60, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 0.7, delay: 0.5 + i * 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className={`inline-block mr-3 sm:mr-5 ${
                 word === 'Match.' || word === 'Tonight.'
-                  ? 'text-accent'
+                  ? 'text-gradient'
                   : 'text-white'
               }`}
             >
@@ -81,14 +96,14 @@ export default function Hero() {
         >
           <a
             href="#app"
-            className="group px-8 py-4 rounded-full bg-accent text-white font-semibold text-lg hover:bg-accent-bright transition-all hover:shadow-[0_0_40px_rgba(255,0,110,0.3)] hover:-translate-y-0.5"
+            className="group relative px-8 py-4 rounded-full bg-accent text-white font-semibold text-lg hover:bg-accent-bright transition-all shadow-[0_0_20px_rgba(255,0,110,0.15)] hover:shadow-[0_0_50px_rgba(255,0,110,0.3)] hover:-translate-y-1 active:translate-y-0"
           >
             Download the App
             <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">&rarr;</span>
           </a>
           <a
             href="#venues"
-            className="px-8 py-4 rounded-full border border-zinc-700 text-zinc-300 font-medium text-lg hover:border-zinc-500 hover:text-white transition-all hover:-translate-y-0.5"
+            className="px-8 py-4 rounded-full border border-zinc-700/80 text-zinc-300 font-medium text-lg hover:border-accent/30 hover:text-white transition-all hover:-translate-y-1 hover:bg-white/[0.02] active:translate-y-0"
           >
             Host a Booth
           </a>
