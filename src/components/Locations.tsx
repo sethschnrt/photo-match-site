@@ -23,7 +23,7 @@ export default function Locations() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="font-[family-name:var(--font-mono)] text-accent text-xs tracking-[0.3em] uppercase block mb-4">
+          <span className="font-[family-name:var(--font-body)] font-medium text-accent text-xs tracking-[0.3em] uppercase block mb-4">
             Locations
           </span>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4">
@@ -59,7 +59,7 @@ export default function Locations() {
                   </motion.div>
                 )}
                 <span
-                  className={`text-xs font-[family-name:var(--font-mono)] px-3 py-1 rounded-full ${
+                  className={`text-xs font-[family-name:var(--font-body)] font-medium px-3 py-1 rounded-full ${
                     venue.status === 'Live'
                       ? 'bg-accent/10 text-accent border border-accent/20'
                       : 'bg-zinc-800 text-zinc-500 border border-zinc-700'
@@ -77,7 +77,7 @@ export default function Locations() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center text-zinc-600 text-sm mt-10 font-[family-name:var(--font-mono)]"
+          className="text-center text-zinc-600 text-sm mt-10 font-[family-name:var(--font-body)] font-medium"
         >
           Dallas, Houston, Nashville — coming 2026
         </motion.p>

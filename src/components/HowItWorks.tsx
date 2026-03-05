@@ -45,7 +45,7 @@ function StepCard({ step, index }: { step: { num: string; title: string; desc: s
     >
       <div className="glass-card p-8 sm:p-10 relative overflow-hidden transition-all duration-300">
         {/* Step number */}
-        <span className="font-[family-name:var(--font-mono)] text-accent/30 text-7xl sm:text-8xl font-bold absolute top-4 right-6 select-none group-hover:text-accent/50 transition-colors">
+        <span className="font-[family-name:var(--font-body)] font-medium text-accent/30 text-7xl sm:text-8xl font-bold absolute top-4 right-6 select-none group-hover:text-accent/50 transition-colors">
           {step.num}
         </span>
 
@@ -83,7 +83,7 @@ export default function HowItWorks() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <span className="font-[family-name:var(--font-mono)] text-accent text-xs tracking-[0.3em] uppercase block mb-4">
+          <span className="font-[family-name:var(--font-body)] font-medium text-accent text-xs tracking-[0.3em] uppercase block mb-4">
             How It Works
           </span>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white max-w-xl">

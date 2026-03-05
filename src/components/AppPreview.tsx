@@ -32,7 +32,7 @@ export default function AppPreview() {
                 <div className="rounded-[2rem] bg-[#0a0a0a] overflow-hidden aspect-[9/19.5]">
                   {/* Status bar */}
                   <div className="flex items-center justify-between px-6 pt-4 pb-2">
-                    <span className="text-[10px] text-zinc-500 font-[family-name:var(--font-mono)]">9:41</span>
+                    <span className="text-[10px] text-zinc-500 font-[family-name:var(--font-body)] font-medium">9:41</span>
                     <div className="flex gap-1">
                       <div className="w-3.5 h-1.5 rounded-sm bg-zinc-600" />
                       <div className="w-1.5 h-1.5 rounded-full bg-zinc-600" />
@@ -87,7 +87,7 @@ export default function AppPreview() {
                       </div>
                       <div>
                         <p className="text-white text-xs font-semibold">The Driskill</p>
-                        <p className="text-accent text-[10px] font-[family-name:var(--font-mono)]">
+                        <p className="text-accent text-[10px] font-[family-name:var(--font-body)] font-medium">
                           47 people matching now
                         </p>
                       </div>
@@ -108,7 +108,7 @@ export default function AppPreview() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="order-1 lg:order-2"
           >
-            <span className="font-[family-name:var(--font-mono)] text-accent text-xs tracking-[0.3em] uppercase block mb-4">
+            <span className="font-[family-name:var(--font-body)] font-medium text-accent text-xs tracking-[0.3em] uppercase block mb-4">
               The App
             </span>
             <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
@@ -137,7 +137,7 @@ export default function AppPreview() {
                 </div>
               </div>
             </div>
-            <p className="text-zinc-600 text-xs mt-3 font-[family-name:var(--font-mono)]">
+            <p className="text-zinc-600 text-xs mt-3 font-[family-name:var(--font-body)] font-medium">
               Coming soon — join the waitlist
             </p>
           </motion.div>

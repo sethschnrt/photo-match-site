@@ -1,23 +1,29 @@
 import type { Metadata } from 'next'
-import { Sora, DM_Sans, JetBrains_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
+import { Instrument_Sans } from 'next/font/google'
 import './globals.css'
 
-const sora = Sora({ 
-  subsets: ['latin'],
-  variable: '--font-sora',
-  weight: ['300', '400', '500', '600', '700', '800']
+const clashDisplay = localFont({
+  src: [
+    {
+      path: '../../public/fonts/ClashDisplay-Semibold.woff2',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/ClashDisplay-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-display',
+  display: 'swap',
 })
 
-const dmSans = DM_Sans({
+const instrumentSans = Instrument_Sans({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
-  weight: ['300', '400', '500', '600', '700']
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  weight: ['400', '500', '600']
+  variable: '--font-body',
+  weight: ['400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -38,7 +44,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${sora.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased`}>
+      <body className={`${clashDisplay.variable} ${instrumentSans.variable} antialiased`}>
         {children}
       </body>
     </html>

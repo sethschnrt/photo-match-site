@@ -9,9 +9,8 @@
   --color-surface-raised: #111111;
   --color-surface-glass: rgba(255, 255, 255, 0.03);
   --color-muted: #4B5563;
-  --font-display: var(--font-sora), system-ui, sans-serif;
-  --font-body: var(--font-dm-sans), system-ui, sans-serif;
-  --font-mono: var(--font-mono), 'JetBrains Mono', monospace;
+  --font-display: var(--font-display), system-ui, sans-serif;
+  --font-body: var(--font-body), system-ui, sans-serif;
 }
 
 /* Base */
