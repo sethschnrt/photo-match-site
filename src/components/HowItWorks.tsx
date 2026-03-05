@@ -6,26 +6,26 @@ import { Camera, Lightning, HeartStraight, Handshake } from '@phosphor-icons/rea
 const steps = [
   {
     num: '01',
-    title: 'Step up to the booth',
-    desc: 'Find a Photo Match booth at your favorite spot. They are impossible to miss.',
+    title: 'Walk up to the booth',
+    desc: 'Find a Photo Match booth at your favorite bar or club. Impossible to miss.',
     Icon: Camera,
   },
   {
     num: '02',
-    title: 'Strike a pose',
-    desc: 'Get your photo reel printed on the spot. Keep it, share it, stick it on your fridge.',
+    title: 'Get your photo reel',
+    desc: 'Pose, smile, be weird. Your reel prints instantly. It is yours to keep.',
     Icon: Lightning,
   },
   {
     num: '03',
-    title: 'Get matched',
-    desc: 'Our algorithm finds someone at this venue who matches your vibe. Both of you get notified.',
+    title: 'We find your match',
+    desc: 'Our algorithm pairs you with someone at this venue. Both of you get notified.',
     Icon: HeartStraight,
   },
   {
     num: '04',
-    title: 'Meet your match',
-    desc: 'Walk over, say hey. No screens, no swiping, just two people in the same place.',
+    title: 'Go say hey',
+    desc: 'Your match is already here. Walk over, introduce yourself. No pressure.',
     Icon: Handshake,
   },
 ]
@@ -35,38 +35,43 @@ export default function HowItWorks() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="how" className="section-large overflow-hidden" ref={ref}>
+    <section id="how" className="py-24 md:py-32 overflow-hidden" ref={ref}>
       <div className="container-site">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="mb-16"
-        >
-          <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">How It Works</p>
-          <h2>Four steps. No awkward openers.</h2>
-        </motion.div>
+        <div className="grid lg:grid-cols-5 gap-16">
+          {/* Left column - sticky heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-2"
+          >
+            <p className="text-accent font-medium text-sm tracking-widest uppercase mb-4">How It Works</p>
+            <h2>Four steps.<br />No swiping required.</h2>
+          </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.num}
-              initial={{ opacity: 0, y: 24 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
-              className="glass-card p-8 group"
-            >
-              <div className="flex items-center gap-3 mb-5">
-                <span className="text-accent text-xs font-semibold tracking-wider">{step.num}</span>
-                <div className="h-px flex-1 bg-white/[0.06]" />
-              </div>
-              <div className="text-accent mb-4">
-                <step.Icon size={28} weight="duotone" />
-              </div>
-              <h3 className="text-lg font-semibold mb-3">{step.title}</h3>
-              <p className="text-zinc-400 text-base leading-relaxed">{step.desc}</p>
-            </motion.div>
-          ))}
+          {/* Right column - steps */}
+          <div className="lg:col-span-3 space-y-0">
+            {steps.map((step, i) => (
+              <motion.div
+                key={step.num}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.15 + i * 0.1 }}
+                className="flex gap-6 py-8 border-b border-white/[0.06] first:pt-0 last:border-0 last:pb-0"
+              >
+                <div className="text-accent shrink-0 mt-1">
+                  <step.Icon size={24} weight="duotone" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-xs text-zinc-600 font-medium">{step.num}</span>
+                    <h3 className="text-lg font-semibold">{step.title}</h3>
+                  </div>
+                  <p className="text-zinc-400 leading-relaxed">{step.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -3,6 +3,7 @@ import Hero from '@/components/Hero'
 import SocialProof from '@/components/SocialProof'
 import HowItWorks from '@/components/HowItWorks'
 import Experience from '@/components/Experience'
+import Testimonial from '@/components/Testimonial'
 import ForVenues from '@/components/ForVenues'
 import AppPreview from '@/components/AppPreview'
 import Locations from '@/components/Locations'
@@ -16,6 +17,7 @@ export default function Home() {
       <SocialProof />
       <HowItWorks />
       <Experience />
+      <Testimonial />
       <ForVenues />
       <AppPreview />
       <Locations />
