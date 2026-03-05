@@ -1,119 +1,120 @@
 'use client'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden flex items-center">
-      {/* Brick wall background */}
-      <div className="absolute inset-0">
-        {/* Dark brick texture via CSS pattern */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundColor: '#1a1410',
-            backgroundImage: `
-              linear-gradient(to right, rgba(0,0,0,0.15) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(0,0,0,0.2) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(0,0,0,0.15) 1px, transparent 1px)
-            `,
-            backgroundSize: '68px 34px, 68px 34px, 34px 34px',
-            backgroundPosition: '0 0, 34px 17px, 0 0',
-          }}
-        />
-        {/* Subtle vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.7)_100%)]" />
-        {/* Light spill from the neon sign */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-[#FF006E]/[0.06] rounded-full blur-[100px] pointer-events-none" />
-      </div>
+    <section className="relative min-h-screen overflow-hidden flex items-center justify-center">
+      {/* Brick wall photo */}
+      <Image
+        src={`${basePath}/assets/images/brick-wall-2.jpg`}
+        alt=""
+        fill
+        className="object-cover"
+        priority
+      />
 
-      <div className="container-site relative z-10 pt-24 pb-20">
-        <div className="flex flex-col items-center text-center">
-          {/* LED Neon Sign */}
+      {/* Darken edges more */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(0,0,0,0.5)_70%,rgba(0,0,0,0.8)_100%)]" />
+
+      {/* Pink light spill from the sign onto the wall */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, delay: 0.5 }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[55%] w-[450px] h-[350px] bg-[#FF006E]/[0.08] rounded-full blur-[80px] pointer-events-none"
+      />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, delay: 0.5 }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[55%] w-[250px] h-[200px] bg-[#FF006E]/[0.12] rounded-full blur-[50px] pointer-events-none"
+      />
+
+      <div className="relative z-10 text-center px-6">
+        {/* Neon logo sign */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          className="relative mb-8"
+        >
+          {/* Glow layer behind logo */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <Image
+              src={`${basePath}/assets/logos/photo-match-logo.svg`}
+              alt=""
+              width={320}
+              height={200}
+              className="w-[280px] md:w-[360px] h-auto blur-[20px] opacity-60"
+            />
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <Image
+              src={`${basePath}/assets/logos/photo-match-logo.svg`}
+              alt=""
+              width={320}
+              height={200}
+              className="w-[280px] md:w-[360px] h-auto blur-[40px] opacity-30"
+            />
+          </div>
+          {/* Main logo */}
+          <Image
+            src={`${basePath}/assets/logos/photo-match-logo.svg`}
+            alt="Photo Match"
+            width={320}
+            height={200}
+            className="relative w-[280px] md:w-[360px] h-auto mx-auto drop-shadow-[0_0_15px_rgba(255,0,110,0.5)]"
+          />
+          {/* Subtle flicker on the whole sign */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5, delay: 0.3 }}
-            className="mb-12"
-          >
-            <div className="relative inline-block">
-              {/* Neon glow behind text */}
-              <div className="absolute inset-0 blur-[30px] opacity-50">
-                <p className="text-[clamp(2.5rem,7vw,5rem)] font-extrabold leading-[1.1] tracking-tight text-[#FF006E]">
-                  Find Your<br />Match Tonight
-                </p>
-              </div>
-              {/* Outer glow */}
-              <div className="absolute inset-0 blur-[60px] opacity-25">
-                <p className="text-[clamp(2.5rem,7vw,5rem)] font-extrabold leading-[1.1] tracking-tight text-[#FF006E]">
-                  Find Your<br />Match Tonight
-                </p>
-              </div>
-              {/* Main neon text */}
-              <h1
-                className="relative text-[clamp(2.5rem,7vw,5rem)] font-extrabold leading-[1.1] tracking-tight"
-                style={{
-                  color: '#fff',
-                  textShadow: `
-                    0 0 7px #FF006E,
-                    0 0 10px #FF006E,
-                    0 0 21px #FF006E,
-                    0 0 42px #FF006E80,
-                    0 0 82px #FF006E40
-                  `,
-                }}
-              >
-                Find Your<br />Match Tonight
-              </h1>
-              {/* Small flickering detail */}
-              <motion.div
-                animate={{ opacity: [1, 0.85, 1, 1, 0.9, 1, 1, 1, 0.88, 1] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-                className="absolute inset-0 pointer-events-none"
-                style={{ mixBlendMode: 'multiply' }}
-              />
-            </div>
-          </motion.div>
+            animate={{ opacity: [1, 0.92, 1, 1, 0.95, 1, 1, 0.88, 1, 1, 1] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
+            className="absolute inset-0"
+          />
+        </motion.div>
 
-          {/* Subtext */}
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8, ease: [0.4, 0, 0.2, 1] }}
-            className="text-zinc-400 text-lg mb-8 max-w-md leading-relaxed"
-          >
-            Step into the booth. Get your photo reel. We match you with someone here, right now. $5 flat.
-          </motion.p>
+        {/* Tagline below the sign */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.0, ease: [0.4, 0, 0.2, 1] }}
+          className="text-white/80 text-lg md:text-xl font-medium mb-3 tracking-tight"
+        >
+          The photo booth that finds your match.
+        </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 1.0 }}
-            className="text-accent/60 text-sm font-medium tracking-widest uppercase mb-8"
-          >
-            Live on 6th Street, Austin TX
-          </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 1.2 }}
+          className="text-zinc-500 text-sm mb-10"
+        >
+          $5 flat &middot; Live on 6th Street, Austin TX
+        </motion.p>
 
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.1, ease: [0.4, 0, 0.2, 1] }}
-            className="flex flex-wrap justify-center gap-4"
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.3, ease: [0.4, 0, 0.2, 1] }}
+          className="flex flex-wrap justify-center gap-4"
+        >
+          <a
+            href="#app"
+            className="px-7 py-3.5 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25 transition-all duration-200"
           >
-            <a
-              href="#app"
-              className="px-7 py-3.5 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/20 transition-all duration-200"
-            >
-              Download the App
-            </a>
-            <a
-              href="#how"
-              className="px-7 py-3.5 rounded-lg bg-white/10 text-white font-medium hover:bg-white/15 hover:-translate-y-0.5 transition-all duration-200 backdrop-blur-sm"
-            >
-              How It Works
-            </a>
-          </motion.div>
-        </div>
+            Download the App
+          </a>
+          <a
+            href="#how"
+            className="px-7 py-3.5 rounded-lg bg-white/10 text-white font-medium hover:bg-white/15 hover:-translate-y-0.5 transition-all duration-200 backdrop-blur-sm border border-white/[0.06]"
+          >
+            How It Works
+          </a>
+        </motion.div>
       </div>
     </section>
   )
