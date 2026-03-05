@@ -1,3 +1,4 @@
+import SmoothScroll from '@/components/SmoothScroll'
 import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
 import SocialProof from '@/components/SocialProof'
@@ -13,6 +14,7 @@ import Footer from '@/components/Footer'
 export default function Home() {
   return (
     <main className="grain-overlay overflow-x-hidden">
+      <SmoothScroll />
       <Navigation />
       <Hero />
       <SocialProof />
