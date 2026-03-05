@@ -43,7 +43,7 @@ function StepCard({ step, index }: { step: { num: string; title: string; desc: s
       transition={{ duration: 0.6, delay: index * 0.15 }}
       className="group relative"
     >
-      <div className="glass-card p-8 sm:p-10 relative overflow-hidden transition-all duration-300">
+      <div className="glass-card p-8 sm:p-10 relative overflow-visible transition-all duration-300">
         {/* Step number */}
         <span className="font-medium text-accent/30 text-7xl sm:text-8xl font-bold absolute top-4 right-6 select-none group-hover:text-accent/50 transition-colors">
           {step.num}

@@ -5,7 +5,7 @@ const headlineWords = ['Find', 'Your', 'Match.', 'Tonight.']
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-x-hidden">
       {/* Layered backgrounds for depth */}
       <div className="absolute inset-0 bg-[#050505]" />
       <div className="absolute inset-0 gradient-mesh" />
@@ -58,7 +58,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Headline */}
-        <h1 className="text-[3.5rem] sm:text-7xl md:text-[5.5rem] lg:text-[7rem] xl:text-[8rem] font-extrabold tracking-tighter mb-8 leading-[0.95]">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 leading-[1.05]">
           {headlineWords.map((word, i) => (
             <motion.span
               key={word}

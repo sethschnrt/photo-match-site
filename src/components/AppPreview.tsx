@@ -9,7 +9,7 @@ export default function AppPreview() {
   const isInView = useInView(ref, { once: true, margin: '-50px' })
 
   return (
-    <section id="app" className="section-gap relative overflow-hidden" ref={ref}>
+    <section id="app" className="section-gap relative overflow-x-hidden" ref={ref}>
       {/* Background accent */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-accent/[0.03] blur-[150px] pointer-events-none" />
 
