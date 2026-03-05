@@ -1,80 +1,104 @@
 'use client'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
-import Image from 'next/image'
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+import { motion } from 'framer-motion'
 
 export default function Hero() {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  })
-  
-  // Parallax: image moves slower than scroll
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
-
   return (
-    <section ref={ref} className="relative h-screen overflow-hidden">
-      {/* Parallax background image */}
-      <motion.div className="absolute inset-0" style={{ y }}>
-        <Image
-          src={`${basePath}/assets/images/hero-booth.jpg`}
-          alt="Friends in a Photo Match booth"
-          fill
-          className="object-cover scale-110"
-          priority
+    <section className="relative min-h-screen overflow-hidden flex items-center">
+      {/* Brick wall background */}
+      <div className="absolute inset-0">
+        {/* Dark brick texture via CSS pattern */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundColor: '#1a1410',
+            backgroundImage: `
+              linear-gradient(to right, rgba(0,0,0,0.15) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(0,0,0,0.2) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(0,0,0,0.15) 1px, transparent 1px)
+            `,
+            backgroundSize: '68px 34px, 68px 34px, 34px 34px',
+            backgroundPosition: '0 0, 34px 17px, 0 0',
+          }}
         />
-      </motion.div>
+        {/* Subtle vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.7)_100%)]" />
+        {/* Light spill from the neon sign */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-[#FF006E]/[0.06] rounded-full blur-[100px] pointer-events-none" />
+      </div>
 
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
-
-      <motion.div className="relative z-10 h-full flex flex-col justify-end pb-20 md:pb-28" style={{ opacity }}>
-        <div className="container-site">
-          <motion.p
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
-            className="text-accent font-semibold text-sm tracking-widest uppercase mb-4"
+      <div className="container-site relative z-10 pt-24 pb-20">
+        <div className="flex flex-col items-center text-center">
+          {/* LED Neon Sign */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5, delay: 0.3 }}
+            className="mb-12"
           >
-            Live on 6th Street, Austin TX
-          </motion.p>
+            <div className="relative inline-block">
+              {/* Neon glow behind text */}
+              <div className="absolute inset-0 blur-[30px] opacity-50">
+                <p className="text-[clamp(2.5rem,7vw,5rem)] font-extrabold leading-[1.1] tracking-tight text-[#FF006E]">
+                  Find Your<br />Match Tonight
+                </p>
+              </div>
+              {/* Outer glow */}
+              <div className="absolute inset-0 blur-[60px] opacity-25">
+                <p className="text-[clamp(2.5rem,7vw,5rem)] font-extrabold leading-[1.1] tracking-tight text-[#FF006E]">
+                  Find Your<br />Match Tonight
+                </p>
+              </div>
+              {/* Main neon text */}
+              <h1
+                className="relative text-[clamp(2.5rem,7vw,5rem)] font-extrabold leading-[1.1] tracking-tight"
+                style={{
+                  color: '#fff',
+                  textShadow: `
+                    0 0 7px #FF006E,
+                    0 0 10px #FF006E,
+                    0 0 21px #FF006E,
+                    0 0 42px #FF006E80,
+                    0 0 82px #FF006E40
+                  `,
+                }}
+              >
+                Find Your<br />Match Tonight
+              </h1>
+              {/* Small flickering detail */}
+              <motion.div
+                animate={{ opacity: [1, 0.85, 1, 1, 0.9, 1, 1, 1, 0.88, 1] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+                className="absolute inset-0 pointer-events-none"
+                style={{ mixBlendMode: 'multiply' }}
+              />
+            </div>
+          </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
-            className="max-w-2xl"
-          >
-            Find Your Match.{' '}
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.9 }}
-              className="text-accent"
-            >
-              Tonight.
-            </motion.span>
-          </motion.h1>
-
+          {/* Subtext */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6, ease: [0.4, 0, 0.2, 1] }}
-            className="text-white/70 text-lg mt-5 mb-8 max-w-md leading-relaxed"
+            transition={{ duration: 0.5, delay: 0.8, ease: [0.4, 0, 0.2, 1] }}
+            className="text-zinc-400 text-lg mb-8 max-w-md leading-relaxed"
           >
             Step into the booth. Get your photo reel. We match you with someone here, right now. $5 flat.
           </motion.p>
 
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 1.0 }}
+            className="text-accent/60 text-sm font-medium tracking-widest uppercase mb-8"
+          >
+            Live on 6th Street, Austin TX
+          </motion.p>
+
+          {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.75, ease: [0.4, 0, 0.2, 1] }}
-            className="flex flex-wrap gap-4"
+            transition={{ duration: 0.5, delay: 1.1, ease: [0.4, 0, 0.2, 1] }}
+            className="flex flex-wrap justify-center gap-4"
           >
             <a
               href="#app"
@@ -90,7 +114,7 @@ export default function Hero() {
             </a>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }
