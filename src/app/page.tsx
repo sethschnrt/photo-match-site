@@ -10,7 +10,7 @@ import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
-    <main className="grain-overlay">
+    <main className="grain-overlay overflow-x-hidden">
       <Navigation />
       <Hero />
       <HowItWorks />

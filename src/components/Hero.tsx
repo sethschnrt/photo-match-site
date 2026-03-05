@@ -5,7 +5,7 @@ const headlineWords = ['Find', 'Your', 'Match.', 'Tonight.']
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-x-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Layered backgrounds for depth */}
       <div className="absolute inset-0 bg-[#050505]" />
       <div className="absolute inset-0 gradient-mesh" />

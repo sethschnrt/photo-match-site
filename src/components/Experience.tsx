@@ -81,7 +81,7 @@ export default function Experience() {
   const isInView = useInView(ref, { once: true, margin: '-50px' })
 
   return (
-    <section id="experience" className="section-gap relative" ref={ref}>
+    <section id="experience" className="section-gap relative overflow-hidden" ref={ref}>
       {/* Ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/[0.03] blur-[120px] pointer-events-none" />
 

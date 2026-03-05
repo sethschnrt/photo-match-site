@@ -1,10 +1,16 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Nunito } from 'next/font/google'
 import './globals.css'
+
+const nunito = Nunito({
+  subsets: ['latin'],
+  variable: '--font-display',
+  weight: ['700', '800', '900'],
+})
 
 const inter = Inter({ 
   subsets: ['latin'],
-  variable: '--font-main',
+  variable: '--font-body',
 })
 
 export const metadata: Metadata = {
@@ -25,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} antialiased`}>
+      <body className={`${nunito.variable} ${inter.variable} antialiased`}>
         {children}
       </body>
     </html>

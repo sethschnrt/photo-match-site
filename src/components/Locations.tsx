@@ -15,7 +15,7 @@ export default function Locations() {
   const isInView = useInView(ref, { once: true, margin: '-50px' })
 
   return (
-    <section id="locations" className="section-gap relative" ref={ref}>
+    <section id="locations" className="section-gap relative overflow-hidden" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

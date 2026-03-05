@@ -60,7 +60,7 @@ export default function SocialProof() {
   const isInView = useInView(ref, { once: true, margin: '-50px' })
 
   return (
-    <section className="section-gap relative" ref={ref}>
+    <section className="section-gap relative overflow-hidden" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
         {/* Stats Row */}
         <motion.div

@@ -13,7 +13,7 @@ export default function ForVenues() {
   const isInView = useInView(ref, { once: true, margin: '-50px' })
 
   return (
-    <section id="venues" className="section-gap relative" ref={ref}>
+    <section id="venues" className="section-gap relative overflow-hidden" ref={ref}>
       {/* Subtle divider */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
 
