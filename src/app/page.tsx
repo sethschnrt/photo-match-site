@@ -1,6 +1,7 @@
 import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
 import SocialProof from '@/components/SocialProof'
+import VenueTicker from '@/components/VenueTicker'
 import HowItWorks from '@/components/HowItWorks'
 import Experience from '@/components/Experience'
 import Testimonial from '@/components/Testimonial'
@@ -15,6 +16,7 @@ export default function Home() {
       <Navigation />
       <Hero />
       <SocialProof />
+      <VenueTicker />
       <HowItWorks />
       <Experience />
       <Testimonial />

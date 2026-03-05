@@ -36,7 +36,7 @@ export default function Locations() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.1 + i * 0.06 }}
-              className="glass-card p-6 flex items-center justify-between group"
+              className="glass-card p-6 flex items-center justify-between group cursor-pointer"
             >
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-lg bg-white/[0.04] flex items-center justify-center text-accent">
