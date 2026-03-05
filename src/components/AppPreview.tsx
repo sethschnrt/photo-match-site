@@ -89,7 +89,7 @@ export default function AppPreview() {
           >
             <p className="text-accent font-medium text-sm tracking-wide uppercase mb-3">The App</p>
             <h2 className="mb-6">See who is out tonight.</h2>
-            <p className="text-zinc-400 text-lg leading-relaxed mb-8">
+            <p className="text-zinc-400 leading-relaxed mb-8 max-w-lg">
               The Photo Match app shows you which venues near you have active booths, live match rates, and how many people are using it right now. Find the spot with the best energy.
             </p>
 
