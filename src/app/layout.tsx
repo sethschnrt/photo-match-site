@@ -1,26 +1,32 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
+import { Sora, DM_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
-const spaceGrotesk = Space_Grotesk({ 
+const sora = Sora({ 
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
-  weight: ['400', '500', '600', '700']
+  variable: '--font-sora',
+  weight: ['300', '400', '500', '600', '700', '800']
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
+  weight: ['300', '400', '500', '600', '700']
 })
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  variable: '--font-jetbrains',
+  variable: '--font-mono',
   weight: ['400', '500', '600']
 })
 
 export const metadata: Metadata = {
-  title: 'Photo ♥ Match | Get Matched. Get Memories.',
-  description: 'Austin\'s premier nightlife photo booth experience. Pay $5, snap photos, get matched with someone special at the hottest venues on 6th Street.',
-  keywords: 'nightlife, photo booth, dating, Austin, 6th Street, nightclub, bars, matching',
+  title: 'Photo Match — Find Your Match Tonight',
+  description: 'The photo booth that connects you with someone at this venue. Right now. $5 flat. Live on 6th Street, Austin TX.',
+  keywords: 'photo booth, matching, nightlife, Austin, 6th Street, dating, bars, nightclub',
   openGraph: {
-    title: 'Photo ♥ Match | Get Matched. Get Memories.',
-    description: 'Austin\'s premier nightlife photo booth experience.',
+    title: 'Photo Match — Find Your Match Tonight',
+    description: 'The photo booth that connects you with someone at this venue. Right now.',
     type: 'website',
   },
 }
@@ -32,7 +38,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased bg-black overflow-x-hidden`}>
+      <body className={`${sora.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased`}>
         {children}
       </body>
     </html>
