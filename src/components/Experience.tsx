@@ -93,7 +93,7 @@ export default function Experience() {
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <span className="font-[family-name:var(--font-body)] font-medium text-accent text-xs tracking-[0.3em] uppercase block mb-4">
+          <span className="font-medium text-accent text-xs tracking-[0.3em] uppercase block mb-4">
             The Experience
           </span>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white">

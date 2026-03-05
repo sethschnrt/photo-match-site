@@ -52,7 +52,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900/50 mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-          <span className="text-xs font-medium text-zinc-400 tracking-widest uppercase font-[family-name:var(--font-body)] font-medium">
+          <span className="text-xs font-medium text-zinc-400 tracking-widest uppercase font-medium">
             Live on 6th Street, Austin TX
           </span>
         </motion.div>

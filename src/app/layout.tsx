@@ -1,29 +1,11 @@
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
-import { Instrument_Sans } from 'next/font/google'
+import { Nunito } from 'next/font/google'
 import './globals.css'
 
-const clashDisplay = localFont({
-  src: [
-    {
-      path: '../../public/fonts/ClashDisplay-Semibold.woff2',
-      weight: '600',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/ClashDisplay-Bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-display',
-  display: 'swap',
-})
-
-const instrumentSans = Instrument_Sans({
+const nunito = Nunito({ 
   subsets: ['latin'],
-  variable: '--font-body',
-  weight: ['400', '500', '600', '700'],
+  variable: '--font-main',
+  weight: ['400', '500', '600', '700', '800', '900'],
 })
 
 export const metadata: Metadata = {
@@ -44,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${clashDisplay.variable} ${instrumentSans.variable} antialiased`}>
+      <body className={`${nunito.variable} antialiased`}>
         {children}
       </body>
     </html>

@@ -25,7 +25,7 @@ export default function ForVenues() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <span className="font-[family-name:var(--font-body)] font-medium text-accent text-xs tracking-[0.3em] uppercase block mb-4">
+            <span className="font-medium text-accent text-xs tracking-[0.3em] uppercase block mb-4">
               For Venues
             </span>
             <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
@@ -48,7 +48,7 @@ export default function ForVenues() {
                   transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
                   className="flex items-start gap-4"
                 >
-                  <div className="text-2xl sm:text-3xl font-extrabold text-accent font-[family-name:var(--font-body)] font-medium min-w-[4rem]">
+                  <div className="text-2xl sm:text-3xl font-extrabold text-accent font-medium min-w-[4rem]">
                     {b.stat}
                   </div>
                   <div>
@@ -85,7 +85,7 @@ export default function ForVenues() {
                   <div className="w-12 h-1 bg-zinc-800 rounded" />
                   <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-20 h-1.5 bg-accent/20 rounded-full blur-sm" />
                 </div>
-                <p className="text-zinc-600 text-xs font-[family-name:var(--font-body)] font-medium uppercase tracking-wider">
+                <p className="text-zinc-600 text-xs font-medium uppercase tracking-wider">
                   Sleek. Modern. On-brand.
                 </p>
               </div>

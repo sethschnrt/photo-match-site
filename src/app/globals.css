@@ -9,21 +9,20 @@
   --color-surface-raised: #111111;
   --color-surface-glass: rgba(255, 255, 255, 0.03);
   --color-muted: #4B5563;
-  --font-display: var(--font-display), system-ui, sans-serif;
-  --font-body: var(--font-body), system-ui, sans-serif;
+  --font-main: var(--font-main), system-ui, sans-serif;
 }
 
 /* Base */
 @layer base {
   html {
-    font-family: var(--font-body);
+    font-family: var(--font-main);
     background: #050505;
     color: #e5e5e5;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
-    font-weight: 700;
+    font-family: var(--font-main);
+    font-weight: 800;
     letter-spacing: -0.02em;
     line-height: 1.1;
     color: white;

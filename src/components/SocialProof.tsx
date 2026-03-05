@@ -25,7 +25,7 @@ function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: str
   }, [isInView, target])
 
   return (
-    <span ref={ref} className="font-[family-name:var(--font-body)] font-medium tabular-nums">
+    <span ref={ref} className="font-medium tabular-nums">
       {count.toLocaleString()}{suffix}
     </span>
   )
@@ -73,7 +73,7 @@ export default function SocialProof() {
             <div key={stat.label} className="text-center">
               <div className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white mb-2">
                 {stat.label === 'Dollar flat fee' ? (
-                  <span className="font-[family-name:var(--font-body)] font-medium">${stat.value}</span>
+                  <span className="font-medium">${stat.value}</span>
                 ) : (
                   <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                 )}
@@ -100,7 +100,7 @@ export default function SocialProof() {
               </p>
               <div>
                 <p className="text-white font-semibold text-sm">{t.name}</p>
-                <p className="text-zinc-600 text-xs font-[family-name:var(--font-body)] font-medium">
+                <p className="text-zinc-600 text-xs font-medium">
                   {t.venue}
                 </p>
               </div>
