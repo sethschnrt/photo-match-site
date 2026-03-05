@@ -61,7 +61,7 @@ export default function ForVenues() {
 
             <a
               href="mailto:hello@photomatch.live"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black font-semibold text-lg hover:bg-zinc-200 transition-all hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black font-extrabold text-lg hover:bg-zinc-200 transition-all hover:-translate-y-0.5"
             >
               Bring Photo Match to Your Venue
               <span>&rarr;</span>

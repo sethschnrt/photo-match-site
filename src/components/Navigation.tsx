@@ -38,7 +38,7 @@ export default function Navigation() {
           ))}
           <a
             href="#venues"
-            className="text-sm font-semibold px-5 py-2.5 rounded-full bg-accent text-white hover:bg-accent-bright transition-all hover:shadow-[0_0_30px_rgba(255,0,110,0.3)]"
+            className="text-sm font-extrabold px-5 py-2.5 rounded-full bg-accent text-white hover:bg-accent-bright transition-all hover:shadow-[0_0_30px_rgba(255,0,110,0.3)]"
           >
             Host a Booth
           </a>

@@ -96,14 +96,14 @@ export default function Hero() {
         >
           <a
             href="#app"
-            className="group relative px-8 py-4 rounded-full bg-accent text-white font-semibold text-lg hover:bg-accent-bright transition-all shadow-[0_0_20px_rgba(255,0,110,0.15)] hover:shadow-[0_0_50px_rgba(255,0,110,0.3)] hover:-translate-y-1 active:translate-y-0"
+            className="group relative px-8 py-4 rounded-full bg-accent text-white font-extrabold text-lg hover:bg-accent-bright transition-all shadow-[0_0_20px_rgba(255,0,110,0.15)] hover:shadow-[0_0_50px_rgba(255,0,110,0.3)] hover:-translate-y-1 active:translate-y-0"
           >
             Download the App
             <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">&rarr;</span>
           </a>
           <a
             href="#venues"
-            className="px-8 py-4 rounded-full border border-zinc-700/80 text-zinc-300 font-medium text-lg hover:border-accent/30 hover:text-white transition-all hover:-translate-y-1 hover:bg-white/[0.02] active:translate-y-0"
+            className="px-8 py-4 rounded-full border border-zinc-700/80 text-zinc-300 font-bold text-lg hover:border-accent/30 hover:text-white transition-all hover:-translate-y-1 hover:bg-white/[0.02] active:translate-y-0"
           >
             Host a Booth
           </a>
