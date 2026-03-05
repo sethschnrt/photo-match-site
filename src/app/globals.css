@@ -25,10 +25,11 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display), 'Righteous', system-ui, sans-serif !important;
+  font-family: var(--font-display), 'Bebas Neue', system-ui, sans-serif !important;
   font-weight: 400;
-  letter-spacing: 0.01em;
-  line-height: 1.15;
+  letter-spacing: 0.03em;
+  line-height: 1.05;
+  text-transform: uppercase;
   color: white;
 }
 

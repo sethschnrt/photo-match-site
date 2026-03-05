@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter, Righteous } from 'next/font/google'
+import { Inter, Bebas_Neue } from 'next/font/google'
 import './globals.css'
 
-const righteous = Righteous({
+const bebasNeue = Bebas_Neue({
   subsets: ['latin'],
   variable: '--font-display',
   weight: '400',
@@ -31,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${righteous.variable} ${inter.variable} antialiased`}>
+      <body className={`${bebasNeue.variable} ${inter.variable} antialiased`}>
         {children}
       </body>
     </html>
