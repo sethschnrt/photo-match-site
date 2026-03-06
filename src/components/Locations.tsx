@@ -1,21 +1,122 @@
 'use client'
 import { motion, useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { MapPin } from '@phosphor-icons/react/dist/ssr'
 
 const locations = [
-  { name: 'Dirty Sixth', venues: 12, x: 48, y: 42, hot: true },
-  { name: 'Rainey Street', venues: 8, x: 53, y: 52, hot: true },
-  { name: 'West Sixth', venues: 6, x: 38, y: 40, hot: false },
-  { name: 'East Austin', venues: 4, x: 65, y: 38, hot: false },
-  { name: 'South Congress', venues: 3, x: 46, y: 62, hot: false },
-  { name: 'The Domain', venues: 5, x: 42, y: 15, hot: false },
+  { name: 'Dirty Sixth', venues: 12, lng: -97.7405, lat: 30.2672, hot: true },
+  { name: 'Rainey Street', venues: 8, lng: -97.7380, lat: 30.2560, hot: true },
+  { name: 'West Sixth', venues: 6, lng: -97.7530, lat: 30.2700, hot: false },
+  { name: 'East Austin', venues: 4, lng: -97.7200, lat: 30.2610, hot: false },
+  { name: 'South Congress', venues: 3, lng: -97.7490, lat: 30.2480, hot: false },
+  { name: 'The Domain', venues: 5, lng: -97.7320, lat: 30.4020, hot: false },
 ]
+
+function MapComponent() {
+  const mapContainer = useRef<HTMLDivElement>(null)
+  const mapRef = useRef<any>(null)
+  const [hovered, setHovered] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!mapContainer.current || mapRef.current) return
+
+    let cancelled = false
+
+    import('maplibre-gl').then((maplibregl) => {
+      if (cancelled || !mapContainer.current) return
+
+      // CSS loaded via link tag below
+
+      const map = new maplibregl.default.Map({
+        container: mapContainer.current,
+        style: {
+          version: 8,
+          sources: {
+            carto: {
+              type: 'raster',
+              tiles: [
+                'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
+                'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
+                'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
+              ],
+              tileSize: 256,
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+            },
+          },
+          layers: [
+            {
+              id: 'carto-tiles',
+              type: 'raster',
+              source: 'carto',
+              minzoom: 0,
+              maxzoom: 19,
+            },
+          ],
+        },
+        center: [-97.7431, 30.2972],
+        zoom: 11.5,
+        minZoom: 10,
+        maxZoom: 15,
+        attributionControl: false,
+        interactive: true,
+        dragRotate: false,
+        pitchWithRotate: false,
+      })
+
+      map.addControl(new maplibregl.default.NavigationControl({ showCompass: false }), 'bottom-right')
+
+      map.on('load', () => {
+        // Add location markers
+        locations.forEach((loc) => {
+          // Create custom marker element
+          const el = document.createElement('div')
+          el.className = `locations_marker ${loc.hot ? 'is-hot' : ''}`
+          el.innerHTML = `
+            <div class="locations_marker-pulse"></div>
+            <div class="locations_marker-dot"></div>
+          `
+
+          // Create popup
+          const popup = new maplibregl.default.Popup({
+            offset: 16,
+            closeButton: false,
+            closeOnClick: false,
+            className: 'locations_popup',
+          }).setHTML(`
+            <div class="locations_popup-inner">
+              <strong>${loc.name}</strong>
+              <span>${loc.venues} venues</span>
+            </div>
+          `)
+
+          el.addEventListener('mouseenter', () => popup.addTo(map))
+          el.addEventListener('mouseleave', () => popup.remove())
+
+          new maplibregl.default.Marker({ element: el })
+            .setLngLat([loc.lng, loc.lat])
+            .setPopup(popup)
+            .addTo(map)
+        })
+      })
+
+      mapRef.current = map
+    })
+
+    return () => {
+      cancelled = true
+      if (mapRef.current) {
+        mapRef.current.remove()
+        mapRef.current = null
+      }
+    }
+  }, [])
+
+  return <div ref={mapContainer} className="locations_maplibre" />
+}
 
 export default function Locations() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-20px' })
-  const [hovered, setHovered] = useState<string | null>(null)
 
   return (
     <section id="locations" className="section_locations" ref={ref}>
@@ -49,140 +150,144 @@ export default function Locations() {
             </motion.p>
           </div>
 
-          <motion.div
-            initial={{ opacity: 1, y: 0 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="locations_map-container"
-          >
-            {/* SVG Map of Austin */}
-            <div className="locations_map">
-              <svg viewBox="0 0 100 80" className="locations_map-svg" xmlns="http://www.w3.org/2000/svg">
-                {/* Austin area outline - simplified */}
-                <path
-                  d="M20,10 Q25,5 35,8 L50,6 Q60,5 70,10 L78,18 Q82,25 80,35 L82,50 Q80,60 75,68 L65,74 Q55,78 45,76 L35,72 Q25,70 20,62 L18,50 Q15,40 18,30 L16,20 Q17,14 20,10Z"
-                  fill="none"
-                  stroke="rgba(255,0,110,0.15)"
-                  strokeWidth="0.5"
-                />
-                {/* Roads / grid lines */}
-                <line x1="15" y1="42" x2="85" y2="42" stroke="rgba(255,255,255,0.04)" strokeWidth="0.3" />
-                <line x1="48" y1="5" x2="48" y2="75" stroke="rgba(255,255,255,0.04)" strokeWidth="0.3" />
-                <line x1="20" y1="55" x2="80" y2="55" stroke="rgba(255,255,255,0.03)" strokeWidth="0.2" />
-                <line x1="30" y1="8" x2="30" y2="70" stroke="rgba(255,255,255,0.03)" strokeWidth="0.2" />
-                <line x1="65" y1="10" x2="65" y2="70" stroke="rgba(255,255,255,0.03)" strokeWidth="0.2" />
-                {/* I-35 */}
-                <path d="M48,5 Q50,30 51,42 Q52,55 48,75" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" strokeDasharray="2,1" />
-                {/* MoPac */}
-                <path d="M30,8 Q32,25 33,42 Q34,55 32,70" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" strokeDasharray="2,1" />
-                {/* Lady Bird Lake */}
-                <path d="M20,48 Q35,50 50,48 Q60,47 75,50" fill="none" stroke="rgba(100,150,255,0.12)" strokeWidth="0.8" />
-
-                {/* Location pins */}
-                {locations.map((loc, i) => (
-                  <g key={loc.name}>
-                    {/* Pulse ring for hot locations */}
-                    {loc.hot && (
-                      <circle
-                        cx={loc.x}
-                        cy={loc.y}
-                        r="3"
-                        fill="none"
-                        stroke="rgba(255,0,110,0.3)"
-                        strokeWidth="0.5"
-                        className="locations_pulse-ring"
-                      />
-                    )}
-                    {/* Pin glow */}
-                    <circle
-                      cx={loc.x}
-                      cy={loc.y}
-                      r={hovered === loc.name ? 3 : 2}
-                      fill={hovered === loc.name ? 'rgba(255,0,110,0.3)' : 'rgba(255,0,110,0.15)'}
-                      className="locations_pin-glow"
-                    />
-                    {/* Pin dot */}
-                    <circle
-                      cx={loc.x}
-                      cy={loc.y}
-                      r="1.2"
-                      fill="var(--color-accent)"
-                      className="locations_pin"
-                      onMouseEnter={() => setHovered(loc.name)}
-                      onMouseLeave={() => setHovered(null)}
-                      style={{ cursor: 'pointer' }}
-                    />
-                  </g>
-                ))}
-              </svg>
-
-              {/* Labels overlay */}
-              {locations.map((loc) => (
-                <div
-                  key={loc.name}
-                  className={`locations_label ${hovered === loc.name ? 'is-active' : ''}`}
-                  style={{ left: `${loc.x}%`, top: `${loc.y}%` }}
-                  onMouseEnter={() => setHovered(loc.name)}
-                  onMouseLeave={() => setHovered(null)}
-                >
-                  <span className="locations_label-name">{loc.name}</span>
-                  <span className="locations_label-count">{loc.venues} venues</span>
-                </div>
-              ))}
+          <div className="locations_content">
+            <div className="locations_map-wrap">
+              <MapComponent />
             </div>
 
-            {/* Legend list */}
             <div className="locations_legend">
               {locations.map((loc) => (
-                <div
-                  key={loc.name}
-                  className={`locations_legend-item ${hovered === loc.name ? 'is-active' : ''}`}
-                  onMouseEnter={() => setHovered(loc.name)}
-                  onMouseLeave={() => setHovered(null)}
-                >
+                <div key={loc.name} className="locations_legend-item">
                   <MapPin size={16} weight="fill" className="locations_legend-icon" />
                   <div>
                     <p className="locations_legend-name text-color-primary">{loc.name}</p>
-                    <p className="locations_legend-count text-color-secondary">{loc.venues} venues {loc.hot ? ' - Popular' : ''}</p>
+                    <p className="locations_legend-count text-color-secondary">{loc.venues} venues{loc.hot ? ' \u2022 Popular' : ''}</p>
                   </div>
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       <style jsx global>{`
         .locations_header { display: flex; flex-direction: column; gap: 8px; margin-bottom: 48px; }
         .locations_header .text-style-label { margin-bottom: 12px; }
-        .locations_map-container { display: grid; grid-template-columns: 1fr; gap: 32px; }
-        .locations_map { position: relative; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: 16px; padding: 32px; aspect-ratio: 5/4; overflow: hidden; }
-        .locations_map-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-        .locations_pin { transition: r 0.2s; }
-        .locations_pin-glow { transition: all 0.3s; }
-        @keyframes pulse-ring {
-          0% { r: 2; opacity: 0.6; }
-          100% { r: 6; opacity: 0; }
+
+        .locations_content { display: grid; grid-template-columns: 1fr; gap: 32px; }
+
+        .locations_map-wrap {
+          border-radius: 16px;
+          overflow: hidden;
+          border: 1px solid var(--color-border);
+          aspect-ratio: 16 / 10;
         }
-        .locations_pulse-ring { animation: pulse-ring 2s ease-out infinite; }
-        .locations_label { position: absolute; transform: translate(8px, -50%); display: flex; flex-direction: column; gap: 2px; opacity: 0; transition: opacity 0.2s; pointer-events: none; white-space: nowrap; }
-        .locations_label.is-active { opacity: 1; }
-        .locations_label-name { font-size: 0.8125rem; font-weight: 600; color: var(--color-text-primary); }
-        .locations_label-count { font-size: 0.6875rem; color: var(--color-text-secondary); }
+        .locations_maplibre {
+          width: 100%;
+          height: 100%;
+        }
+
+        /* MapLibre UI overrides */
+        .locations_maplibre .maplibregl-ctrl-group {
+          background: var(--color-bg-secondary) !important;
+          border: 1px solid var(--color-border) !important;
+          border-radius: 8px !important;
+        }
+        .locations_maplibre .maplibregl-ctrl-group button {
+          background: transparent !important;
+          border: none !important;
+          width: 32px !important;
+          height: 32px !important;
+        }
+        .locations_maplibre .maplibregl-ctrl-group button + button {
+          border-top: 1px solid var(--color-border) !important;
+        }
+        .locations_maplibre .maplibregl-ctrl-group button span {
+          filter: invert(1);
+        }
+
+        /* Custom markers */
+        .locations_marker {
+          position: relative;
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+        }
+        .locations_marker-dot {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #FF006E;
+          transform: translate(-50%, -50%);
+          box-shadow: 0 0 12px rgba(255, 0, 110, 0.6);
+          transition: transform 0.2s;
+        }
+        .locations_marker:hover .locations_marker-dot {
+          transform: translate(-50%, -50%) scale(1.4);
+        }
+        .locations_marker-pulse {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: rgba(255, 0, 110, 0.25);
+          transform: translate(-50%, -50%);
+          opacity: 0;
+        }
+        .locations_marker.is-hot .locations_marker-pulse {
+          animation: marker-pulse 2s ease-out infinite;
+        }
+        @keyframes marker-pulse {
+          0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+          100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+        }
+
+        /* Popup */
+        .locations_popup .maplibregl-popup-content {
+          background: var(--color-bg-secondary) !important;
+          border: 1px solid var(--color-border) !important;
+          border-radius: 10px !important;
+          padding: 12px 16px !important;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+        }
+        .locations_popup .maplibregl-popup-tip {
+          border-top-color: var(--color-bg-secondary) !important;
+        }
+        .locations_popup-inner {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+        .locations_popup-inner strong {
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--color-text-primary);
+        }
+        .locations_popup-inner span {
+          font-size: 0.75rem;
+          color: var(--color-text-secondary);
+        }
+
+        /* Legend */
         .locations_legend { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .locations_legend-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: 10px; cursor: pointer; transition: all 0.2s; }
-        .locations_legend-item.is-active { border-color: rgba(255,0,110,0.3); }
+        .locations_legend-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: 10px; transition: border-color 0.2s; }
+        .locations_legend-item:hover { border-color: rgba(255,0,110,0.3); }
         .locations_legend-icon { color: var(--color-accent); flex-shrink: 0; }
         .locations_legend-name { font-size: 0.875rem; font-weight: 600; }
         .locations_legend-count { font-size: 0.75rem; }
+
         @media (min-width: 768px) {
           .locations_legend { grid-template-columns: repeat(3, 1fr); }
         }
         @media (min-width: 992px) {
           .locations_header { flex-direction: row; justify-content: space-between; align-items: flex-end; }
-          .locations_map-container { grid-template-columns: 2fr 1fr; gap: 48px; align-items: start; }
+          .locations_content { grid-template-columns: 2fr 1fr; gap: 48px; align-items: start; }
           .locations_legend { grid-template-columns: 1fr; }
-          .locations_map { aspect-ratio: 16/10; }
         }
       `}</style>
     </section>
