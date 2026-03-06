@@ -2,7 +2,6 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import ImageReveal from './ImageReveal'
-import AnimatedText from './AnimatedText'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -38,11 +37,9 @@ export default function Experience() {
         <div className="experience_hero-content">
           <div className="padding-global">
             <div className="container-large">
-              <AnimatedText
-                text="Not another\ndating app."
-                as="h2"
-                className="experience_heading"
-              />
+              <h2 className="experience_heading">
+                Not another<br />dating app.
+              </h2>
             </div>
           </div>
         </div>
