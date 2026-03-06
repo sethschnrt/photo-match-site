@@ -18,6 +18,10 @@ export default function Experience() {
   const { scrollYProgress } = useScroll({ target: imgRef, offset: ['start end', 'end start'] })
   const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '15%'])
 
+  const barRef = useRef(null)
+  const { scrollYProgress: barScrollY } = useScroll({ target: barRef, offset: ['start end', 'end start'] })
+  const barY = useTransform(barScrollY, [0, 1], ['-15%', '15%'])
+
   return (
     <section className="section_experience" ref={ref}>
       {/* Editorial hero: massive heading left + overlapping image right */}
@@ -75,15 +79,17 @@ export default function Experience() {
         </div>
       </div>
 
-      {/* Photo strips: rotated, offset like a tossed photo */}
-      <div className="experience_photo-toss">
+      {/* Bar atmosphere image with parallax + overlay */}
+      <div className="experience_photo-toss" ref={barRef}>
         <div className="experience_photo-toss-inner">
-          <ImageReveal
-            src={`${basePath}/assets/images/photo-strips-bar.webp`}
-            alt="Photo booth strips on a bar counter"
-            className="experience_image-reveal"
-          />
-          <div className="experience_image-overlay is-subtle" />
+          <motion.div className="experience_parallax-img" style={{ y: barY }}>
+            <ImageReveal
+              src={`${basePath}/assets/images/photo-strips-bar.webp`}
+              alt="Packed Austin bar on a Friday night"
+              className="experience_image-reveal"
+            />
+          </motion.div>
+          <div className="experience_bar-overlay" />
         </div>
       </div>
 
@@ -117,6 +123,13 @@ export default function Experience() {
         }
         .experience_image-overlay.is-subtle {
           background: linear-gradient(to top, var(--color-bg-primary) 5%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.3) 100%);
+        }
+        .experience_bar-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, var(--color-bg-primary) 3%, rgba(10,10,10,0.45) 40%, rgba(10,10,10,0.35) 70%, var(--color-bg-primary) 97%);
+          z-index: 2;
+          pointer-events: none;
         }
         .experience_hero-content {
           position: absolute;
@@ -171,6 +184,12 @@ export default function Experience() {
           width: 100%;
           border-radius: 0;
           overflow: hidden;
+        }
+        .experience_parallax-img {
+          position: absolute;
+          inset: -15% 0;
+          height: 130%;
+          width: 100%;
         }
         .experience_photo-toss-inner .experience_image-reveal {
           position: absolute;
