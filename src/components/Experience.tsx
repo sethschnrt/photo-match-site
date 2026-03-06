@@ -14,7 +14,7 @@ const features = [
 
 export default function Experience() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const isInView = useInView(ref, { once: true, margin: '-20px' })
   const imgRef = useRef(null)
   const { scrollYProgress } = useScroll({ target: imgRef, offset: ['start end', 'end start'] })
   const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '15%'])

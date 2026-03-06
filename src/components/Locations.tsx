@@ -14,7 +14,7 @@ const locations = [
 
 export default function Locations() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const isInView = useInView(ref, { once: true, margin: '-20px' })
   const [hovered, setHovered] = useState<string | null>(null)
 
   return (

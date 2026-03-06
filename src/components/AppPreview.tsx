@@ -11,7 +11,7 @@ const features = [
 
 export default function AppPreview() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const isInView = useInView(ref, { once: true, margin: '-20px' })
 
   return (
     <section id="app" className="section_app-preview" ref={ref}>

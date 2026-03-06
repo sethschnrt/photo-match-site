@@ -1,32 +1,21 @@
 'use client'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 export default function Preloader() {
-  const [progress, setProgress] = useState(0)
   const [complete, setComplete] = useState(false)
 
   useEffect(() => {
-    // Lock scroll while loading
     document.body.style.overflow = 'hidden'
-
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        const next = prev + Math.random() * 12
-        if (next >= 100) {
-          clearInterval(timer)
-          setTimeout(() => {
-            setComplete(true)
-            document.body.style.overflow = ''
-          }, 500)
-          return 100
-        }
-        return next
-      })
-    }, 80)
-
+    const timer = setTimeout(() => {
+      setComplete(true)
+      document.body.style.overflow = ''
+    }, 1800)
     return () => {
-      clearInterval(timer)
+      clearTimeout(timer)
       document.body.style.overflow = ''
     }
   }, [])
@@ -37,21 +26,36 @@ export default function Preloader() {
         {!complete && (
           <motion.div
             className="preloader_component"
-            exit={{ y: '-100%' }}
-            transition={{ duration: 0.8, ease: [0.77, 0, 0.175, 1] }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
           >
-            <div className="preloader_content">
-              <div className="preloader_number">
-                {Math.round(progress)}
-              </div>
-              <div className="preloader_bar-track">
-                <motion.div
-                  className="preloader_bar-fill"
-                  style={{ width: `${progress}%` }}
-                  transition={{ ease: 'linear' }}
-                />
-              </div>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+              className="preloader_logo"
+            >
+              <Image
+                src={`${basePath}/assets/logos/photo-match-logo-v2-transparent.png`}
+                alt="Photo Match"
+                width={200}
+                height={200}
+                unoptimized
+              />
+            </motion.div>
+            <motion.div
+              className="preloader_bar-track"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <motion.div
+                className="preloader_bar-fill"
+                initial={{ width: '0%' }}
+                animate={{ width: '100%' }}
+                transition={{ duration: 1.4, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -63,25 +67,23 @@ export default function Preloader() {
           z-index: 100;
           background: #0a0a0a;
           display: flex;
-          align-items: flex-end;
-          padding: 48px;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 32px;
         }
-        .preloader_content {
+        .preloader_logo {
+          width: 160px;
+          height: auto;
+        }
+        .preloader_logo img {
           width: 100%;
-        }
-        .preloader_number {
-          color: #FF006E;
-          font-size: 12vw;
-          font-weight: 600;
-          line-height: 1;
-          font-variant-numeric: tabular-nums;
-          letter-spacing: -0.04em;
+          height: auto;
         }
         .preloader_bar-track {
-          width: 100%;
+          width: 160px;
           height: 2px;
           background: rgba(255, 255, 255, 0.08);
-          margin-top: 16px;
         }
         .preloader_bar-fill {
           height: 100%;

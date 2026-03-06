@@ -11,7 +11,7 @@ const testimonials = [
 
 export default function Testimonial() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const isInView = useInView(ref, { once: true, margin: '-20px' })
   const [current, setCurrent] = useState(0)
   const next = () => setCurrent((c) => (c + 1) % testimonials.length)
   const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length)

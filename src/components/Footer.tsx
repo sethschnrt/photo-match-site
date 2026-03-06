@@ -65,7 +65,7 @@ export default function Footer() {
           <div className="container-large footer_bottom-inner">
             {/* Logo + tagline */}
             <div className="footer_brand">
-              <Image src={`${basePath}/assets/logos/photo-match-logo-v2-transparent.png`} alt="Photo Match" width={160} height={36} unoptimized className="footer_logo" />
+              <Image src={`${basePath}/assets/logos/photo-match-logo-v2-transparent.png`} alt="Photo Match" width={200} height={200} unoptimized className="footer_logo" />
               <p className="footer_tagline text-color-secondary">The photo booth that finds your match.</p>
             </div>
 
@@ -113,7 +113,7 @@ export default function Footer() {
         .footer_bottom { background: #050505; padding-top: 64px; padding-bottom: 32px; }
         .footer_bottom-inner { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 48px; }
         .footer_brand { display: flex; flex-direction: column; gap: 12px; }
-        .footer_logo { height: 34px; width: auto; opacity: 0.5; object-fit: contain; }
+        .footer_logo { height: 64px; width: auto; opacity: 0.7; object-fit: contain; }
         .footer_tagline { font-size: 0.875rem; }
         .footer_nav { display: flex; flex-direction: column; gap: 10px; }
         .footer_nav-heading { font-size: 0.8125rem; font-weight: 600; margin-bottom: 4px; }

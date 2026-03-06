@@ -32,7 +32,7 @@ export default function Navigation() {
         <div className="padding-global nav_inner">
           <div className="container-large nav_container">
             <a href="#" className="nav_logo-link">
-              <Image src={`${basePath}/assets/logos/photo-match-logo-v2-transparent.png`} alt="Photo Match" width={160} height={40} unoptimized className="nav_logo" />
+              <Image src={`${basePath}/assets/logos/photo-match-logo-v2-transparent.png`} alt="Photo Match" width={200} height={200} unoptimized className="nav_logo" />
             </a>
 
             <div className="nav_menu">
@@ -115,7 +115,7 @@ export default function Navigation() {
         .nav_border { position: absolute; inset-inline: 0; bottom: 0; height: 1px; background: white; }
         .nav_inner { position: relative; z-index: 10; }
         .nav_container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-        .nav_logo { height: 38px; width: auto; object-fit: contain; }
+        .nav_logo { height: 56px; width: auto; object-fit: contain; }
         .nav_menu { display: none; align-items: center; gap: 32px; }
         .nav_link { font-size: 0.8125rem; position: relative; transition: color 0.2s; text-decoration: none; color: rgba(180, 184, 192, 0.85); }
         .nav_link:hover { color: var(--color-text-primary); }

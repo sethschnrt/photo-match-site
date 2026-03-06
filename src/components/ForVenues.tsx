@@ -24,7 +24,7 @@ const benefits = [
 
 export default function ForVenues() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const isInView = useInView(ref, { once: true, margin: '-20px' })
 
   return (
     <section id="venues" className="section_for-venues" ref={ref}>

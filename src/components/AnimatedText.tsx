@@ -18,7 +18,7 @@ export default function AnimatedText({
   once = true,
 }: AnimatedTextProps) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once, margin: '-60px' })
+  const isInView = useInView(ref, { once, margin: '-20px' })
 
   // Split text by words, preserving line breaks
   const lines = text.split('\n')

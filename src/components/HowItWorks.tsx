@@ -50,7 +50,7 @@ function StepCard({ step, index, scrollYProgress }: { step: Step; index: number;
 export default function HowItWorks() {
   const containerRef = useRef(null)
   const headingRef = useRef(null)
-  const isInView = useInView(headingRef, { once: true, margin: '-80px' })
+  const isInView = useInView(headingRef, { once: true, margin: '-20px' })
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
