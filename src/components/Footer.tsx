@@ -68,7 +68,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .footer_cta { position: relative; overflow: hidden; }
         .footer_cta-pattern { position: absolute; inset: 0; opacity: 0.1; background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px; }
         .footer_cta-content { position: relative; z-index: 1; text-align: center; padding: 80px 0; }

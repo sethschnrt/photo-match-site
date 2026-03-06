@@ -62,7 +62,7 @@ export default function SocialProof() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .section_social-proof { border-bottom: 1px solid var(--color-border); }
         .social-proof_grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 48px; }
         .social-proof_item { display: flex; align-items: baseline; gap: 8px; }

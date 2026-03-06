@@ -87,7 +87,7 @@ export default function Navigation() {
         </motion.div>
       )}
 
-      <style jsx>{`
+      <style jsx global>{`
         .nav_component { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }
         .nav_background { position: absolute; inset: 0; background: rgba(10,10,10,0.85); backdrop-filter: blur(16px); }
         .nav_border { position: absolute; inset-inline: 0; bottom: 0; height: 1px; background: white; }

@@ -77,7 +77,7 @@ export default function Experience() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .experience_image-break { position: relative; height: 50vh; overflow: hidden; }
         .experience_image-parallax { position: absolute; inset: 0; }
         .experience_image { object-fit: cover; transform: scale(1.1); }

@@ -76,7 +76,7 @@ export default function HowItWorks() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .how-it-works_layout { display: grid; grid-template-columns: 1fr; gap: 48px; }
         .how-it-works_heading-side .text-style-label { margin-bottom: 12px; }
         .how-it-works_accent-line { width: 64px; height: 2px; background: var(--color-accent); margin-top: 24px; transform-origin: left; }

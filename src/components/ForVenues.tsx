@@ -101,7 +101,7 @@ export default function ForVenues() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .for-venues_layout { display: grid; grid-template-columns: 1fr; gap: 48px; }
         .for-venues_left .text-style-label { margin-bottom: 12px; }
         .for-venues_left h2 { margin-bottom: 16px; }

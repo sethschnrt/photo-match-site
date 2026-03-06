@@ -23,7 +23,7 @@ export default function VenueTicker() {
         ))}
       </motion.div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .ticker_component { padding: 20px 0; overflow: hidden; border-bottom: 1px solid var(--color-border); }
         .ticker_track { display: flex; gap: 32px; white-space: nowrap; }
         .ticker_item { font-size: 0.8125rem; display: flex; align-items: center; gap: 32px; }

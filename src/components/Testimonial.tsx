@@ -72,7 +72,7 @@ export default function Testimonial() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .section_testimonial { border-top: 1px solid var(--color-border); }
         .testimonial_icon { text-align: center; color: rgba(255,0,110,0.2); margin-bottom: 24px; }
         .testimonial_quote { font-size: clamp(1.375rem, 3vw, 1.75rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.35; text-align: center; min-height: 100px; }

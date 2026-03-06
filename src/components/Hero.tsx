@@ -91,7 +91,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .section_hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .hero_background { position: absolute; inset: 0; }
         .hero_background-image { object-fit: cover; }

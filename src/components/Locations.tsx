@@ -80,7 +80,7 @@ export default function Locations() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .locations_header { display: flex; flex-direction: column; gap: 8px; margin-bottom: 48px; }
         .locations_header .text-style-label { margin-bottom: 12px; }
         .locations_grid { display: grid; grid-template-columns: 1fr; gap: 12px; }

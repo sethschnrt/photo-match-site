@@ -100,7 +100,7 @@ export default function AppPreview() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .section_app-preview { border-top: 1px solid var(--color-border); }
         .app-preview_layout { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
         .app-preview_phone { display: flex; justify-content: center; }
