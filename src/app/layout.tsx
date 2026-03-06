@@ -8,11 +8,11 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Photo Match — Find Your Match Tonight',
+  title: 'Photo Match - Find Your Match Tonight',
   description: 'The photo booth that matches you with someone at this venue. $5 flat. Live on 6th Street, Austin TX.',
   keywords: 'photo booth, matching, nightlife, Austin, 6th Street, bars, nightclub',
   openGraph: {
-    title: 'Photo Match — Find Your Match Tonight',
+    title: 'Photo Match - Find Your Match Tonight',
     description: 'The photo booth that matches you with someone at this venue. Right now.',
     type: 'website',
   },

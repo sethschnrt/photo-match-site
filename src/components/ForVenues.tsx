@@ -1,9 +1,6 @@
 'use client'
 import { motion, useInView, animate } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import Image from 'next/image'
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 function AnimatedNum({ value, suffix, visible }: { value: number; suffix: string; visible: boolean }) {
   const [count, setCount] = useState(0)
@@ -55,17 +52,27 @@ export default function ForVenues() {
                 Photo Match booths bring energy to your venue. More engagement, longer stays, and a reason for guests to come back next weekend.
               </motion.p>
 
+              {/* Stats row instead of image */}
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="for-venues_image-wrapper"
+                className="for-venues_stats-row"
               >
-                <Image src={`${basePath}/assets/images/venue-interior.jpg`} alt="Photo Match booth in a bar" fill className="for-venues_image" />
-                <div className="for-venues_image-overlay" />
-                <div className="for-venues_live-badge">
-                  <span className="for-venues_live-dot" />
-                  <span className="text-size-tiny text-color-primary text-weight-medium">Live at 45 venues</span>
+                <div className="for-venues_stat-card">
+                  <span className="for-venues_stat-number text-color-accent">45+</span>
+                  <span className="for-venues_stat-label text-color-secondary">Partner venues</span>
+                </div>
+                <div className="for-venues_stat-card">
+                  <span className="for-venues_stat-number text-color-accent">10k+</span>
+                  <span className="for-venues_stat-label text-color-secondary">Matches made</span>
+                </div>
+                <div className="for-venues_stat-card">
+                  <div className="for-venues_live-indicator">
+                    <span className="for-venues_live-dot" />
+                    <span className="for-venues_stat-number text-color-accent">Live</span>
+                  </div>
+                  <span className="for-venues_stat-label text-color-secondary">Austin, TX</span>
                 </div>
               </motion.div>
             </div>
@@ -106,10 +113,11 @@ export default function ForVenues() {
         .for-venues_left .text-style-label { margin-bottom: 12px; }
         .for-venues_left h2 { margin-bottom: 16px; }
         .for-venues_desc { font-size: 1.0625rem; line-height: 1.6; margin-bottom: 40px; }
-        .for-venues_image-wrapper { position: relative; aspect-ratio: 4/3; border-radius: 16px; overflow: hidden; }
-        .for-venues_image { object-fit: cover; }
-        .for-venues_image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); }
-        .for-venues_live-badge { position: absolute; bottom: 16px; left: 16px; display: flex; align-items: center; gap: 8px; }
+        .for-venues_stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .for-venues_stat-card { display: flex; flex-direction: column; gap: 4px; padding: 20px; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: 12px; }
+        .for-venues_stat-number { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; }
+        .for-venues_stat-label { font-size: 0.8125rem; }
+        .for-venues_live-indicator { display: flex; align-items: center; gap: 8px; }
         .for-venues_live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent); animation: pulse 2s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
         .for-venues_right { display: flex; flex-direction: column; gap: 32px; }
@@ -123,6 +131,9 @@ export default function ForVenues() {
         @media (min-width: 992px) {
           .for-venues_layout { grid-template-columns: 1fr 1fr; gap: 96px; align-items: start; }
           .for-venues_right { padding-top: 48px; }
+        }
+        @media (max-width: 599px) {
+          .for-venues_stats-row { grid-template-columns: 1fr; }
         }
       `}</style>
     </section>

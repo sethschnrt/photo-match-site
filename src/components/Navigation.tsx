@@ -32,12 +32,12 @@ export default function Navigation() {
         <div className="padding-global nav_inner">
           <div className="container-large nav_container">
             <a href="#" className="nav_logo-link">
-              <Image src={`${basePath}/assets/logos/photo-match-logo.svg`} alt="Photo Match" width={120} height={32} className="nav_logo" />
+              <Image src={`${basePath}/assets/logos/photo-match-logo-v2.png`} alt="Photo Match" width={160} height={40} unoptimized className="nav_logo" />
             </a>
 
             <div className="nav_menu">
               {links.map((link) => (
-                <a key={link.href} href={link.href} className="nav_link text-color-secondary">
+                <a key={link.href} href={link.href} className="nav_link">
                   {link.label}
                   <span className="nav_link-underline" />
                 </a>
@@ -93,14 +93,14 @@ export default function Navigation() {
         .nav_border { position: absolute; inset-inline: 0; bottom: 0; height: 1px; background: white; }
         .nav_inner { position: relative; z-index: 10; }
         .nav_container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-        .nav_logo { height: 28px; width: auto; }
+        .nav_logo { height: 38px; width: auto; object-fit: contain; }
         .nav_menu { display: none; align-items: center; gap: 32px; }
-        .nav_link { font-size: 0.8125rem; position: relative; transition: color 0.2s; text-decoration: none; }
+        .nav_link { font-size: 0.8125rem; position: relative; transition: color 0.2s; text-decoration: none; color: rgba(180, 184, 192, 0.85); }
         .nav_link:hover { color: var(--color-text-primary); }
         .nav_link-underline { position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--color-accent); transition: width 0.3s; }
         .nav_link:hover .nav_link-underline { width: 100%; }
         .nav_right { display: flex; align-items: center; gap: 16px; }
-        .nav_cta { display: none; padding: 10px 20px; font-size: 13px; }
+        .nav_cta { display: none; padding: 10px 20px; font-size: 13px; font-weight: 800; }
         .nav_mobile-toggle { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: none; border: none; color: var(--color-text-secondary); cursor: pointer; transition: color 0.2s; }
         .nav_mobile-toggle:hover { color: var(--color-text-primary); }
         .nav_mobile-overlay { position: fixed; inset: 0; z-index: 40; background: rgba(10,10,10,0.95); backdrop-filter: blur(16px); padding-top: 80px; }

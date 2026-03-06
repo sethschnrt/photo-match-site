@@ -68,6 +68,10 @@ h3 {
   overflow-x: hidden;
 }
 
+.main-wrapper {
+  overflow-x: hidden;
+}
+
 .padding-global {
   padding-left: 32px;
   padding-right: 32px;
@@ -170,11 +174,12 @@ h3 {
 .button.is-primary {
   background: var(--color-accent);
   color: white;
+  font-weight: 800;
 }
 .button.is-primary:hover {
-  background: var(--color-accent-bright);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255, 0, 110, 0.2);
+  background: #e80063;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 0, 110, 0.15);
 }
 
 .button.is-secondary {
@@ -185,7 +190,7 @@ h3 {
 }
 .button.is-secondary:hover {
   background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .button.is-white {
@@ -194,8 +199,8 @@ h3 {
 }
 .button.is-white:hover {
   background: #f0f0f0;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .button.is-large {
