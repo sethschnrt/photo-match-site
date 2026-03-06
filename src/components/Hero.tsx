@@ -10,7 +10,7 @@ export default function Hero() {
       {/* Background: brick wall */}
       <div className="hero_background">
         <Image
-          src={`${basePath}/assets/images/brick-wall-2.jpg`}
+          src={`${basePath}/assets/images/hero-bar-wall.jpg`}
           alt=""
           fill
           className="hero_background-image"
