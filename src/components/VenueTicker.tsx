@@ -2,35 +2,33 @@
 import { motion } from 'framer-motion'
 
 const venues = [
-  'The Blind Pig',
-  'Summit Rooftop',
-  'Handlebar',
-  'Maggie Mae\'s',
-  'The Elephant Room',
-  'Stubb\'s',
-  'Midnight Cowboy',
-  'Rain on 4th',
-  'Lustre Pearl',
-  'Container Bar',
-  'Cedar Street Courtyard',
-  'Pete\'s Dueling Piano Bar',
+  'The Blind Pig', 'Summit Rooftop', 'Handlebar', 'Maggie Mae\'s',
+  'The Elephant Room', 'Stubb\'s', 'Midnight Cowboy', 'Rain on 4th',
+  'Lustre Pearl', 'Container Bar', 'Cedar Street Courtyard', 'Pete\'s Dueling Piano Bar',
 ]
 
 export default function VenueTicker() {
   return (
-    <div className="py-6 overflow-hidden border-b border-white/[0.06] bg-white/[0.01]">
+    <div className="ticker_component">
       <motion.div
         animate={{ x: ['0%', '-50%'] }}
         transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-        className="flex gap-8 whitespace-nowrap"
+        className="ticker_track"
       >
         {[...venues, ...venues].map((name, i) => (
-          <span key={i} className="text-sm text-zinc-600 flex items-center gap-8">
+          <span key={i} className="ticker_item text-color-tertiary">
             {name}
-            <span className="text-accent/40 text-xs">&#9679;</span>
+            <span className="ticker_dot" />
           </span>
         ))}
       </motion.div>
+
+      <style jsx>{`
+        .ticker_component { padding: 20px 0; overflow: hidden; border-bottom: 1px solid var(--color-border); }
+        .ticker_track { display: flex; gap: 32px; white-space: nowrap; }
+        .ticker_item { font-size: 0.8125rem; display: flex; align-items: center; gap: 32px; }
+        .ticker_dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,0,110,0.3); flex-shrink: 0; }
+      `}</style>
     </div>
   )
 }

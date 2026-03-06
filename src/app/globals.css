@@ -1,21 +1,29 @@
 @import "tailwindcss";
 
+/* ===== DESIGN TOKENS ===== */
 @theme {
   --color-accent: #FF006E;
   --color-accent-bright: #FF3D8F;
   --color-accent-dim: #CC0058;
-  --color-surface: #0a0a0a;
-  --color-surface-raised: #141414;
-  --color-surface-glass: rgba(255, 255, 255, 0.04);
-  --color-muted: #666666;
-  --color-border: rgba(255, 255, 255, 0.08);
+  --color-bg-primary: #0a0a0a;
+  --color-bg-secondary: #111111;
+  --color-bg-tertiary: #1a1a1a;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgb(138, 143, 152);
+  --color-text-tertiary: rgb(100, 100, 110);
+  --color-border: rgba(255, 255, 255, 0.06);
 }
 
-/* Fonts — applied to body where Next.js sets the CSS variable */
+/* ===== BASE STYLES ===== */
+html {
+  overflow-x: hidden;
+  background: var(--color-bg-primary);
+}
+
 body {
   font-family: var(--font-main), 'Inter', system-ui, sans-serif !important;
-  background: #0a0a0a;
-  color: rgb(138, 143, 152);
+  background: var(--color-bg-primary);
+  color: var(--color-text-secondary);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -23,25 +31,21 @@ body {
   line-height: 1.6;
 }
 
-html {
-  overflow-x: hidden;
-  background: #0a0a0a;
-}
-
+/* ===== TYPOGRAPHY — HTML TAGS (Client-First: style tags first) ===== */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-main), 'Inter', system-ui, sans-serif !important;
-  color: white;
+  color: var(--color-text-primary);
 }
 
 h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.75rem, 5.5vw, 4.5rem);
   font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1.0;
 }
 
 h2 {
-  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.0;
@@ -54,57 +58,181 @@ h3 {
   line-height: 1.3;
 }
 
-p, li, span, a {
-  font-size: 15px;
-  line-height: 1.6;
-}
-
 ::selection {
-  background: #FF006E;
+  background: var(--color-accent);
   color: white;
 }
 
-/* Utility classes */
-.section-large {
-  padding: 96px 0 128px;
+/* ===== CLIENT-FIRST: CORE STRUCTURE ===== */
+.page-wrapper {
+  overflow-x: hidden;
 }
 
-.section-medium {
-  padding: 64px 0 80px;
+.padding-global {
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
-.container-site {
+.padding-section-large {
+  padding-top: 96px;
+  padding-bottom: 128px;
+}
+
+.padding-section-medium {
+  padding-top: 64px;
+  padding-bottom: 80px;
+}
+
+.padding-section-small {
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.container-large {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 32px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
-@media (max-width: 768px) {
-  .section-large {
-    padding: 64px 0 80px;
-  }
-  .section-medium {
-    padding: 48px 0 56px;
-  }
-  .container-site {
-    padding: 0 16px;
-  }
+.container-medium {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
-.glass-card {
-  background: #141414;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+.container-small {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* ===== CLIENT-FIRST: TEXT UTILITIES ===== */
+.text-color-primary { color: var(--color-text-primary); }
+.text-color-secondary { color: var(--color-text-secondary); }
+.text-color-tertiary { color: var(--color-text-tertiary); }
+.text-color-accent { color: var(--color-accent); }
+
+.text-size-large { font-size: 1.125rem; line-height: 1.6; }
+.text-size-regular { font-size: 0.9375rem; line-height: 1.6; }
+.text-size-small { font-size: 0.875rem; line-height: 1.5; }
+.text-size-tiny { font-size: 0.75rem; line-height: 1.5; }
+
+.text-style-allcaps { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8125rem; }
+.text-style-muted { opacity: 0.5; }
+.text-style-label { font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.text-weight-semibold { font-weight: 600; }
+.text-weight-medium { font-weight: 500; }
+
+.heading-style-h1 { font-size: clamp(2.75rem, 5.5vw, 4.5rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.0; color: var(--color-text-primary); }
+.heading-style-h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.0; color: var(--color-text-primary); }
+.heading-style-h3 { font-size: clamp(1.125rem, 1.5vw, 1.25rem); font-weight: 580; letter-spacing: -0.01em; line-height: 1.3; color: var(--color-text-primary); }
+
+/* ===== CLIENT-FIRST: SPACING UTILITIES ===== */
+.margin-top.margin-small { margin: 0; margin-top: 1rem; }
+.margin-top.margin-medium { margin: 0; margin-top: 1.5rem; }
+.margin-top.margin-large { margin: 0; margin-top: 2rem; }
+.margin-top.margin-xlarge { margin: 0; margin-top: 3rem; }
+.margin-bottom.margin-small { margin: 0; margin-bottom: 1rem; }
+.margin-bottom.margin-medium { margin: 0; margin-bottom: 1.5rem; }
+.margin-bottom.margin-large { margin: 0; margin-bottom: 2rem; }
+.margin-bottom.margin-xlarge { margin: 0; margin-bottom: 3rem; }
+
+.max-width-large { max-width: 48rem; }
+.max-width-medium { max-width: 32rem; }
+.max-width-small { max-width: 24rem; }
+
+/* ===== CLIENT-FIRST: BACKGROUND UTILITIES ===== */
+.background-color-primary { background-color: var(--color-bg-primary); }
+.background-color-secondary { background-color: var(--color-bg-secondary); }
+.background-color-tertiary { background-color: var(--color-bg-tertiary); }
+.background-color-accent { background-color: var(--color-accent); }
+
+/* ===== CLIENT-FIRST: BUTTON SYSTEM ===== */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border: none;
+}
+
+.button.is-primary {
+  background: var(--color-accent);
+  color: white;
+}
+.button.is-primary:hover {
+  background: var(--color-accent-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 0, 110, 0.2);
+}
+
+.button.is-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+}
+.button.is-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.button.is-white {
+  background: white;
+  color: #0a0a0a;
+}
+.button.is-white:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.button.is-large {
+  padding: 16px 32px;
+  font-size: 16px;
+}
+
+/* ===== COMPONENT: CARD ===== */
+.card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
   border-radius: 12px;
   transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.glass-card:hover {
-  border-color: rgba(255, 255, 255, 0.12);
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-/* Subtle grain overlay */
+/* ===== RESPONSIVE ===== */
+@media (max-width: 991px) {
+  .padding-global { padding-left: 24px; padding-right: 24px; }
+  .padding-section-large { padding-top: 64px; padding-bottom: 80px; }
+  .padding-section-medium { padding-top: 56px; padding-bottom: 56px; }
+  .padding-section-small { padding-top: 40px; padding-bottom: 40px; }
+}
+
+@media (max-width: 599px) {
+  .padding-global { padding-left: 16px; padding-right: 16px; }
+  .padding-section-large { padding-top: 56px; padding-bottom: 64px; }
+  .padding-section-medium { padding-top: 48px; padding-bottom: 48px; }
+  .padding-section-small { padding-top: 32px; padding-bottom: 32px; }
+}
+
+/* ===== GRAIN OVERLAY ===== */
 .grain-overlay::before {
   content: '';
   position: fixed;
@@ -117,17 +245,8 @@ p, li, span, a {
   background-size: 128px 128px;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg-primary); }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }

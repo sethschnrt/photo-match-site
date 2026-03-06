@@ -5,87 +5,98 @@ import Image from 'next/image'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
+const features = [
+  { num: '01', title: 'Real photos, not profiles', desc: 'No filters, no catfishing. Your photo reel is printed right there in front of you. What you see is what you get.' },
+  { num: '02', title: 'Same venue, same night', desc: 'Your match is not across town or three days away. They are here. Right now. Walk over and say hi.' },
+  { num: '03', title: 'Keep your reel', desc: 'A printed photo strip from every night out. Stick it on your fridge, tape it to your mirror, share it with friends.' },
+]
+
 export default function Experience() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
-  
-  // Parallax on the image
   const imgRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: imgRef,
-    offset: ['start end', 'end start'],
-  })
+  const { scrollYProgress } = useScroll({ target: imgRef, offset: ['start end', 'end start'] })
   const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '15%'])
 
   return (
-    <section ref={ref} className="overflow-hidden">
-      {/* Full-width image break with parallax */}
-      <div ref={imgRef} className="relative h-[50vh] md:h-[60vh] overflow-hidden">
-        <motion.div className="absolute inset-0" style={{ y: imgY }}>
+    <section className="section_experience" ref={ref}>
+      {/* Full-bleed image break */}
+      <div ref={imgRef} className="experience_image-break">
+        <motion.div className="experience_image-parallax" style={{ y: imgY }}>
           <Image
             src={`${basePath}/assets/images/venue-interior.jpg`}
             alt="Inside an Austin bar"
             fill
-            className="object-cover scale-110"
+            className="experience_image"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/40 to-black/20" />
-        <div className="absolute inset-0 flex items-end pb-16 md:pb-20">
-          <div className="container-site">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-              className="text-4xl md:text-6xl font-extrabold tracking-tight max-w-xl leading-[1.05]"
-            >
-              Not another<br />dating app.
-            </motion.h2>
+        <div className="experience_image-overlay" />
+        <div className="experience_image-content">
+          <div className="padding-global">
+            <div className="container-large">
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+                className="experience_heading"
+              >
+                Not another<br />dating app.
+              </motion.h2>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Feature grid below the image */}
-      <div className="py-20 md:py-28">
-        <div className="container-site">
+      {/* Feature grid */}
+      <div className="padding-global padding-section-medium">
+        <div className="container-large">
           <motion.p
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-zinc-400 text-lg max-w-2xl mb-16 leading-relaxed"
+            className="experience_lead text-color-secondary max-width-large"
           >
             Photo Match happens in real life. Same venue, same night, face to face. The way it should be.
           </motion.p>
 
-          <div className="grid md:grid-cols-3 gap-px bg-white/[0.06] rounded-xl overflow-hidden">
-            {[
-              {
-                title: 'Real photos, not profiles',
-                desc: 'No filters, no catfishing. Your photo reel is printed right there in front of you. What you see is what you get.',
-              },
-              {
-                title: 'Same venue, same night',
-                desc: 'Your match is not across town or three days away. They are here. Right now. Walk over and say hi.',
-              },
-              {
-                title: 'Keep your reel',
-                desc: 'A printed photo strip from every night out. Stick it on your fridge, tape it to your mirror, share it with friends.',
-              },
-            ].map((f, i) => (
+          <div className="experience_grid">
+            {features.map((f, i) => (
               <motion.div
                 key={f.title}
                 initial={{ opacity: 0, y: 16 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.3 + i * 0.1, ease: [0.4, 0, 0.2, 1] }}
-                className="bg-[#0a0a0a] p-8 md:p-10 group hover:bg-[#111] transition-colors duration-300"
+                className="experience_feature"
               >
-                <span className="text-accent/40 text-sm font-mono mb-4 block">0{i + 1}</span>
-                <h3 className="text-lg font-semibold mb-3 group-hover:text-accent transition-colors duration-300">{f.title}</h3>
-                <p className="text-zinc-400 leading-relaxed text-base">{f.desc}</p>
+                <span className="experience_feature-num text-color-accent text-style-muted">{f.num}</span>
+                <h3 className="experience_feature-title">{f.title}</h3>
+                <p className="experience_feature-desc text-color-secondary">{f.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .experience_image-break { position: relative; height: 50vh; overflow: hidden; }
+        .experience_image-parallax { position: absolute; inset: 0; }
+        .experience_image { object-fit: cover; transform: scale(1.1); }
+        .experience_image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--color-bg-primary), rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2)); }
+        .experience_image-content { position: absolute; inset: 0; display: flex; align-items: flex-end; padding-bottom: 64px; }
+        .experience_heading { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.0; max-width: 560px; }
+        .experience_lead { font-size: 1.0625rem; line-height: 1.6; margin-bottom: 64px; }
+        .experience_grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--color-border); border-radius: 16px; overflow: hidden; }
+        .experience_feature { background: var(--color-bg-primary); padding: 40px; transition: background 0.3s; }
+        .experience_feature:hover { background: var(--color-bg-secondary); }
+        .experience_feature-num { display: block; font-size: 0.75rem; font-family: monospace; margin-bottom: 16px; }
+        .experience_feature-title { font-size: 1.125rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px; transition: color 0.3s; }
+        .experience_feature:hover .experience_feature-title { color: var(--color-accent); }
+        .experience_feature-desc { font-size: 0.9375rem; line-height: 1.6; }
+        @media (min-width: 768px) {
+          .experience_image-break { height: 60vh; }
+          .experience_grid { grid-template-columns: repeat(3, 1fr); }
+        }
+      `}</style>
     </section>
   )
 }

@@ -13,19 +13,21 @@ import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
-    <main className="grain-overlay overflow-x-hidden">
+    <div className="page-wrapper grain-overlay">
       <SmoothScroll />
       <Navigation />
-      <Hero />
-      <SocialProof />
-      <VenueTicker />
-      <HowItWorks />
-      <Experience />
-      <Testimonial />
-      <ForVenues />
-      <AppPreview />
-      <Locations />
+      <main className="main-wrapper">
+        <Hero />
+        <SocialProof />
+        <VenueTicker />
+        <HowItWorks />
+        <Experience />
+        <Testimonial />
+        <ForVenues />
+        <AppPreview />
+        <Locations />
+      </main>
       <Footer />
-    </main>
+    </div>
   )
 }
