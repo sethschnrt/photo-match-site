@@ -10,7 +10,7 @@ export default function Hero() {
       {/* Background: brick wall */}
       <div className="hero_background">
         <Image
-          src={`${basePath}/assets/images/hero-bar-wall.jpg`}
+          src={`${basePath}/assets/images/hero-bar-wall-v2.jpg`}
           alt=""
           fill
           className="hero_background-image"
@@ -97,7 +97,7 @@ export default function Hero() {
         .section_hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .hero_background { position: absolute; inset: 0; }
         .hero_background-image { object-fit: cover; }
-        .hero_vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.8) 100%); }
+        .hero_vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 10%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.85) 100%); }
         .hero_glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%); width: 500px; height: 400px; background: rgba(255,0,110,0.07); border-radius: 50%; filter: blur(80px); pointer-events: none; }
         .hero_glow.is-inner { width: 280px; height: 220px; background: rgba(255,0,110,0.12); filter: blur(50px); }
         .hero_content-wrapper { position: relative; z-index: 10; padding-top: 120px; padding-bottom: 80px; }
