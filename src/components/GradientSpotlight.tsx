@@ -41,7 +41,7 @@ export default function GradientSpotlight({ children, className = '' }: Gradient
         .gradient-spotlight_glow {
           position: absolute;
           inset: 0;
-          opacity: 0.8;
+          opacity: 1;
           pointer-events: none;
           z-index: 1;
         }

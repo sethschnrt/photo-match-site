@@ -114,7 +114,7 @@ export default function Hero() {
           .hero_logo { position: relative; width: 320px; height: auto; filter: drop-shadow(0 0 20px rgba(255,0,110,0.5)); }
           .hero_flicker { position: absolute; inset: 0; pointer-events: none; }
           .hero_tagline { font-size: clamp(1.25rem, 2.5vw, 1.5rem); font-weight: 500; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--color-text-primary); line-height: 1.3; text-align: center; }
-          .hero_subtitle { margin-bottom: 40px; color: rgba(180, 184, 192, 0.7); }
+          .hero_subtitle { margin-bottom: 40px; color: rgb(180, 184, 192); }
           .hero_button-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
           @media (min-width: 768px) {
             .hero_logo, .hero_logo-blur, .hero_logo-blur.is-wide { width: 400px; }

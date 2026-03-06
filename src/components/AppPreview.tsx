@@ -92,7 +92,7 @@ export default function AppPreview() {
         .section_app-preview { border-top: 1px solid var(--color-border); }
         .app-preview_layout { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
         .app-preview_placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 64px 32px; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: 20px; text-align: center; min-height: 320px; }
-        .app-preview_placeholder-icon { color: var(--color-accent); opacity: 0.5; }
+        .app-preview_placeholder-icon { color: var(--color-accent); opacity: 1; }
         .app-preview_placeholder-title { font-size: 1.125rem; font-weight: 600; }
         .app-preview_placeholder-sub { font-size: 0.875rem; }
         .app-preview_content .text-style-label { margin-bottom: 12px; }
