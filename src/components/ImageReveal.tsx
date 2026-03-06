@@ -20,14 +20,14 @@ export default function ImageReveal({
   return (
     <motion.div
       className={`image-reveal_wrapper ${className}`}
-      initial={{ clipPath: 'inset(0 100% 0 0)' }}
+      initial={{ clipPath: 'inset(0 0% 0 0)' }}
       whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
       transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1] }}
       viewport={{ once: true, margin: '-20px' }}
     >
       <motion.div
         className="image-reveal_inner"
-        initial={{ scale: 1.3 }}
+        initial={{ scale: 1 }}
         whileInView={{ scale: 1 }}
         transition={{ duration: 1.6, ease: [0.33, 1, 0.68, 1] }}
         viewport={{ once: true, margin: '-20px' }}

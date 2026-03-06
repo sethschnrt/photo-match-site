@@ -109,7 +109,7 @@ export default function HowItWorks() {
             {/* Left: sticky heading */}
             <div className="how-it-works_heading-side" ref={headingRef}>
               <motion.p
-                initial={{ opacity: 0, x: -16 }}
+                initial={{ opacity: 1, x: -16 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.4 }}
                 className="text-style-label text-color-accent"
@@ -117,7 +117,7 @@ export default function HowItWorks() {
                 How It Works
               </motion.p>
               <motion.h2
-                initial={{ opacity: 0, x: -16 }}
+                initial={{ opacity: 1, x: -16 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >

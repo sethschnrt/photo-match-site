@@ -52,7 +52,7 @@ export default function Experience() {
       <div className="padding-global padding-section-medium">
         <div className="container-large">
           <motion.p
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="experience_lead text-color-secondary max-width-large"
@@ -64,7 +64,7 @@ export default function Experience() {
             {features.map((f, i) => (
               <motion.div
                 key={f.title}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 1, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.3 + i * 0.12, ease: [0.4, 0, 0.2, 1] }}
                 className="experience_feature"

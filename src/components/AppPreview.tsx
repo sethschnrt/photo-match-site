@@ -20,7 +20,7 @@ export default function AppPreview() {
           <div className="app-preview_layout">
             {/* Clean placeholder card */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
               className="app-preview_placeholder"
@@ -35,7 +35,7 @@ export default function AppPreview() {
             {/* Content */}
             <div className="app-preview_content">
               <motion.p
-                initial={{ opacity: 0, x: 16 }}
+                initial={{ opacity: 1, x: 16 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.4 }}
                 className="text-style-label text-color-accent"
@@ -43,14 +43,14 @@ export default function AppPreview() {
                 The App
               </motion.p>
               <motion.h2
-                initial={{ opacity: 0, x: 16 }}
+                initial={{ opacity: 1, x: 16 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
                 See who is out tonight.
               </motion.h2>
               <motion.p
-                initial={{ opacity: 0 }}
+                initial={{ opacity: 1 }}
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="app-preview_desc text-color-secondary"
@@ -62,7 +62,7 @@ export default function AppPreview() {
                 {features.map((f, i) => (
                   <motion.div
                     key={f.text}
-                    initial={{ opacity: 0, x: 16 }}
+                    initial={{ opacity: 1, x: 16 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
                     className="app-preview_feature"
@@ -76,7 +76,7 @@ export default function AppPreview() {
               </div>
 
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 1, y: 0 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.6 }}
                 className="app-preview_badges"

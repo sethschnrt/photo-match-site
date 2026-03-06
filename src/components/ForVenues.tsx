@@ -43,7 +43,7 @@ export default function ForVenues() {
         <div className="for-venues_heading-overlay">
           <div className="padding-global">
             <motion.p
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4 }}
               className="text-style-label text-color-accent"
@@ -62,7 +62,7 @@ export default function ForVenues() {
       <div className="padding-global padding-section-medium">
         <div className="container-large">
           <motion.p
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="for-venues_desc text-color-secondary max-width-large"
@@ -75,7 +75,7 @@ export default function ForVenues() {
             {benefits.map((item, i) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 1, y: 0 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 + i * 0.12 }}
                 className={`for-venues_benefit ${i % 2 === 1 ? 'is-right' : 'is-left'}`}
@@ -93,7 +93,7 @@ export default function ForVenues() {
 
           {/* Button offset to the right */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.4, delay: 0.6 }}
             className="for-venues_cta"

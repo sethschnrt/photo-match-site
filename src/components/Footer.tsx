@@ -39,7 +39,7 @@ export default function Footer() {
               className="footer_cta-heading"
             />
             <motion.p
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 1 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.4, delay: 0.15 }}
               className="footer_cta-text"
@@ -47,7 +47,7 @@ export default function Footer() {
               Find a Photo Match booth tonight. $5, a printed photo reel, and a real connection.
             </motion.p>
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.25 }}
             >

@@ -24,7 +24,7 @@ export default function Locations() {
           <div className="locations_header">
             <div>
               <motion.p
-                initial={{ opacity: 0, x: -16 }}
+                initial={{ opacity: 1, x: -16 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.4 }}
                 className="text-style-label text-color-accent"
@@ -32,7 +32,7 @@ export default function Locations() {
                 Locations
               </motion.p>
               <motion.h2
-                initial={{ opacity: 0, x: -16 }}
+                initial={{ opacity: 1, x: -16 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
@@ -40,7 +40,7 @@ export default function Locations() {
               </motion.h2>
             </div>
             <motion.p
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 1 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-color-secondary"
@@ -50,7 +50,7 @@ export default function Locations() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="locations_map-container"
