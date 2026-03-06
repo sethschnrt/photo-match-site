@@ -28,31 +28,33 @@ export default function ForVenues() {
 
   return (
     <section id="venues" className="section_for-venues" ref={ref}>
-      {/* Full-bleed image with reveal */}
-      <div className="for-venues_image-break">
-        <ImageReveal
-          src={`${basePath}/assets/images/austin-nightlife.webp`}
-          alt="Austin bar street at night"
-          className="for-venues_image-reveal"
-        />
-        <div className="for-venues_image-overlay" />
-        <div className="for-venues_image-content">
+      {/* Editorial layout: 60% image right, heading overlapping from left */}
+      <div className="for-venues_editorial">
+        <div className="for-venues_image-side">
+          <ImageReveal
+            src={`${basePath}/assets/images/austin-nightlife.webp`}
+            alt="Austin bar street at night"
+            className="for-venues_image-reveal"
+          />
+          <div className="for-venues_image-overlay" />
+        </div>
+
+        {/* Heading overlapping the image from the left */}
+        <div className="for-venues_heading-overlay">
           <div className="padding-global">
-            <div className="container-large">
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4 }}
-                className="text-style-label text-color-accent"
-              >
-                For Venues
-              </motion.p>
-              <AnimatedText
-                text="Turn your bar into the place to be."
-                as="h2"
-                className="for-venues_heading"
-              />
-            </div>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4 }}
+              className="text-style-label text-color-accent"
+            >
+              For Venues
+            </motion.p>
+            <AnimatedText
+              text="Turn your bar into\nthe place to be."
+              as="h2"
+              className="for-venues_heading"
+            />
           </div>
         </div>
       </div>
@@ -68,6 +70,7 @@ export default function ForVenues() {
             Photo Match booths bring energy to your venue. More engagement, longer stays, and a reason for guests to come back next weekend.
           </motion.p>
 
+          {/* Zigzag benefits */}
           <div className="for-venues_benefits">
             {benefits.map((item, i) => (
               <motion.div
@@ -75,7 +78,7 @@ export default function ForVenues() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 + i * 0.12 }}
-                className="for-venues_benefit"
+                className={`for-venues_benefit ${i % 2 === 1 ? 'is-right' : 'is-left'}`}
               >
                 <div className="for-venues_stat text-color-accent">
                   {item.prefix}<AnimatedNum value={item.stat} suffix={item.suffix} visible={isInView} />
@@ -88,11 +91,12 @@ export default function ForVenues() {
             ))}
           </div>
 
+          {/* Button offset to the right */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.4, delay: 0.6 }}
-            style={{ marginTop: '48px' }}
+            className="for-venues_cta"
           >
             <a href="#" className="button is-primary">Book a Demo</a>
           </motion.div>
@@ -100,23 +104,77 @@ export default function ForVenues() {
       </div>
 
       <style jsx global>{`
-        .for-venues_image-break { position: relative; height: 45vh; overflow: hidden; }
-        .for-venues_image-reveal { position: absolute; inset: 0; }
-        .for-venues_image-reveal .image-reveal_inner { position: absolute; inset: 0; }
-        .for-venues_image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--color-bg-primary), rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3)); z-index: 2; }
-        .for-venues_image-content { position: absolute; inset: 0; display: flex; align-items: flex-end; padding-bottom: 64px; z-index: 3; }
-        .for-venues_heading { max-width: 480px; }
+        /* Editorial layout: image right 60%, heading overlapping from left */
+        .for-venues_editorial {
+          position: relative;
+          height: 50vh;
+          overflow: hidden;
+        }
+        .for-venues_image-side {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 60%;
+          height: 100%;
+        }
+        .for-venues_image-reveal {
+          position: absolute;
+          inset: 0;
+        }
+        .for-venues_image-reveal .image-reveal_inner {
+          position: absolute;
+          inset: 0;
+        }
+        .for-venues_image-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to right, var(--color-bg-primary) 10%, rgba(10,10,10,0.5) 50%, rgba(0,0,0,0.2));
+          z-index: 2;
+        }
+        .for-venues_heading-overlay {
+          position: absolute;
+          bottom: 48px;
+          left: 0;
+          z-index: 3;
+          max-width: 55%;
+        }
+        .for-venues_heading {
+          max-width: 480px;
+        }
+
         .for-venues_desc { font-size: 1.0625rem; line-height: 1.6; margin-bottom: 48px; }
+
+        /* Zigzag benefits */
         .for-venues_benefits { display: flex; flex-direction: column; gap: 32px; }
-        .for-venues_benefit { display: flex; gap: 24px; }
+        .for-venues_benefit { display: flex; gap: 24px; max-width: 560px; }
+        .for-venues_benefit.is-left { align-self: flex-start; }
+        .for-venues_benefit.is-right { align-self: flex-end; }
         .for-venues_stat { flex-shrink: 0; width: 80px; text-align: right; font-size: 1.75rem; font-weight: 600; letter-spacing: -0.02em; }
         .for-venues_benefit-content { border-left: 1px solid var(--color-border); padding-left: 24px; transition: border-color 0.3s; }
         .for-venues_benefit:hover .for-venues_benefit-content { border-color: rgba(255,0,110,0.3); }
         .for-venues_benefit-title { font-size: 1rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; transition: color 0.3s; }
         .for-venues_benefit:hover .for-venues_benefit-title { color: #FF006E; }
         .for-venues_benefit-desc { font-size: 0.9375rem; line-height: 1.6; }
+
+        /* CTA offset right */
+        .for-venues_cta {
+          margin-top: 48px;
+          display: flex;
+          justify-content: flex-end;
+        }
+
         @media (min-width: 768px) {
-          .for-venues_image-break { height: 55vh; }
+          .for-venues_editorial { height: 55vh; }
+        }
+
+        @media (max-width: 767px) {
+          .for-venues_image-side { width: 100%; }
+          .for-venues_image-overlay {
+            background: linear-gradient(to top, var(--color-bg-primary), rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2));
+          }
+          .for-venues_heading-overlay { max-width: 90%; }
+          .for-venues_benefit.is-right { align-self: flex-start; }
+          .for-venues_cta { justify-content: center; }
         }
       `}</style>
     </section>
