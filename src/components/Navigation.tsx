@@ -32,7 +32,7 @@ export default function Navigation() {
         <div className="padding-global nav_inner">
           <div className="container-large nav_container">
             <a href="#" className="nav_logo-link">
-              <Image src={`${basePath}/assets/logos/photo-match-logo-v2.png`} alt="Photo Match" width={160} height={40} unoptimized className="nav_logo" />
+              <Image src={`${basePath}/assets/logos/photo-match-logo-v2-transparent.png`} alt="Photo Match" width={160} height={40} unoptimized className="nav_logo" />
             </a>
 
             <div className="nav_menu">

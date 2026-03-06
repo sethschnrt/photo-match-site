@@ -65,7 +65,7 @@ export default function Footer() {
           <div className="container-large footer_bottom-inner">
             {/* Logo + tagline */}
             <div className="footer_brand">
-              <Image src={`${basePath}/assets/logos/photo-match-logo-v2.png`} alt="Photo Match" width={160} height={36} unoptimized className="footer_logo" />
+              <Image src={`${basePath}/assets/logos/photo-match-logo-v2-transparent.png`} alt="Photo Match" width={160} height={36} unoptimized className="footer_logo" />
               <p className="footer_tagline text-color-secondary">The photo booth that finds your match.</p>
             </div>
 

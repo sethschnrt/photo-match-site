@@ -47,13 +47,13 @@ export default function Hero() {
               className="hero_logo-wrapper"
             >
               <div className="hero_logo-glow">
-                <Image src={`${basePath}/assets/logos/photo-match-logo-v2.png`} alt="" width={420} height={420} unoptimized className="hero_logo-blur" />
+                <Image src={`${basePath}/assets/logos/photo-match-logo-v2-transparent.png`} alt="" width={420} height={420} unoptimized className="hero_logo-blur" />
               </div>
               <div className="hero_logo-glow is-outer">
-                <Image src={`${basePath}/assets/logos/photo-match-logo-v2.png`} alt="" width={420} height={420} unoptimized className="hero_logo-blur is-wide" />
+                <Image src={`${basePath}/assets/logos/photo-match-logo-v2-transparent.png`} alt="" width={420} height={420} unoptimized className="hero_logo-blur is-wide" />
               </div>
               <Image
-                src={`${basePath}/assets/logos/photo-match-logo-v2.png`}
+                src={`${basePath}/assets/logos/photo-match-logo-v2-transparent.png`}
                 alt="Photo Match"
                 width={420}
                 height={420}
