@@ -1,7 +1,8 @@
 'use client'
 import { motion, useInView, animate } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import Image from 'next/image'
+import ImageReveal from './ImageReveal'
+import AnimatedText from './AnimatedText'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -27,14 +28,12 @@ export default function ForVenues() {
 
   return (
     <section id="venues" className="section_for-venues" ref={ref}>
-      {/* Full-bleed image: Austin street at night */}
+      {/* Full-bleed image with reveal */}
       <div className="for-venues_image-break">
-        <Image
+        <ImageReveal
           src={`${basePath}/assets/images/austin-nightlife.jpg`}
           alt="Austin bar street at night"
-          fill
-          unoptimized
-          className="for-venues_bg-image"
+          className="for-venues_image-reveal"
         />
         <div className="for-venues_image-overlay" />
         <div className="for-venues_image-content">
@@ -48,14 +47,11 @@ export default function ForVenues() {
               >
                 For Venues
               </motion.p>
-              <motion.h2
-                initial={{ opacity: 0, y: 16 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                style={{ maxWidth: '480px' }}
-              >
-                Turn your bar into the place to be.
-              </motion.h2>
+              <AnimatedText
+                text="Turn your bar into the place to be."
+                as="h2"
+                className="for-venues_heading"
+              />
             </div>
           </div>
         </div>
@@ -105,9 +101,11 @@ export default function ForVenues() {
 
       <style jsx global>{`
         .for-venues_image-break { position: relative; height: 45vh; overflow: hidden; }
-        .for-venues_bg-image { object-fit: cover; transform: scale(1.05); }
-        .for-venues_image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--color-bg-primary), rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3)); }
-        .for-venues_image-content { position: absolute; inset: 0; display: flex; align-items: flex-end; padding-bottom: 64px; }
+        .for-venues_image-reveal { position: absolute; inset: 0; }
+        .for-venues_image-reveal .image-reveal_inner { position: absolute; inset: 0; }
+        .for-venues_image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--color-bg-primary), rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3)); z-index: 2; }
+        .for-venues_image-content { position: absolute; inset: 0; display: flex; align-items: flex-end; padding-bottom: 64px; z-index: 3; }
+        .for-venues_heading { max-width: 480px; }
         .for-venues_desc { font-size: 1.0625rem; line-height: 1.6; margin-bottom: 48px; }
         .for-venues_benefits { display: flex; flex-direction: column; gap: 32px; }
         .for-venues_benefit { display: flex; gap: 24px; }
@@ -115,7 +113,7 @@ export default function ForVenues() {
         .for-venues_benefit-content { border-left: 1px solid var(--color-border); padding-left: 24px; transition: border-color 0.3s; }
         .for-venues_benefit:hover .for-venues_benefit-content { border-color: rgba(255,0,110,0.3); }
         .for-venues_benefit-title { font-size: 1rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; transition: color 0.3s; }
-        .for-venues_benefit:hover .for-venues_benefit-title { color: var(--color-accent); }
+        .for-venues_benefit:hover .for-venues_benefit-title { color: #FF006E; }
         .for-venues_benefit-desc { font-size: 0.9375rem; line-height: 1.6; }
         @media (min-width: 768px) {
           .for-venues_image-break { height: 55vh; }

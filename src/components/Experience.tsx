@@ -1,7 +1,8 @@
 'use client'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
-import Image from 'next/image'
+import ImageReveal from './ImageReveal'
+import AnimatedText from './AnimatedText'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -20,29 +21,25 @@ export default function Experience() {
 
   return (
     <section className="section_experience" ref={ref}>
-      {/* Full-bleed image break */}
+      {/* Full-bleed image break with reveal */}
       <div ref={imgRef} className="experience_image-break">
         <motion.div className="experience_image-parallax" style={{ y: imgY }}>
-          <Image
+          <ImageReveal
             src={`${basePath}/assets/images/nightlife-candid.jpg`}
             alt="Austin nightlife scene"
-            fill
-            unoptimized
-            className="experience_image"
+            className="experience_image-reveal"
+            priority
           />
         </motion.div>
         <div className="experience_image-overlay" />
         <div className="experience_image-content">
           <div className="padding-global">
             <div className="container-large">
-              <motion.h2
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+              <AnimatedText
+                text="Not another\ndating app."
+                as="h2"
                 className="experience_heading"
-              >
-                Not another<br />dating app.
-              </motion.h2>
+              />
             </div>
           </div>
         </div>
@@ -80,12 +77,10 @@ export default function Experience() {
 
       {/* Photo strips flatlay image break */}
       <div className="experience_image-break is-small">
-        <Image
+        <ImageReveal
           src={`${basePath}/assets/images/photo-strips-bar.jpg`}
           alt="Photo booth strips on a bar counter"
-          fill
-          unoptimized
-          className="experience_image"
+          className="experience_image-reveal"
         />
         <div className="experience_image-overlay is-subtle" />
       </div>
@@ -94,10 +89,11 @@ export default function Experience() {
         .experience_image-break { position: relative; height: 55vh; overflow: hidden; }
         .experience_image-break.is-small { height: 35vh; }
         .experience_image-parallax { position: absolute; inset: 0; }
-        .experience_image { object-fit: cover; transform: scale(1.05); }
-        .experience_image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--color-bg-primary), rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2)); }
+        .experience_image-reveal { position: absolute; inset: 0; }
+        .experience_image-reveal .image-reveal_inner { position: absolute; inset: 0; }
+        .experience_image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--color-bg-primary), rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2)); z-index: 2; }
         .experience_image-overlay.is-subtle { background: linear-gradient(to top, var(--color-bg-primary) 5%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.3) 100%); }
-        .experience_image-content { position: absolute; inset: 0; display: flex; align-items: flex-end; padding-bottom: 64px; }
+        .experience_image-content { position: absolute; inset: 0; display: flex; align-items: flex-end; padding-bottom: 64px; z-index: 3; }
         .experience_heading { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.0; max-width: 560px; }
         .experience_lead { font-size: 1.0625rem; line-height: 1.6; margin-bottom: 64px; }
         .experience_grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--color-border); border-radius: 16px; overflow: hidden; }
@@ -105,7 +101,7 @@ export default function Experience() {
         .experience_feature:hover { background: var(--color-bg-secondary); }
         .experience_feature-num { display: block; font-size: 0.75rem; font-family: monospace; margin-bottom: 16px; }
         .experience_feature-title { font-size: 1.125rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px; transition: color 0.3s; }
-        .experience_feature:hover .experience_feature-title { color: var(--color-accent); }
+        .experience_feature:hover .experience_feature-title { color: #FF006E; }
         .experience_feature-desc { font-size: 0.9375rem; line-height: 1.6; }
         @media (min-width: 768px) {
           .experience_image-break { height: 60vh; }

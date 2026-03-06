@@ -3,6 +3,8 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import Image from 'next/image'
 import { InstagramLogo, TiktokLogo, XLogo } from '@phosphor-icons/react/dist/ssr'
+import AnimatedText from './AnimatedText'
+import MagneticButton from './MagneticButton'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -31,14 +33,11 @@ export default function Footer() {
         <div className="footer_cta-gradient" />
         <div className="padding-global">
           <div className="container-medium footer_cta-content">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5 }}
+            <AnimatedText
+              text="Ready to meet someone new?"
+              as="h2"
               className="footer_cta-heading"
-            >
-              Ready to meet someone new?
-            </motion.h2>
+            />
             <motion.p
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
@@ -47,15 +46,15 @@ export default function Footer() {
             >
               Find a Photo Match booth tonight. $5, a printed photo reel, and a real connection.
             </motion.p>
-            <motion.a
+            <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.25 }}
-              href="#app"
-              className="button is-white is-large"
             >
-              Download the App
-            </motion.a>
+              <MagneticButton href="#app" className="button is-white is-large">
+                Download the App
+              </MagneticButton>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -122,7 +121,7 @@ export default function Footer() {
         .footer_link:hover { color: var(--color-text-primary) !important; }
         .footer_social { display: flex; align-items: center; gap: 16px; }
         .footer_social-link { transition: color 0.2s; text-decoration: none; }
-        .footer_social-link:hover { color: var(--color-accent) !important; }
+        .footer_social-link:hover { color: #FF006E !important; }
         .footer_divider { height: 1px; background: var(--color-border); margin-bottom: 24px; }
         .footer_copyright { font-size: 0.75rem; text-align: center; padding-bottom: 16px; }
         @media (min-width: 768px) {
