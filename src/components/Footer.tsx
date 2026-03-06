@@ -113,7 +113,7 @@ export default function Footer() {
         .footer_bottom { background: #050505; padding-top: 64px; padding-bottom: 32px; }
         .footer_bottom-inner { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 48px; }
         .footer_brand { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
-        .footer_logo { height: 96px; width: auto; opacity: 1; object-fit: contain; display: block; }
+        .footer_logo { height: 2.75rem; width: auto; opacity: 1; object-fit: contain; display: block; }
         .footer_tagline { font-size: 0.875rem; }
         .footer_nav { display: flex; flex-direction: column; gap: 10px; }
         .footer_nav-heading { font-size: 0.8125rem; font-weight: 600; margin-bottom: 4px; }
