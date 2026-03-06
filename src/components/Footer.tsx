@@ -112,8 +112,8 @@ export default function Footer() {
         .footer_cta-text { color: rgba(255,255,255,0.8); font-size: 1rem; max-width: 400px; margin: 0 auto 40px; line-height: 1.6; }
         .footer_bottom { background: #050505; padding-top: 64px; padding-bottom: 32px; }
         .footer_bottom-inner { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 48px; }
-        .footer_brand { display: flex; flex-direction: column; gap: 12px; }
-        .footer_logo { height: 64px; width: auto; opacity: 0.7; object-fit: contain; }
+        .footer_brand { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+        .footer_logo { height: 96px; width: auto; opacity: 0.8; object-fit: contain; display: block; }
         .footer_tagline { font-size: 0.875rem; }
         .footer_nav { display: flex; flex-direction: column; gap: 10px; }
         .footer_nav-heading { font-size: 0.8125rem; font-weight: 600; margin-bottom: 4px; }

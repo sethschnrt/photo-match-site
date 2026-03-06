@@ -114,8 +114,8 @@ export default function Navigation() {
         .nav_background { position: absolute; inset: 0; background: rgba(10,10,10,0.85); backdrop-filter: blur(16px); }
         .nav_border { position: absolute; inset-inline: 0; bottom: 0; height: 1px; background: white; }
         .nav_inner { position: relative; z-index: 10; }
-        .nav_container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-        .nav_logo { height: 56px; width: auto; object-fit: contain; }
+        .nav_container { display: flex; align-items: center; justify-content: space-between; height: 88px; }
+        .nav_logo { height: 80px; width: auto; object-fit: contain; }
         .nav_menu { display: none; align-items: center; gap: 32px; }
         .nav_link { font-size: 0.8125rem; position: relative; transition: color 0.2s; text-decoration: none; color: rgba(180, 184, 192, 0.85); }
         .nav_link:hover { color: var(--color-text-primary); }
