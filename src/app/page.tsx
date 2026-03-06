@@ -10,13 +10,11 @@ import ForVenues from '@/components/ForVenues'
 import AppPreview from '@/components/AppPreview'
 import Locations from '@/components/Locations'
 import Footer from '@/components/Footer'
-import Preloader from '@/components/Preloader'
 
 
 export default function Home() {
   return (
     <div className="page-wrapper grain-overlay">
-      <Preloader />
 
       <SmoothScroll />
       <Navigation />

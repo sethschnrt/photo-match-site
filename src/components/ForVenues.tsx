@@ -31,7 +31,7 @@ export default function ForVenues() {
       {/* Full-bleed image with reveal */}
       <div className="for-venues_image-break">
         <ImageReveal
-          src={`${basePath}/assets/images/austin-nightlife.jpg`}
+          src={`${basePath}/assets/images/austin-nightlife.webp`}
           alt="Austin bar street at night"
           className="for-venues_image-reveal"
         />

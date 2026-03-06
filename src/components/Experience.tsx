@@ -25,7 +25,7 @@ export default function Experience() {
       <div ref={imgRef} className="experience_image-break">
         <motion.div className="experience_image-parallax" style={{ y: imgY }}>
           <ImageReveal
-            src={`${basePath}/assets/images/nightlife-candid.jpg`}
+            src={`${basePath}/assets/images/nightlife-candid.webp`}
             alt="Austin nightlife scene"
             className="experience_image-reveal"
             priority
@@ -78,7 +78,7 @@ export default function Experience() {
       {/* Photo strips flatlay image break */}
       <div className="experience_image-break is-small">
         <ImageReveal
-          src={`${basePath}/assets/images/photo-strips-bar.jpg`}
+          src={`${basePath}/assets/images/photo-strips-bar.webp`}
           alt="Photo booth strips on a bar counter"
           className="experience_image-reveal"
         />

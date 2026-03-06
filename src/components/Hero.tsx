@@ -14,7 +14,7 @@ export default function Hero() {
         {/* Background: brick wall */}
         <div className="hero_background">
           <Image
-            src={`${basePath}/assets/images/hero-bar-wall-v2.jpg`}
+            src={`${basePath}/assets/images/hero-bar-wall-v2.webp`}
             alt=""
             fill
             className="hero_background-image"

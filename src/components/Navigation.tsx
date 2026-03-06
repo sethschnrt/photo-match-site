@@ -1,5 +1,5 @@
 'use client'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import Image from 'next/image'
 import { List, X } from '@phosphor-icons/react/dist/ssr'
@@ -14,9 +14,7 @@ const links = [
 
 export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const { scrollY } = useScroll()
-  const bgOpacity = useTransform(scrollY, [0, 100], [0, 0.9])
-  const borderOpacity = useTransform(scrollY, [0, 100], [0, 0.06])
+
 
   return (
     <>
@@ -26,8 +24,8 @@ export default function Navigation() {
         transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
         className="nav_component"
       >
-        <motion.div className="nav_background" style={{ opacity: bgOpacity }} />
-        <motion.div className="nav_border" style={{ opacity: borderOpacity }} />
+        <div className="nav_background" />
+        <div className="nav_border" />
 
         <div className="padding-global nav_inner">
           <div className="container-large nav_container">
@@ -111,11 +109,11 @@ export default function Navigation() {
 
       <style jsx global>{`
         .nav_component { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }
-        .nav_background { position: absolute; inset: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(16px); }
-        .nav_border { position: absolute; inset-inline: 0; bottom: 0; height: 1px; background: white; }
+        .nav_background { position: absolute; inset: 0; background: #0a0a0a; opacity: 1; }
+        .nav_border { position: absolute; inset-inline: 0; bottom: 0; height: 1px; background: white; opacity: 0.06; }
         .nav_inner { position: relative; z-index: 10; }
-        .nav_container { display: flex; align-items: center; justify-content: space-between; height: 88px; }
-        .nav_logo { height: 80px; width: auto; object-fit: contain; }
+        .nav_container { display: flex; align-items: center; justify-content: space-between; height: 4.5rem; max-height: 4.5rem; }
+        .nav_logo { height: 48px; width: auto; object-fit: contain; }
         .nav_menu { display: none; align-items: center; gap: 32px; }
         .nav_link { font-size: 0.8125rem; position: relative; transition: color 0.2s; text-decoration: none; color: rgb(180, 184, 192); }
         .nav_link:hover { color: var(--color-text-primary); }
