@@ -114,7 +114,7 @@ export default function ForVenues() {
           position: absolute;
           top: 0;
           right: 0;
-          width: 60%;
+          width: 100%;
           height: 100%;
         }
         .for-venues_image-reveal {

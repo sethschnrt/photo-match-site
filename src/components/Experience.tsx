@@ -98,7 +98,7 @@ export default function Experience() {
           position: absolute;
           top: 0;
           right: 0;
-          width: 70%;
+          width: 100%;
           height: 100%;
         }
         .experience_hero-image .experience_image-reveal {
@@ -157,7 +157,7 @@ export default function Experience() {
         }
         .experience_feature-num { display: block; font-size: 0.75rem; font-family: monospace; margin-bottom: 16px; }
         .experience_feature-title { font-size: 1.125rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px; transition: color 0.3s; }
-        .experience_feature:hover .experience_feature-title { color: #FF006E; }
+        .experience_feature:hover .experience_feature-title { color: var(--color-text-primary); }
         .experience_feature-desc { font-size: 0.9375rem; line-height: 1.6; }
 
         /* Photo toss: rotated, offset */
@@ -167,11 +167,9 @@ export default function Experience() {
         }
         .experience_photo-toss-inner {
           position: relative;
-          height: 35vh;
-          width: 85%;
-          margin-left: auto;
-          transform: rotate(-2deg);
-          border-radius: 8px;
+          height: 45vh;
+          width: 100%;
+          border-radius: 0;
           overflow: hidden;
         }
         .experience_photo-toss-inner .experience_image-reveal {
@@ -205,8 +203,7 @@ export default function Experience() {
           }
           .experience_feature { margin-top: 0 !important; }
           .experience_photo-toss-inner {
-            width: 95%;
-            transform: rotate(-1deg);
+            width: 100%;
           }
         }
       `}</style>
