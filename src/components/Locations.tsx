@@ -1,6 +1,6 @@
 'use client'
 import { motion, useInView } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import { MapPin } from '@phosphor-icons/react/dist/ssr'
 
 const locations = [
@@ -12,23 +12,25 @@ const locations = [
   { name: 'The Domain', venues: 5, lng: -97.7320, lat: 30.4020, hot: false },
 ]
 
-function MapComponent() {
+export default function Locations() {
+  const sectionRef = useRef(null)
+  const isInView = useInView(sectionRef, { once: true, margin: '-20px' })
   const mapContainer = useRef<HTMLDivElement>(null)
   const mapRef = useRef<any>(null)
+  const markersRef = useRef<Map<string, any>>(new Map())
+  const popupsRef = useRef<Map<string, any>>(new Map())
   const [hovered, setHovered] = useState<string | null>(null)
 
   useEffect(() => {
     if (!mapContainer.current || mapRef.current) return
-
     let cancelled = false
 
-    import('maplibre-gl').then((maplibregl) => {
+    import('maplibre-gl').then((mod) => {
       if (cancelled || !mapContainer.current) return
+      const maplibregl = mod.default
 
-      // CSS loaded via link tag below
-
-      const map = new maplibregl.default.Map({
-        container: mapContainer.current,
+      const map = new maplibregl.Map({
+        container: mapContainer.current!,
         style: {
           version: 8,
           sources: {
@@ -40,44 +42,44 @@ function MapComponent() {
                 'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
               ],
               tileSize: 256,
-              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+              attribution: '&copy; OpenStreetMap &copy; CARTO',
             },
           },
-          layers: [
-            {
-              id: 'carto-tiles',
-              type: 'raster',
-              source: 'carto',
-              minzoom: 0,
-              maxzoom: 19,
-            },
-          ],
+          layers: [{ id: 'carto-tiles', type: 'raster', source: 'carto', minzoom: 0, maxzoom: 19 }],
         },
-        center: [-97.7431, 30.2972],
-        zoom: 11.5,
+        center: [-97.7400, 30.3200],
+        zoom: 11,
         minZoom: 10,
         maxZoom: 15,
         attributionControl: false,
-        interactive: true,
         dragRotate: false,
         pitchWithRotate: false,
+        cooperativeGestures: true,
       })
 
-      map.addControl(new maplibregl.default.NavigationControl({ showCompass: false }), 'bottom-right')
+      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right')
 
       map.on('load', () => {
-        // Add location markers
+        // Fit map to show ALL pins with padding
+        const bounds = new maplibregl.LngLatBounds()
+        locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]))
+        map.fitBounds(bounds, { padding: 60, maxZoom: 13, duration: 0 })
+
+        // Add markers
         locations.forEach((loc) => {
-          // Create custom marker element
           const el = document.createElement('div')
           el.className = `locations_marker ${loc.hot ? 'is-hot' : ''}`
+          el.dataset.name = loc.name
           el.innerHTML = `
             <div class="locations_marker-pulse"></div>
             <div class="locations_marker-dot"></div>
+            <div class="locations_marker-label">
+              <strong>${loc.name}</strong>
+              <span>${loc.venues} venues</span>
+            </div>
           `
 
-          // Create popup
-          const popup = new maplibregl.default.Popup({
+          const popup = new maplibregl.Popup({
             offset: 16,
             closeButton: false,
             closeOnClick: false,
@@ -89,13 +91,21 @@ function MapComponent() {
             </div>
           `)
 
-          el.addEventListener('mouseenter', () => popup.addTo(map))
-          el.addEventListener('mouseleave', () => popup.remove())
-
-          new maplibregl.default.Marker({ element: el })
+          const marker = new maplibregl.Marker({ element: el })
             .setLngLat([loc.lng, loc.lat])
-            .setPopup(popup)
             .addTo(map)
+
+          el.addEventListener('mouseenter', () => {
+            popup.setLngLat([loc.lng, loc.lat]).addTo(map)
+            setHovered(loc.name)
+          })
+          el.addEventListener('mouseleave', () => {
+            popup.remove()
+            setHovered(null)
+          })
+
+          markersRef.current.set(loc.name, marker)
+          popupsRef.current.set(loc.name, popup)
         })
       })
 
@@ -111,15 +121,33 @@ function MapComponent() {
     }
   }, [])
 
-  return <div ref={mapContainer} className="locations_maplibre" />
-}
+  // Sync hover from legend cards to map markers
+  const handleCardHover = useCallback((name: string | null) => {
+    setHovered(name)
 
-export default function Locations() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-20px' })
+    // Show/hide popup for hovered location
+    popupsRef.current.forEach((popup, locName) => {
+      if (locName === name && mapRef.current) {
+        const loc = locations.find((l) => l.name === locName)
+        if (loc) popup.setLngLat([loc.lng, loc.lat]).addTo(mapRef.current)
+      } else {
+        popup.remove()
+      }
+    })
+
+    // Highlight marker
+    markersRef.current.forEach((marker, locName) => {
+      const el = marker.getElement()
+      if (locName === name) {
+        el.classList.add('is-highlighted')
+      } else {
+        el.classList.remove('is-highlighted')
+      }
+    })
+  }, [])
 
   return (
-    <section id="locations" className="section_locations" ref={ref}>
+    <section id="locations" className="section_locations" ref={sectionRef}>
       <div className="padding-global padding-section-large">
         <div className="container-large">
           <div className="locations_header">
@@ -152,12 +180,17 @@ export default function Locations() {
 
           <div className="locations_content">
             <div className="locations_map-wrap">
-              <MapComponent />
+              <div ref={mapContainer} className="locations_maplibre" />
             </div>
 
             <div className="locations_legend">
               {locations.map((loc) => (
-                <div key={loc.name} className="locations_legend-item">
+                <div
+                  key={loc.name}
+                  className={`locations_legend-item ${hovered === loc.name ? 'is-active' : ''}`}
+                  onMouseEnter={() => handleCardHover(loc.name)}
+                  onMouseLeave={() => handleCardHover(null)}
+                >
                   <MapPin size={16} weight="fill" className="locations_legend-icon" />
                   <div>
                     <p className="locations_legend-name text-color-primary">{loc.name}</p>
@@ -173,18 +206,21 @@ export default function Locations() {
       <style jsx global>{`
         .locations_header { display: flex; flex-direction: column; gap: 8px; margin-bottom: 48px; }
         .locations_header .text-style-label { margin-bottom: 12px; }
-
         .locations_content { display: grid; grid-template-columns: 1fr; gap: 32px; }
-
         .locations_map-wrap {
           border-radius: 16px;
           overflow: hidden;
           border: 1px solid var(--color-border);
           aspect-ratio: 16 / 10;
         }
-        .locations_maplibre {
-          width: 100%;
-          height: 100%;
+        .locations_maplibre { width: 100%; height: 100%; }
+
+        /* Cooperative gestures overlay text */
+        .locations_maplibre .maplibregl-cooperative-gesture-screen {
+          background: rgba(10, 10, 10, 0.7) !important;
+          font-family: var(--font-main), sans-serif !important;
+          color: var(--color-text-secondary) !important;
+          font-size: 0.875rem !important;
         }
 
         /* MapLibre UI overrides */
@@ -206,34 +242,37 @@ export default function Locations() {
           filter: invert(1);
         }
 
-        /* Custom markers */
+        /* Markers */
         .locations_marker {
           position: relative;
-          width: 20px;
-          height: 20px;
+          width: 24px;
+          height: 24px;
           cursor: pointer;
+          z-index: 1;
         }
         .locations_marker-dot {
           position: absolute;
           top: 50%;
           left: 50%;
-          width: 10px;
-          height: 10px;
+          width: 12px;
+          height: 12px;
           border-radius: 50%;
           background: #FF006E;
           transform: translate(-50%, -50%);
           box-shadow: 0 0 12px rgba(255, 0, 110, 0.6);
-          transition: transform 0.2s;
+          transition: transform 0.2s, box-shadow 0.2s;
         }
-        .locations_marker:hover .locations_marker-dot {
-          transform: translate(-50%, -50%) scale(1.4);
+        .locations_marker:hover .locations_marker-dot,
+        .locations_marker.is-highlighted .locations_marker-dot {
+          transform: translate(-50%, -50%) scale(1.5);
+          box-shadow: 0 0 20px rgba(255, 0, 110, 0.8);
         }
         .locations_marker-pulse {
           position: absolute;
           top: 50%;
           left: 50%;
-          width: 20px;
-          height: 20px;
+          width: 24px;
+          height: 24px;
           border-radius: 50%;
           background: rgba(255, 0, 110, 0.25);
           transform: translate(-50%, -50%);
@@ -242,6 +281,7 @@ export default function Locations() {
         .locations_marker.is-hot .locations_marker-pulse {
           animation: marker-pulse 2s ease-out infinite;
         }
+        .locations_marker-label { display: none; }
         @keyframes marker-pulse {
           0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
           100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
@@ -275,8 +315,22 @@ export default function Locations() {
 
         /* Legend */
         .locations_legend { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .locations_legend-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: 10px; transition: border-color 0.2s; }
-        .locations_legend-item:hover { border-color: rgba(255,0,110,0.3); }
+        .locations_legend-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 16px;
+          background: var(--color-bg-secondary);
+          border: 1px solid var(--color-border);
+          border-radius: 10px;
+          cursor: pointer;
+          transition: border-color 0.2s, background 0.2s;
+        }
+        .locations_legend-item:hover,
+        .locations_legend-item.is-active {
+          border-color: rgba(255, 0, 110, 0.4);
+          background: rgba(255, 0, 110, 0.04);
+        }
         .locations_legend-icon { color: var(--color-accent); flex-shrink: 0; }
         .locations_legend-name { font-size: 0.875rem; font-weight: 600; }
         .locations_legend-count { font-size: 0.75rem; }
