@@ -113,7 +113,7 @@ export default function Navigation() {
         .nav_border { position: absolute; inset-inline: 0; bottom: 0; height: 1px; background: white; opacity: 0.06; }
         .nav_inner { position: relative; z-index: 10; }
         .nav_container { display: flex; align-items: center; justify-content: space-between; height: 4.5rem; max-height: 4.5rem; }
-        .nav_logo { height: 48px; width: auto; object-fit: contain; }
+        .nav_logo { height: 64px; width: auto; object-fit: contain; }
         .nav_menu { display: none; align-items: center; gap: 32px; }
         .nav_link { font-size: 0.8125rem; position: relative; transition: color 0.2s; text-decoration: none; color: rgb(180, 184, 192); }
         .nav_link:hover { color: var(--color-text-primary); }
