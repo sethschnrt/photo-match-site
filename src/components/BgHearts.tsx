@@ -4,10 +4,9 @@ interface BgHeartsProps {
   layout: 'how-it-works' | 'experience' | 'for-venues' | 'locations' | 'cta'
 }
 
-/* Multiple concentric heart outlines radiating outward, like ripples */
 function RadialHearts({ 
   position = 'right',
-  opacity = 0.05,
+  opacity = 0.065,
   scale = 1,
   offsetY = '0%',
   rings = 3,
@@ -23,11 +22,11 @@ function RadialHearts({
     top: offsetY,
     pointerEvents: 'none',
     zIndex: 0,
-    width: `${80 * scale}%`,
-    maxWidth: `${1100 * scale}px`,
+    width: `${65 * scale}%`,
+    maxWidth: `${900 * scale}px`,
     aspectRatio: '1',
-    ...(position === 'right' && { right: '-15%' }),
-    ...(position === 'left' && { left: '-15%' }),
+    ...(position === 'right' && { right: '-12%' }),
+    ...(position === 'left' && { left: '-12%' }),
     ...(position === 'center' && { left: '50%', transform: 'translateX(-50%)' }),
   }
 
@@ -35,7 +34,6 @@ function RadialHearts({
 
   return (
     <div style={posStyle}>
-      {/* Soft radial glow */}
       <div style={{
         position: 'absolute',
         inset: '-10%',
@@ -43,7 +41,6 @@ function RadialHearts({
         borderRadius: '50%',
         pointerEvents: 'none',
       }} />
-      {/* Concentric heart rings — innermost is most opaque, outer rings fade */}
       {Array.from({ length: rings }).map((_, i) => {
         const ringScale = 0.4 + i * 0.3
         const ringOpacity = opacity * (1 - i * 0.25)
@@ -75,15 +72,15 @@ function RadialHearts({
 export default function BgHearts({ layout }: BgHeartsProps) {
   switch (layout) {
     case 'how-it-works':
-      return <RadialHearts position="right" opacity={0.055} scale={1.1} offsetY="-15%" rings={3} />
+      return <RadialHearts position="right" opacity={0.07} scale={0.95} offsetY="-15%" rings={3} />
     case 'experience':
-      return <RadialHearts position="left" opacity={0.05} scale={1} offsetY="5%" rings={3} />
+      return <RadialHearts position="left" opacity={0.065} scale={0.85} offsetY="5%" rings={3} />
     case 'for-venues':
-      return <RadialHearts position="right" opacity={0.055} scale={1} offsetY="40%" rings={3} />
+      return <RadialHearts position="right" opacity={0.07} scale={0.9} offsetY="40%" rings={3} />
     case 'locations':
-      return <RadialHearts position="left" opacity={0.05} scale={0.9} offsetY="-5%" rings={3} />
+      return null
     case 'cta':
-      return <RadialHearts position="center" opacity={0.06} scale={1.2} offsetY="-20%" rings={4} />
+      return <RadialHearts position="center" opacity={0.075} scale={1} offsetY="-20%" rings={4} />
     default:
       return null
   }
