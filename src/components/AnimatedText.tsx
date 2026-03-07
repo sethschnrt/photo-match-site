@@ -41,7 +41,7 @@ export default function AnimatedText({
                     ease: [0.33, 1, 0.68, 1],
                   }}
                 >
-                  {word}
+                  {word}{' '}
                 </motion.span>
               </span>
             )

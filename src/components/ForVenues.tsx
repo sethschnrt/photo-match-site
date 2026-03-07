@@ -50,11 +50,14 @@ export default function ForVenues() {
             >
               For Venues
             </motion.p>
-            <AnimatedText
-              text="Turn your bar into\nthe place to be."
-              as="h2"
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 }}
               className="for-venues_heading"
-            />
+            >
+              Turn your bar into<br />the place to be.
+            </motion.h2>
           </div>
         </div>
       </div>
