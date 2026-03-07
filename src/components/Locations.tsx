@@ -47,8 +47,8 @@ export default function Locations() {
           },
           layers: [{ id: 'carto-tiles', type: 'raster', source: 'carto', minzoom: 0, maxzoom: 19 }],
         },
-        center: [-97.7400, 30.3200],
-        zoom: 11,
+        center: [-97.7380, 30.2850],
+        zoom: 11.8,
         minZoom: 10,
         maxZoom: 15,
         attributionControl: false,
@@ -63,11 +63,6 @@ export default function Locations() {
       })
 
       map.on('load', () => {
-        // Fit map to show ALL pins with padding
-        const bounds = new maplibregl.LngLatBounds()
-        locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]))
-        map.fitBounds(bounds, { padding: 60, maxZoom: 13, duration: 0 })
-
         // Add markers
         locations.forEach((loc) => {
           const el = document.createElement('div')
