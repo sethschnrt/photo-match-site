@@ -75,7 +75,7 @@ export default function Hero() {
           overflow: hidden;
         }
         .hero_background { position: absolute; inset: 0; }
-        .hero_background-image { object-fit: cover; object-position: center top; }
+        .hero_background-image { object-fit: cover; object-position: center center; }
         .hero_vignette {
           position: absolute;
           inset: 0;
