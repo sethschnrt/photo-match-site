@@ -75,7 +75,7 @@ export default function Hero() {
           overflow: hidden;
         }
         .hero_background { position: absolute; inset: 0; }
-        .hero_background-image { object-fit: cover; object-position: center 35%; }
+        .hero_background-image { object-fit: cover; object-position: center center; }
         .hero_vignette {
           position: absolute;
           inset: 0;
@@ -91,6 +91,7 @@ export default function Hero() {
         }
         .hero_content {
           min-height: 100vh;
+          min-height: 100svh;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -102,7 +103,7 @@ export default function Hero() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding-bottom: 40px;
+          padding-bottom: 60px;
         }
         .hero_tagline {
           font-size: clamp(1.25rem, 2.5vw, 1.5rem);
