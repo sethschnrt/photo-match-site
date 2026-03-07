@@ -47,8 +47,8 @@ export default function Locations() {
           },
           layers: [{ id: 'carto-tiles', type: 'raster', source: 'carto', minzoom: 0, maxzoom: 19 }],
         },
-        center: [-97.7380, 30.2850],
-        zoom: 11.8,
+        center: [-97.7400, 30.3200],
+        zoom: 11,
         minZoom: 10,
         maxZoom: 15,
         attributionControl: false,
@@ -63,6 +63,11 @@ export default function Locations() {
       })
 
       map.on('load', () => {
+        // Fit all pins with more padding at bottom to push downtown toward center
+        const bounds = new maplibregl.LngLatBounds()
+        locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]))
+        map.fitBounds(bounds, { padding: { top: 40, bottom: 80, left: 40, right: 40 }, duration: 0 })
+
         // Add markers
         locations.forEach((loc) => {
           const el = document.createElement('div')
