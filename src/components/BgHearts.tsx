@@ -38,22 +38,23 @@ interface BgHeartsProps {
 export default function BgHearts({ layout }: BgHeartsProps) {
   const configs: Record<string, HeartProps[]> = {
     'how-it-works': [
-      { size: 120, top: '8%', right: '5%', rotate: 15, opacity: 0.04 },
-      { size: 64, bottom: '12%', left: '3%', rotate: -20, opacity: 0.05 },
-      { size: 40, top: '40%', right: '15%', rotate: 35, opacity: 0.03 },
+      { size: 140, top: '6%', right: '4%', rotate: 15, opacity: 0.08 },
+      { size: 80, bottom: '10%', left: '2%', rotate: -20, opacity: 0.07 },
+      { size: 48, top: '45%', right: '18%', rotate: 35, opacity: 0.06 },
     ],
     'experience': [
-      { size: 80, top: '5%', left: '8%', rotate: -12, opacity: 0.04 },
-      { size: 48, bottom: '20%', right: '6%', rotate: 25, opacity: 0.05 },
+      { size: 100, top: '4%', left: '6%', rotate: -12, opacity: 0.07 },
+      { size: 60, bottom: '15%', right: '5%', rotate: 25, opacity: 0.08 },
+      { size: 36, top: '60%', left: '25%', rotate: -8, opacity: 0.06 },
     ],
     'for-venues': [
-      { size: 96, top: '10%', right: '4%', rotate: 18, opacity: 0.04 },
-      { size: 56, bottom: '15%', left: '6%', rotate: -30, opacity: 0.04 },
-      { size: 32, top: '50%', left: '20%', rotate: 10, opacity: 0.03 },
+      { size: 120, top: '8%', right: '3%', rotate: 18, opacity: 0.08 },
+      { size: 72, bottom: '12%', left: '5%', rotate: -30, opacity: 0.07 },
+      { size: 40, top: '50%', left: '18%', rotate: 10, opacity: 0.06 },
     ],
     'locations': [
-      { size: 72, top: '6%', left: '4%', rotate: -15, opacity: 0.04 },
-      { size: 44, bottom: '10%', right: '8%', rotate: 22, opacity: 0.05 },
+      { size: 90, top: '5%', left: '3%', rotate: -15, opacity: 0.07 },
+      { size: 56, bottom: '8%', right: '6%', rotate: 22, opacity: 0.08 },
     ],
   }
 
