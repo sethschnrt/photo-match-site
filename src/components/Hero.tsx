@@ -9,7 +9,6 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 export default function Hero() {
   return (
     <section className="section_hero">
-      {/* Background: neon sign on brick wall */}
       <div className="hero_background">
         <Image
           src={`${basePath}/assets/images/neon-sign-hero.webp`}
@@ -19,15 +18,11 @@ export default function Hero() {
           priority
           unoptimized
         />
-        {/* Vignette for text readability at edges */}
         <div className="hero_vignette" />
       </div>
 
       <div className="padding-global hero_content-wrapper">
         <div className="container-large hero_content">
-          {/* Spacer to push text below the sign */}
-          <div className="hero_spacer" />
-
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -68,9 +63,11 @@ export default function Hero() {
       <style jsx global>{`
         .section_hero {
           position: relative;
-          min-height: 100vh;
+          height: 100vh;
+          height: 100svh;
+          max-height: 900px;
           display: flex;
-          align-items: center;
+          align-items: flex-end;
           justify-content: center;
           overflow: hidden;
         }
@@ -80,30 +77,25 @@ export default function Hero() {
           position: absolute;
           inset: 0;
           background:
-            linear-gradient(to bottom, transparent 50%, rgba(10, 10, 10, 0.9) 90%, #0a0a0a 100%),
+            linear-gradient(to bottom, transparent 55%, rgba(10, 10, 10, 0.85) 85%, #0a0a0a 100%),
             radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
         }
         .hero_content-wrapper {
           position: relative;
           z-index: 10;
-          padding-top: 80px;
-          padding-bottom: 80px;
+          width: 100%;
         }
         .hero_content {
-          min-height: 100vh;
-          min-height: 100svh;
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: flex-end;
           text-align: center;
+          padding-bottom: 48px;
         }
-        .hero_spacer { flex: 1; }
         .hero_text-block {
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding-bottom: 60px;
         }
         .hero_tagline {
           font-size: clamp(1.25rem, 2.5vw, 1.5rem);
@@ -114,7 +106,7 @@ export default function Hero() {
           line-height: 1.3;
           text-align: center;
         }
-        .hero_subtitle { margin-bottom: 40px; color: rgb(180, 184, 192); }
+        .hero_subtitle { margin-bottom: 32px; color: rgb(180, 184, 192); }
         .hero_button-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
         @media (min-width: 768px) {
           .hero_tagline { font-size: 1.5rem; }
