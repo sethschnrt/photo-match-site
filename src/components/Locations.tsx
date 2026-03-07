@@ -66,7 +66,7 @@ export default function Locations() {
         // Fit all pins with more padding at bottom to push downtown toward center
         const bounds = new maplibregl.LngLatBounds()
         locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]))
-        map.fitBounds(bounds, { padding: { top: 40, bottom: 80, left: 40, right: 40 }, duration: 0 })
+        map.fitBounds(bounds, { padding: { top: 30, bottom: 140, left: 40, right: 40 }, duration: 0 })
 
         // Add markers
         locations.forEach((loc) => {
