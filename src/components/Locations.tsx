@@ -21,20 +21,6 @@ export default function Locations() {
   const popupsRef = useRef<Map<string, any>>(new Map())
   const [hovered, setHovered] = useState<string | null>(null)
 
-  // Block page scroll when user is zooming the map
-  useEffect(() => {
-    const el = mapContainer.current
-    if (!el) return
-    const handler = (e: WheelEvent) => {
-      // If user is holding Ctrl/Cmd (cooperative gesture zoom), block page scroll
-      if (e.ctrlKey || e.metaKey) {
-        e.preventDefault()
-      }
-    }
-    el.addEventListener('wheel', handler, { passive: false })
-    return () => el.removeEventListener('wheel', handler)
-  }, [])
-
   useEffect(() => {
     if (!mapContainer.current || mapRef.current) return
     let cancelled = false
@@ -68,7 +54,7 @@ export default function Locations() {
         attributionControl: false,
         dragRotate: false,
         pitchWithRotate: false,
-        cooperativeGestures: true,
+        scrollZoom: false,
       })
 
       map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right')
@@ -194,7 +180,7 @@ export default function Locations() {
 
           <div className="locations_content">
             <div className="locations_map-wrap">
-              <div ref={mapContainer} className="locations_maplibre" data-lenis-prevent />
+              <div ref={mapContainer} className="locations_maplibre" />
             </div>
 
             <div className="locations_legend">
