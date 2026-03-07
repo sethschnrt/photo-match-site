@@ -56,7 +56,8 @@ export default function ForVenues() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="for-venues_heading"
             >
-              Turn your bar into<br />the place to be.
+              Turn your bar into<br />
+              the place to be.
             </motion.h2>
           </div>
         </div>
