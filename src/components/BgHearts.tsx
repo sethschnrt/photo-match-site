@@ -51,15 +51,15 @@ function RadialHearts({
 export default function BgHearts({ layout }: BgHeartsProps) {
   switch (layout) {
     case 'how-it-works':
-      return <RadialHearts id="hiw" opacity={0.09} rings={3} />
+      return <RadialHearts id="hiw" opacity={0.065} rings={3} />
     case 'experience':
-      return <RadialHearts id="exp" opacity={0.08} rings={3} />
+      return <RadialHearts id="exp" opacity={0.06} rings={3} />
     case 'for-venues':
-      return <RadialHearts id="fv" opacity={0.09} rings={3} />
+      return <RadialHearts id="fv" opacity={0.065} rings={3} />
     case 'locations':
       return null
     case 'cta':
-      return <RadialHearts id="cta" opacity={0.1} rings={4} />
+      return <RadialHearts id="cta" opacity={0.07} rings={4} />
     default:
       return null
   }
