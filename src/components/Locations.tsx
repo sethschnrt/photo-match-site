@@ -55,9 +55,12 @@ export default function Locations() {
         dragRotate: false,
         pitchWithRotate: false,
         scrollZoom: false,
+        dragPan: false,
+        doubleClickZoom: false,
+        touchZoomRotate: false,
+        boxZoom: false,
+        keyboard: false,
       })
-
-      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right')
 
       map.on('load', () => {
         // Fit map to show ALL pins with padding
