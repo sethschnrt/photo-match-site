@@ -79,9 +79,9 @@ export default function ForVenues() {
             {benefits.map((item, i) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, x: i % 2 === 1 ? 32 : -32 }}
+                initial={{ opacity: 0, x: i % 2 === 1 ? 48 : -48 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + i * 0.15, ease: [0.4, 0, 0.2, 1] }}
+                transition={{ duration: 0.65, delay: 0.2 + i * 0.18, ease: [0.22, 1, 0.36, 1] }}
                 className={`for-venues_benefit ${i % 2 === 1 ? 'is-right' : 'is-left'}`}
               >
                 <div className="for-venues_stat text-color-accent">
@@ -108,6 +108,27 @@ export default function ForVenues() {
       </div>
 
       <style jsx global>{`
+        .section_for-venues { position: relative; overflow: hidden; }
+        .section_for-venues::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: -200px;
+          width: 500px;
+          height: 500px;
+          background: radial-gradient(circle, rgba(255, 0, 110, 0.03) 0%, transparent 70%);
+          pointer-events: none;
+        }
+        .section_for-venues::after {
+          content: '';
+          position: absolute;
+          bottom: 100px;
+          left: -200px;
+          width: 400px;
+          height: 400px;
+          background: radial-gradient(circle, rgba(255, 255, 255, 0.015) 0%, transparent 70%);
+          pointer-events: none;
+        }
         /* Editorial layout: image right 60%, heading overlapping from left */
         .for-venues_editorial {
           position: relative;

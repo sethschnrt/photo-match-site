@@ -65,9 +65,9 @@ export default function Experience() {
             {features.map((f, i) => (
               <motion.div
                 key={f.title}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + i * 0.12, ease: [0.4, 0, 0.2, 1] }}
+                transition={{ duration: 0.6, delay: 0.2 + i * 0.15, ease: [0.22, 1, 0.36, 1] }}
                 className="experience_feature"
               >
                 <span className="experience_feature-num text-color-accent text-style-muted">{f.num}</span>
@@ -156,12 +156,27 @@ export default function Experience() {
           display: grid;
           grid-template-columns: 1fr;
           gap: 24px;
+          position: relative;
+        }
+        .experience_grid::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 600px;
+          height: 400px;
+          background: radial-gradient(ellipse, rgba(255, 0, 110, 0.04) 0%, transparent 70%);
+          pointer-events: none;
+          z-index: 0;
         }
         .experience_feature {
           background: var(--color-bg-secondary);
           border: 1px solid var(--color-border);
           border-radius: 16px;
           padding: 40px;
+          position: relative;
+          z-index: 1;
         }
         .experience_feature-num { display: block; font-size: 0.75rem; font-family: monospace; margin-bottom: 16px; }
         .experience_feature-title { font-size: 1.125rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px; }

@@ -24,6 +24,7 @@ export default function HowItWorks() {
 
   return (
     <section id="how" className="section_how-it-works" ref={ref}>
+      <div className="how-it-works_bg-pattern" />
       <div className="padding-global padding-section-medium">
         <div className="container-large">
           <div className="how-it-works_header">
@@ -36,9 +37,9 @@ export default function HowItWorks() {
             {steps.map((step, i) => (
               <motion.div
                 key={step.num}
-                initial={{ opacity: 0, y: 32 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.4, 0, 0.2, 1] }}
+                initial={{ opacity: 0, y: 48, scale: 0.95 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ duration: 0.6, delay: 0.15 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
                 className={`how-it-works_card ${i % 2 === 1 ? 'is-offset' : ''}`}
               >
                 <div className="how-it-works_card-top">
@@ -56,13 +57,23 @@ export default function HowItWorks() {
       </div>
 
       <style jsx global>{`
-        .how-it-works_header { margin-bottom: 64px; }
+        .section_how-it-works { position: relative; overflow: hidden; }
+        .how-it-works_bg-pattern {
+          position: absolute;
+          inset: 0;
+          background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+          background-size: 32px 32px;
+          pointer-events: none;
+        }
+        .how-it-works_header { margin-bottom: 64px; position: relative; z-index: 1; }
         .how-it-works_header .text-style-label { margin-bottom: 12px; }
         .how-it-works_accent-line { width: 64px; height: 2px; background: #FF006E; margin-top: 24px; }
         .how-it-works_grid {
           display: grid;
           grid-template-columns: 1fr;
           gap: 24px;
+          position: relative;
+          z-index: 1;
         }
         .how-it-works_card {
           padding: 40px 32px;
