@@ -160,18 +160,7 @@ export default function Experience() {
           gap: 24px;
           position: relative;
         }
-        .experience_grid::before {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 600px;
-          height: 400px;
-          background: radial-gradient(ellipse, rgba(255, 0, 110, 0.04) 0%, transparent 70%);
-          pointer-events: none;
-          z-index: 0;
-        }
+
         .experience_feature {
           background: var(--color-bg-secondary);
           border: 1px solid var(--color-border);
