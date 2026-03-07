@@ -162,15 +162,9 @@ export default function Experience() {
           border: 1px solid var(--color-border);
           border-radius: 16px;
           padding: 40px;
-          transition: border-color 0.3s, background 0.3s;
-        }
-        .experience_feature:hover {
-          border-color: rgba(255,0,110,0.15);
-          background: var(--color-bg-tertiary);
         }
         .experience_feature-num { display: block; font-size: 0.75rem; font-family: monospace; margin-bottom: 16px; }
-        .experience_feature-title { font-size: 1.125rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px; transition: color 0.3s; }
-        .experience_feature:hover .experience_feature-title { color: var(--color-text-primary); }
+        .experience_feature-title { font-size: 1.125rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px; }
         .experience_feature-desc { font-size: 0.9375rem; line-height: 1.6; }
 
         /* Photo toss: rotated, offset */

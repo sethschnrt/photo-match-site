@@ -66,10 +66,6 @@ export default function HowItWorks() {
           border: 1px solid var(--color-border);
           border-radius: 16px;
           background: var(--color-bg-secondary);
-          transition: border-color 0.3s;
-        }
-        .how-it-works_card:hover {
-          border-color: rgba(255, 0, 110, 0.3);
         }
         .how-it-works_card-top {
           display: flex;

@@ -154,10 +154,8 @@ export default function ForVenues() {
         .for-venues_benefit.is-left { align-self: flex-start; }
         .for-venues_benefit.is-right { align-self: flex-end; }
         .for-venues_stat { flex-shrink: 0; min-width: 80px; text-align: right; font-size: 1.75rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1; white-space: nowrap; }
-        .for-venues_benefit-content { border-left: 1px solid var(--color-border); padding-left: 24px; transition: border-color 0.3s; }
-        .for-venues_benefit:hover .for-venues_benefit-content { border-color: rgba(255,0,110,0.3); }
-        .for-venues_benefit-title { font-size: 1rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; transition: color 0.3s; }
-        .for-venues_benefit:hover .for-venues_benefit-title { color: #FF006E; }
+        .for-venues_benefit-content { border-left: 1px solid var(--color-border); padding-left: 24px; }
+        .for-venues_benefit-title { font-size: 1rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; }
         .for-venues_benefit-desc { font-size: 0.9375rem; line-height: 1.6; }
 
         /* CTA offset right */
