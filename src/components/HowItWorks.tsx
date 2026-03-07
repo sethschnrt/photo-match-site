@@ -24,7 +24,6 @@ export default function HowItWorks() {
 
   return (
     <section id="how" className="section_how-it-works" ref={ref}>
-      <div className="how-it-works_bg-pattern" />
       <div className="padding-global padding-section-medium">
         <div className="container-large">
           <div className="how-it-works_header">
@@ -58,13 +57,6 @@ export default function HowItWorks() {
 
       <style jsx global>{`
         .section_how-it-works { position: relative; overflow: hidden; }
-        .how-it-works_bg-pattern {
-          position: absolute;
-          inset: 0;
-          background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
-          background-size: 32px 32px;
-          pointer-events: none;
-        }
         .how-it-works_header { margin-bottom: 64px; position: relative; z-index: 1; }
         .how-it-works_header .text-style-label { margin-bottom: 12px; }
         .how-it-works_accent-line { width: 64px; height: 2px; background: #FF006E; margin-top: 24px; }

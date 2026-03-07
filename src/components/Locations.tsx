@@ -207,17 +207,7 @@ export default function Locations() {
       </div>
 
       <style jsx global>{`
-        .section_locations { position: relative; overflow: hidden; }
-        .section_locations::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-image: 
-            linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
-          background-size: 100% 80px;
-          pointer-events: none;
-        }
-        .locations_header { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 8px; margin-bottom: 48px; }
+        .locations_header { display: flex; flex-direction: column; gap: 8px; margin-bottom: 48px; }
         .locations_header .text-style-label { margin-bottom: 12px; }
         .locations_content { display: grid; grid-template-columns: 1fr; gap: 32px; }
         .locations_map-wrap {
