@@ -4,16 +4,19 @@ interface BgHeartsProps {
   layout: 'how-it-works' | 'experience' | 'for-venues' | 'locations' | 'cta'
 }
 
-function LargeHeart({ 
+/* Multiple concentric heart outlines radiating outward, like ripples */
+function RadialHearts({ 
   position = 'right',
-  opacity = 0.06,
+  opacity = 0.05,
   scale = 1,
   offsetY = '0%',
+  rings = 3,
 }: { 
   position?: 'left' | 'right' | 'center'
   opacity?: number 
   scale?: number
   offsetY?: string
+  rings?: number
 }) {
   const posStyle: React.CSSProperties = {
     position: 'absolute',
@@ -21,34 +24,50 @@ function LargeHeart({
     pointerEvents: 'none',
     zIndex: 0,
     width: `${80 * scale}%`,
-    maxWidth: `${1200 * scale}px`,
+    maxWidth: `${1100 * scale}px`,
     aspectRatio: '1',
     ...(position === 'right' && { right: '-15%' }),
     ...(position === 'left' && { left: '-15%' }),
     ...(position === 'center' && { left: '50%', transform: 'translateX(-50%)' }),
   }
 
+  const heartPath = "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+
   return (
     <div style={posStyle}>
-      {/* Radial glow behind the heart */}
+      {/* Soft radial glow */}
       <div style={{
         position: 'absolute',
-        inset: '-20%',
-        background: `radial-gradient(circle, rgba(255, 0, 110, ${opacity * 0.6}) 0%, rgba(255, 0, 110, ${opacity * 0.2}) 40%, transparent 70%)`,
+        inset: '-10%',
+        background: `radial-gradient(circle, rgba(255, 0, 110, ${opacity * 0.35}) 0%, transparent 60%)`,
         borderRadius: '50%',
         pointerEvents: 'none',
       }} />
-      {/* Heart outline — thick stroke */}
-      <svg viewBox="0 0 24 24" width="100%" height="100%" style={{
-        fill: 'none',
-        stroke: `rgba(255, 0, 110, ${opacity})`,
-        strokeWidth: 0.6,
-        position: 'relative',
-        zIndex: 1,
-        filter: `drop-shadow(0 0 40px rgba(255, 0, 110, ${opacity * 0.5}))`,
-      }}>
-        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-      </svg>
+      {/* Concentric heart rings — innermost is most opaque, outer rings fade */}
+      {Array.from({ length: rings }).map((_, i) => {
+        const ringScale = 0.4 + i * 0.3
+        const ringOpacity = opacity * (1 - i * 0.25)
+        const size = `${ringScale * 100}%`
+        const offset = `${(1 - ringScale) * 50}%`
+        return (
+          <svg
+            key={i}
+            viewBox="0 0 24 24"
+            style={{
+              position: 'absolute',
+              width: size,
+              height: size,
+              top: offset,
+              left: offset,
+              fill: 'none',
+              stroke: `rgba(255, 0, 110, ${ringOpacity})`,
+              strokeWidth: 0.5 - i * 0.1,
+            }}
+          >
+            <path d={heartPath} />
+          </svg>
+        )
+      })}
     </div>
   )
 }
@@ -56,15 +75,15 @@ function LargeHeart({
 export default function BgHearts({ layout }: BgHeartsProps) {
   switch (layout) {
     case 'how-it-works':
-      return <LargeHeart position="right" opacity={0.07} scale={1.1} offsetY="-15%" />
+      return <RadialHearts position="right" opacity={0.055} scale={1.1} offsetY="-15%" rings={3} />
     case 'experience':
-      return <LargeHeart position="left" opacity={0.06} scale={1} offsetY="0%" />
+      return <RadialHearts position="left" opacity={0.05} scale={1} offsetY="5%" rings={3} />
     case 'for-venues':
-      return <LargeHeart position="right" opacity={0.07} scale={1.05} offsetY="-5%" />
+      return <RadialHearts position="right" opacity={0.055} scale={1} offsetY="40%" rings={3} />
     case 'locations':
-      return <LargeHeart position="left" opacity={0.06} scale={0.95} offsetY="-10%" />
+      return <RadialHearts position="left" opacity={0.05} scale={0.9} offsetY="-5%" rings={3} />
     case 'cta':
-      return <LargeHeart position="center" opacity={0.08} scale={1.3} offsetY="-25%" />
+      return <RadialHearts position="center" opacity={0.06} scale={1.2} offsetY="-20%" rings={4} />
     default:
       return null
   }
