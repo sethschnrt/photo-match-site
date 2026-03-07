@@ -9,20 +9,30 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 export default function Hero() {
   return (
     <section className="section_hero">
-      <div className="hero_background">
-        <Image
-          src={`${basePath}/assets/images/neon-sign-hero.webp`}
-          alt=""
-          fill
-          className="hero_background-image"
-          priority
-          unoptimized
-        />
-        <div className="hero_vignette" />
-      </div>
+      {/* Dark background matching the image edges */}
+      <div className="hero_bg-fill" />
 
       <div className="padding-global hero_content-wrapper">
         <div className="container-large hero_content">
+          {/* Neon sign image — contained, not background */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            className="hero_image-wrapper"
+          >
+            <Image
+              src={`${basePath}/assets/images/neon-sign-hero.webp`}
+              alt="Photo Match neon sign"
+              width={5504}
+              height={3072}
+              className="hero_image"
+              priority
+              unoptimized
+            />
+          </motion.div>
+
+          {/* Text directly below the image */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -63,39 +73,39 @@ export default function Hero() {
       <style jsx global>{`
         .section_hero {
           position: relative;
-          height: 100vh;
-          height: 100svh;
-          max-height: 900px;
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
           overflow: hidden;
         }
-        .hero_background { position: absolute; inset: 0; }
-        .hero_background-image { object-fit: cover; object-position: center center; }
-        .hero_vignette {
+        .hero_bg-fill {
           position: absolute;
           inset: 0;
-          background:
-            linear-gradient(to bottom, transparent 55%, rgba(10, 10, 10, 0.85) 85%, #0a0a0a 100%),
-            radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
+          background: #0a0a0a;
         }
         .hero_content-wrapper {
           position: relative;
           z-index: 10;
-          width: 100%;
+          padding-top: 5rem;
         }
         .hero_content {
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
-          padding-bottom: 48px;
+        }
+        .hero_image-wrapper {
+          width: 100%;
+          max-width: 800px;
+          margin-bottom: 32px;
+        }
+        .hero_image {
+          width: 100%;
+          height: auto;
+          display: block;
         }
         .hero_text-block {
           display: flex;
           flex-direction: column;
           align-items: center;
+          padding-bottom: 48px;
         }
         .hero_tagline {
           font-size: clamp(1.25rem, 2.5vw, 1.5rem);
@@ -110,6 +120,10 @@ export default function Hero() {
         .hero_button-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
         @media (min-width: 768px) {
           .hero_tagline { font-size: 1.5rem; }
+          .hero_image-wrapper { max-width: 900px; }
+        }
+        @media (min-width: 1200px) {
+          .hero_image-wrapper { max-width: 1000px; }
         }
       `}</style>
     </section>
