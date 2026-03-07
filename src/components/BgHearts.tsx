@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+
 interface BgHeartsProps {
   layout: 'how-it-works' | 'experience' | 'for-venues' | 'locations' | 'cta'
 }
@@ -17,23 +19,39 @@ function RadialHearts({
   offsetY?: string
   rings?: number
 }) {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  // On mobile: center the hearts, bring them into view
+  const mobilePos = position === 'center' ? 'center' : position
+  const sideOffset = isMobile ? '-5%' : '-12%'
+  const widthPct = isMobile ? 90 * scale : 65 * scale
+  const maxW = isMobile ? 500 * scale : 900 * scale
+
   const posStyle: React.CSSProperties = {
     position: 'absolute',
     top: offsetY,
     pointerEvents: 'none',
     zIndex: 0,
-    width: `${65 * scale}%`,
-    maxWidth: `${900 * scale}px`,
+    width: `${widthPct}%`,
+    maxWidth: `${maxW}px`,
     aspectRatio: '1',
-    ...(position === 'right' && { right: '-12%' }),
-    ...(position === 'left' && { left: '-12%' }),
-    ...(position === 'center' && { left: '50%', transform: 'translateX(-50%)' }),
+    ...(mobilePos === 'right' && { right: sideOffset }),
+    ...(mobilePos === 'left' && { left: sideOffset }),
+    ...(mobilePos === 'center' && { left: '50%', transform: 'translateX(-50%)' }),
   }
 
   const heartPath = "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
 
   return (
     <div style={posStyle}>
+      {/* Soft radial glow */}
       <div style={{
         position: 'absolute',
         inset: '-10%',
@@ -41,6 +59,7 @@ function RadialHearts({
         borderRadius: '50%',
         pointerEvents: 'none',
       }} />
+      {/* Concentric heart rings */}
       {Array.from({ length: rings }).map((_, i) => {
         const ringScale = 0.4 + i * 0.3
         const ringOpacity = opacity * (1 - i * 0.25)
