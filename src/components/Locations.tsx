@@ -194,7 +194,7 @@ export default function Locations() {
 
           <div className="locations_content">
             <div className="locations_map-wrap">
-              <div ref={mapContainer} className="locations_maplibre" />
+              <div ref={mapContainer} className="locations_maplibre" data-lenis-prevent />
             </div>
 
             <div className="locations_legend">
