@@ -85,7 +85,7 @@ export default function ForVenues() {
                 className={`for-venues_benefit ${i % 2 === 1 ? 'is-right' : 'is-left'}`}
               >
                 <div className="for-venues_stat text-color-accent">
-                  {item.prefix}<AnimatedNum value={item.stat} suffix={item.suffix} visible={isInView} />
+                  {item.prefix}<AnimatedNum value={item.stat} suffix="" visible={isInView} />{item.suffix && <span className="for-venues_stat-suffix">{item.suffix}</span>}
                 </div>
                 <div className="for-venues_benefit-content">
                   <h3 className="for-venues_benefit-title">{item.title}</h3>
@@ -153,7 +153,8 @@ export default function ForVenues() {
         .for-venues_benefit { display: flex; gap: 24px; max-width: 560px; }
         .for-venues_benefit.is-left { align-self: flex-start; }
         .for-venues_benefit.is-right { align-self: flex-end; }
-        .for-venues_stat { flex-shrink: 0; width: 80px; text-align: right; font-size: 1.75rem; font-weight: 600; letter-spacing: -0.02em; }
+        .for-venues_stat { flex-shrink: 0; width: 80px; text-align: right; font-size: 1.75rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+        .for-venues_stat-suffix { font-size: 0.875rem; font-weight: 500; }
         .for-venues_benefit-content { border-left: 1px solid var(--color-border); padding-left: 24px; transition: border-color 0.3s; }
         .for-venues_benefit:hover .for-venues_benefit-content { border-color: rgba(255,0,110,0.3); }
         .for-venues_benefit-title { font-size: 1rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; transition: color 0.3s; }
