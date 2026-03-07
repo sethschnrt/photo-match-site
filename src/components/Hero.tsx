@@ -82,9 +82,9 @@ export default function Hero() {
           inset: 0;
           background: linear-gradient(
             to bottom,
-            transparent 40%,
-            rgba(10, 10, 10, 0.6) 70%,
-            rgba(10, 10, 10, 0.95) 100%
+            transparent 50%,
+            rgba(10, 10, 10, 0.35) 75%,
+            rgba(10, 10, 10, 0.8) 100%
           );
         }
         .hero_content-wrapper {
