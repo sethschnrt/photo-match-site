@@ -34,8 +34,11 @@ export default function HowItWorks() {
 
           <div className="how-it-works_grid">
             {steps.map((step, i) => (
-              <div
+              <motion.div
                 key={step.num}
+                initial={{ opacity: 0, y: 32 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.4, 0, 0.2, 1] }}
                 className={`how-it-works_card ${i % 2 === 1 ? 'is-offset' : ''}`}
               >
                 <div className="how-it-works_card-top">
@@ -46,7 +49,7 @@ export default function HowItWorks() {
                 </div>
                 <h3 className="how-it-works_card-title">{step.title}</h3>
                 <p className="how-it-works_card-desc text-color-secondary">{step.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

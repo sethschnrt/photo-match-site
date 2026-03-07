@@ -79,9 +79,9 @@ export default function ForVenues() {
             {benefits.map((item, i) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 1, y: 0 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + i * 0.12 }}
+                initial={{ opacity: 0, x: i % 2 === 1 ? 32 : -32 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.2 + i * 0.15, ease: [0.4, 0, 0.2, 1] }}
                 className={`for-venues_benefit ${i % 2 === 1 ? 'is-right' : 'is-left'}`}
               >
                 <div className="for-venues_stat text-color-accent">
