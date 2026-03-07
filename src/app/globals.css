@@ -264,26 +264,26 @@ h3 {
   pointer-events: none;
 }
 
-/* Desktop: smaller, anchored to edges */
-.bg-hearts--hiw { width: 40%; max-width: 550px; top: -10%; right: -8%; }
-.bg-hearts--exp { width: 35%; max-width: 480px; top: 10%; left: -8%; }
-.bg-hearts--fv  { width: 38%; max-width: 500px; top: 35%; right: -8%; }
-.bg-hearts--cta { width: 40%; max-width: 550px; top: -15%; left: 50%; transform: translateX(-50%); }
+/* Desktop: ~50% section width, bleeding off edge */
+.bg-hearts--hiw { width: 50%; max-width: 700px; top: -10%; right: -10%; }
+.bg-hearts--exp { width: 45%; max-width: 620px; top: 5%; left: -10%; }
+.bg-hearts--fv  { width: 48%; max-width: 660px; top: 35%; right: -10%; }
+.bg-hearts--cta { width: 50%; max-width: 700px; top: -15%; left: 50%; transform: translateX(-50%); }
 
 /* Tablet */
 @media (max-width: 1024px) {
-  .bg-hearts--hiw { width: 35%; max-width: 400px; right: -5%; }
-  .bg-hearts--exp { width: 30%; max-width: 360px; left: -5%; }
-  .bg-hearts--fv  { width: 32%; max-width: 380px; right: -5%; }
-  .bg-hearts--cta { width: 38%; max-width: 420px; }
+  .bg-hearts--hiw { width: 50%; max-width: 500px; right: -5%; }
+  .bg-hearts--exp { width: 45%; max-width: 460px; left: -5%; }
+  .bg-hearts--fv  { width: 48%; max-width: 480px; right: -5%; }
+  .bg-hearts--cta { width: 50%; max-width: 500px; }
 }
 
-/* Mobile: centered vertically in section */
+/* Mobile: centered in section, large enough to see */
 @media (max-width: 767px) {
-  .bg-hearts--hiw { width: 70%; max-width: 320px; right: 15%; top: 50%; transform: translateY(-50%); }
-  .bg-hearts--exp { width: 65%; max-width: 300px; left: 15%; top: 50%; transform: translateY(-50%); }
-  .bg-hearts--fv  { width: 68%; max-width: 310px; right: 15%; top: 50%; transform: translateY(-50%); }
-  .bg-hearts--cta { width: 75%; max-width: 340px; top: 50%; transform: translate(-50%, -50%); }
+  .bg-hearts--hiw { width: 90%; max-width: none; right: 5%; top: 50%; transform: translateY(-50%); }
+  .bg-hearts--exp { width: 85%; max-width: none; left: 5%; top: 50%; transform: translateY(-50%); }
+  .bg-hearts--fv  { width: 88%; max-width: none; right: 5%; top: 50%; transform: translateY(-50%); }
+  .bg-hearts--cta { width: 95%; max-width: none; top: 50%; transform: translate(-50%, -50%); }
 }
 
 /* ===== SCROLLBAR ===== */
