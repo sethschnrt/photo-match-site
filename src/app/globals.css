@@ -250,6 +250,34 @@ h3 {
   background-size: 128px 128px;
 }
 
+/* ===== BACKGROUND HEARTS ===== */
+.bg-hearts {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  aspect-ratio: 1;
+}
+.bg-hearts_glow {
+  position: absolute;
+  inset: -10%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Desktop: 65% wide, offset -12% from edge */
+.bg-hearts--hiw { width: 65%; max-width: 900px; top: -15%; right: -12%; }
+.bg-hearts--exp { width: 55%; max-width: 750px; top: 5%; left: -12%; }
+.bg-hearts--fv  { width: 58%; max-width: 800px; top: 40%; right: -12%; }
+.bg-hearts--cta { width: 65%; max-width: 900px; top: -20%; left: 50%; transform: translateX(-50%); }
+
+/* Mobile: centered, fully visible */
+@media (max-width: 767px) {
+  .bg-hearts--hiw { width: 80%; max-width: 400px; right: 10%; top: -5%; }
+  .bg-hearts--exp { width: 75%; max-width: 380px; left: 10%; top: 10%; }
+  .bg-hearts--fv  { width: 78%; max-width: 390px; right: 10%; top: 50%; }
+  .bg-hearts--cta { width: 85%; max-width: 420px; top: -10%; }
+}
+
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-bg-primary); }
