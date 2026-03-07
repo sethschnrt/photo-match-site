@@ -264,25 +264,25 @@ h3 {
   pointer-events: none;
 }
 
-/* Desktop: ~50% section width, bleeding off edge */
+/* Desktop: ~50% section width, varied positions */
 .bg-hearts--hiw { width: 50%; max-width: 700px; top: -10%; right: -10%; }
 .bg-hearts--exp { width: 45%; max-width: 620px; top: 5%; left: -10%; }
-.bg-hearts--fv  { width: 48%; max-width: 660px; top: 35%; right: -10%; }
+.bg-hearts--fv  { width: 48%; max-width: 660px; bottom: -10%; left: -10%; top: auto; }
 .bg-hearts--cta { width: 50%; max-width: 700px; top: -15%; left: 50%; transform: translateX(-50%); }
 
 /* Tablet */
 @media (max-width: 1024px) {
   .bg-hearts--hiw { width: 50%; max-width: 500px; right: -5%; }
   .bg-hearts--exp { width: 45%; max-width: 460px; left: -5%; }
-  .bg-hearts--fv  { width: 48%; max-width: 480px; right: -5%; }
+  .bg-hearts--fv  { width: 48%; max-width: 480px; left: -5%; bottom: -5%; top: auto; }
   .bg-hearts--cta { width: 50%; max-width: 500px; }
 }
 
-/* Mobile: centered in section, large enough to see */
+/* Mobile: large enough to see, varied positions */
 @media (max-width: 767px) {
   .bg-hearts--hiw { width: 90%; max-width: none; right: 5%; top: 50%; transform: translateY(-50%); }
   .bg-hearts--exp { width: 85%; max-width: none; left: 5%; top: 50%; transform: translateY(-50%); }
-  .bg-hearts--fv  { width: 88%; max-width: none; right: 5%; top: 50%; transform: translateY(-50%); }
+  .bg-hearts--fv  { width: 88%; max-width: none; left: 5%; right: auto; bottom: 5%; top: auto; transform: none; }
   .bg-hearts--cta { width: 95%; max-width: none; top: 50%; transform: translate(-50%, -50%); }
 }
 
