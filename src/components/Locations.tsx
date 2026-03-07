@@ -2,6 +2,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { MapPin } from '@phosphor-icons/react/dist/ssr'
+import BgHearts from './BgHearts'
 
 const locations = [
   { name: 'Dirty Sixth', venues: 12, lng: -97.7405, lat: 30.2672, hot: true },
@@ -150,7 +151,8 @@ export default function Locations() {
   }, [])
 
   return (
-    <section id="locations" className="section_locations" ref={sectionRef}>
+    <section id="locations" className="section_locations" ref={sectionRef} style={{ position: 'relative', overflow: 'hidden' }}>
+      <BgHearts layout="locations" />
       <div className="padding-global padding-section-large">
         <div className="container-large">
           <div className="locations_header">

@@ -2,6 +2,7 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import ImageReveal from './ImageReveal'
+import BgHearts from './BgHearts'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -23,7 +24,8 @@ export default function Experience() {
   const barY = useTransform(barScrollY, [0, 1], ['-15%', '15%'])
 
   return (
-    <section className="section_experience" ref={ref}>
+    <section className="section_experience" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
+      <BgHearts layout="experience" />
       {/* Editorial hero: massive heading left + overlapping image right */}
       <div ref={imgRef} className="experience_editorial-hero">
         {/* Background image, offset to the right */}

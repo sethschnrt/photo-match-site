@@ -2,6 +2,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Camera, Lightning, HeartStraight, Handshake } from '@phosphor-icons/react/dist/ssr'
+import BgHearts from './BgHearts'
 import type { Icon } from '@phosphor-icons/react'
 
 interface Step {
@@ -24,6 +25,7 @@ export default function HowItWorks() {
 
   return (
     <section id="how" className="section_how-it-works" ref={ref}>
+      <BgHearts layout="how-it-works" />
       <div className="padding-global padding-section-medium">
         <div className="container-large">
           <div className="how-it-works_header">

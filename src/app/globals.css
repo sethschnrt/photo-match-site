@@ -237,6 +237,18 @@ h3 {
   .padding-section-small { padding-top: 32px; padding-bottom: 32px; }
 }
 
+/* ===== BACKGROUND HEARTS ===== */
+.bg-heart {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+.bg-heart svg {
+  fill: none;
+  stroke: rgba(255, 0, 110, 0.06);
+  stroke-width: 1.5;
+}
+
 /* ===== GRAIN OVERLAY ===== */
 .grain-overlay::before {
   content: '';

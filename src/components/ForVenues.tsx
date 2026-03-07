@@ -3,6 +3,7 @@ import { motion, useInView, animate } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import ImageReveal from './ImageReveal'
 import AnimatedText from './AnimatedText'
+import BgHearts from './BgHearts'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -28,6 +29,7 @@ export default function ForVenues() {
 
   return (
     <section id="venues" className="section_for-venues" ref={ref}>
+      <BgHearts layout="for-venues" />
       {/* Editorial layout: 60% image right, heading overlapping from left */}
       <div className="for-venues_editorial">
         <div className="for-venues_image-side">
