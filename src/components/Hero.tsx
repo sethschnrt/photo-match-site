@@ -57,7 +57,7 @@ export default function Hero() {
         }
         .hero_bg-image {
           object-fit: cover;
-          object-position: center 25%;
+          object-position: center 15%;
         }
         .hero_overlay {
           position: absolute;
