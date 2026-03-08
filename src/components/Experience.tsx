@@ -179,7 +179,7 @@ export default function Experience() {
           position: relative;
           z-index: 1;
         }
-        .experience_feature-num { display: block; font-size: 0.75rem; font-family: monospace; margin-bottom: 16px; }
+        .experience_feature-num { display: block; font-size: 1rem; font-family: monospace; margin-bottom: 16px; }
         .experience_feature-title { font-size: 1.125rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px; }
         .experience_feature-desc { font-size: 0.9375rem; line-height: 1.6; }
 
