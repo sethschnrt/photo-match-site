@@ -70,8 +70,16 @@ export default function Locations() {
         const fitMap = () => {
           map.fitBounds(bounds, { padding: { top: 50, bottom: 30, left: 30, right: 30 }, maxZoom: 12, duration: 0 })
         }
+        // fitBounds on load, on resize, AND when container becomes visible
         fitMap()
         map.on('resize', fitMap)
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0]?.isIntersecting) {
+            map.resize()
+            fitMap()
+          }
+        }, { threshold: 0.1 })
+        if (mapContainer.current) observer.observe(mapContainer.current)
 
         // Add markers
         locations.forEach((loc) => {
