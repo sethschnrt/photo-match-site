@@ -141,6 +141,22 @@ export default function Footer() {
           border-radius: 50%;
           pointer-events: none;
         }
+        @media (max-width: 767px) {
+          .footer_cta-blob1 {
+            width: 350px; height: 350px;
+            top: -80px; left: -60px;
+            filter: blur(50px);
+          }
+          .footer_cta-blob2 {
+            width: 280px; height: 280px;
+            bottom: -80px; right: -40px;
+            filter: blur(45px);
+          }
+          .footer_cta-blob3 {
+            width: 200px; height: 200px;
+            filter: blur(35px);
+          }
+        }
         .footer_cta-gradient { position: absolute; inset: 0; background: none; }
         .footer_cta-content { position: relative; z-index: 1; text-align: center; padding: 80px 0; }
         .footer_cta-heading { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.0; color: white; margin-bottom: 16px; }
