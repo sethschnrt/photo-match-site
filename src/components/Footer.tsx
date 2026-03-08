@@ -29,7 +29,11 @@ export default function Footer() {
     <footer className="footer_component" ref={ref}>
       {/* CTA band */}
       <div className="footer_cta">
-        <div className="footer_cta-pattern" />
+        <div className="footer_cta-pattern">
+          <div className="footer_cta-blob1" />
+          <div className="footer_cta-blob2" />
+          <div className="footer_cta-blob3" />
+        </div>
         <div className="footer_cta-gradient" />
         <div className="padding-global">
           <div className="container-medium footer_cta-content">
@@ -104,9 +108,40 @@ export default function Footer() {
       </div>
 
       <style jsx global>{`
-        .footer_cta { position: relative; overflow: hidden; background: #b30050; }
-        .footer_cta-pattern { position: absolute; inset: 0; opacity: 0.08; background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px; }
-        .footer_cta-gradient { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,0,110,0.3) 0%, transparent 40%, rgba(180,0,70,0.2) 100%); }
+        .footer_cta { position: relative; overflow: hidden; background: #0a0a0a; }
+        .footer_cta-pattern { position: absolute; inset: 0; pointer-events: none; }
+        /* Abstract swirling blobs — pink version of QuickFlip style */
+        .footer_cta-blob1 {
+          position: absolute;
+          width: 700px; height: 700px;
+          top: -200px; left: -150px;
+          background: radial-gradient(ellipse at center, rgba(255, 0, 110, 0.35) 0%, rgba(180, 0, 80, 0.15) 40%, transparent 70%);
+          filter: blur(80px);
+          border-radius: 50%;
+          transform: rotate(-15deg) scaleX(1.3);
+          pointer-events: none;
+        }
+        .footer_cta-blob2 {
+          position: absolute;
+          width: 500px; height: 500px;
+          bottom: -180px; right: -100px;
+          background: radial-gradient(ellipse at center, rgba(255, 0, 110, 0.25) 0%, rgba(200, 0, 100, 0.1) 45%, transparent 70%);
+          filter: blur(70px);
+          border-radius: 50%;
+          transform: rotate(20deg) scaleY(1.4);
+          pointer-events: none;
+        }
+        .footer_cta-blob3 {
+          position: absolute;
+          width: 300px; height: 300px;
+          top: 50%; left: 50%;
+          transform: translate(-50%, -50%);
+          background: radial-gradient(circle, rgba(255, 80, 150, 0.12) 0%, transparent 60%);
+          filter: blur(50px);
+          border-radius: 50%;
+          pointer-events: none;
+        }
+        .footer_cta-gradient { position: absolute; inset: 0; background: none; }
         .footer_cta-content { position: relative; z-index: 1; text-align: center; padding: 80px 0; }
         .footer_cta-heading { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.0; color: white; margin-bottom: 16px; }
         .footer_cta-text { color: rgba(255,255,255,0.8); font-size: 1rem; max-width: 400px; margin: 0 auto 40px; line-height: 1.6; }
