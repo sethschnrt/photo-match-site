@@ -120,7 +120,7 @@ export default function Navigation() {
         .nav_link-underline { position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #FF006E; transition: width 0.3s ease; }
         .nav_link:hover .nav_link-underline { width: 100%; }
         .nav_right { display: flex; align-items: center; gap: 16px; }
-        .nav_cta { display: none; padding: 10px 20px; font-size: 13px; font-weight: 800; }
+        .nav_cta { display: inline-flex; padding: 8px 16px; font-size: 12px; font-weight: 800; }
         .nav_mobile-toggle { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: none; border: none; color: var(--color-text-secondary); cursor: pointer; transition: color 0.2s; z-index: 60; position: relative; }
         .nav_mobile-toggle:hover { color: var(--color-text-primary); }
 
@@ -133,7 +133,7 @@ export default function Navigation() {
 
         @media (min-width: 768px) {
           .nav_menu { display: flex; }
-          .nav_cta { display: inline-flex; }
+          .nav_cta { padding: 10px 20px; font-size: 13px; }
           .nav_mobile-toggle { display: none; }
         }
       `}</style>
