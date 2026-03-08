@@ -48,8 +48,8 @@ export default function Locations() {
           },
           layers: [{ id: 'carto-tiles', type: 'raster', source: 'carto', minzoom: 0, maxzoom: 19 }],
         },
-        bounds: [[-97.76, 30.24], [-97.71, 30.41]] as any,
-        fitBoundsOptions: { padding: { top: 20, bottom: 120, left: 15, right: 15 } },
+        bounds: [[-97.76, 30.22], [-97.71, 30.42]] as any,
+        fitBoundsOptions: { padding: 20 },
         minZoom: 9,
         maxZoom: 15,
         attributionControl: false,
@@ -67,8 +67,10 @@ export default function Locations() {
         // Fit all pins with padding, re-fit on resize
         const bounds = new maplibregl.LngLatBounds()
         locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]))
+        // Extend south by 0.02 degrees (~2.2km) to keep markers fully visible
+        bounds.extend([bounds.getCenter().lng, bounds.getSouth() - 0.02])
         const fitMap = () => {
-          map.fitBounds(bounds, { padding: { top: 20, bottom: 120, left: 15, right: 15 }, maxZoom: 12, duration: 0 })
+          map.fitBounds(bounds, { padding: 20, maxZoom: 12, duration: 0 })
         }
         // fitBounds on load, on resize, AND when container becomes visible
         fitMap()
