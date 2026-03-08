@@ -133,16 +133,14 @@ export default function Navigation() {
           max-width: 900px;
           padding: 10px 10px 10px 16px;
           border-radius: 100px;
-          background: rgba(15, 15, 15, 0.7);
-          backdrop-filter: blur(20px) saturate(1.4);
-          -webkit-backdrop-filter: blur(20px) saturate(1.4);
+          background: #0f0f0f;
           border: 1px solid rgba(255, 255, 255, 0.08);
           box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .nav_component.is-scrolled .nav_pill {
           padding: 8px 8px 8px 14px;
-          background: rgba(12, 12, 12, 0.85);
+          background: #0c0c0c;
           box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.04);
         }
 
