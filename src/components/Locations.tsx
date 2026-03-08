@@ -49,7 +49,7 @@ export default function Locations() {
           layers: [{ id: 'carto-tiles', type: 'raster', source: 'carto', minzoom: 0, maxzoom: 19 }],
         },
         center: [-97.7390, 30.2900],
-        zoom: 10.8,
+        zoom: 10,
         minZoom: 10,
         maxZoom: 15,
         attributionControl: false,
@@ -64,6 +64,13 @@ export default function Locations() {
       })
 
       map.on('load', () => {
+        // Fit all pins with padding, re-fit on resize
+        const bounds = new maplibregl.LngLatBounds()
+        locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]))
+        const fitMap = () => map.fitBounds(bounds, { padding: 40, maxZoom: 12, duration: 0 })
+        fitMap()
+        map.on('resize', fitMap)
+
         // Add markers
         locations.forEach((loc) => {
           const el = document.createElement('div')
