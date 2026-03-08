@@ -72,8 +72,8 @@ export default function Locations() {
           const w = container.offsetWidth
           const h = container.offsetHeight
           // More padding on wider viewports to center the tall pin spread
-          const pad = 30
-          map.fitBounds(bounds, { padding: pad, maxZoom: 12, duration: 0 })
+          // Extra top padding for marker height (pins anchor at bottom, extend ~35px up)
+          map.fitBounds(bounds, { padding: { top: 60, bottom: 30, left: 30, right: 30 }, maxZoom: 12, duration: 0 })
         }
         fitMap()
         map.on('resize', fitMap)
