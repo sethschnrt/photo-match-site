@@ -122,7 +122,7 @@ export default function Footer() {
           background: linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.9) 20%, rgba(10,10,10,0.6) 45%, rgba(10,10,10,0.3) 65%, rgba(10,10,10,0.1) 80%, transparent 100%);
           z-index: 1; pointer-events: none;
         }
-        .footer_cta-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.5) 100%); z-index: 1; pointer-events: none; }
+        .footer_cta-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.6) 100%); z-index: 1; pointer-events: none; }
         .footer_cta-content { position: relative; z-index: 2; text-align: center; padding: 160px 0 160px; }
         .footer_cta-heading { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; color: white; margin-bottom: 16px; }
         .footer_cta-text { color: rgba(255,255,255,0.8); font-size: 1rem; max-width: 400px; margin: 0 auto 40px; line-height: 1.6; }
