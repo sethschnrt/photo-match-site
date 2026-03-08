@@ -119,14 +119,14 @@ export default function Footer() {
         }
         .footer_cta-fade-bottom {
           position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
-          background: linear-gradient(to top, #050505 0%, rgba(5,5,5,0.8) 30%, rgba(5,5,5,0.4) 60%, rgba(5,5,5,0.1) 80%, transparent 100%);
+          background: linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.8) 30%, rgba(10,10,10,0.4) 60%, rgba(10,10,10,0.1) 80%, transparent 100%);
           z-index: 1; pointer-events: none;
         }
         .footer_cta-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.4) 100%); }
-        .footer_cta-content { position: relative; z-index: 2; text-align: center; padding: 96px 0 80px; }
+        .footer_cta-content { position: relative; z-index: 2; text-align: center; padding: 140px 0 120px; }
         .footer_cta-heading { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.0; color: white; margin-bottom: 16px; }
         .footer_cta-text { color: rgba(255,255,255,0.8); font-size: 1rem; max-width: 400px; margin: 0 auto 40px; line-height: 1.6; }
-        .footer_bottom { background: #050505; padding-top: 64px; padding-bottom: 32px; }
+        .footer_bottom { background: #0a0a0a; padding-top: 64px; padding-bottom: 32px; }
         .footer_bottom-inner { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 48px; }
         .footer_brand { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
         .footer_logo { height: 2.75rem; width: auto; opacity: 1; object-fit: contain; display: block; }
