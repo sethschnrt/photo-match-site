@@ -149,6 +149,15 @@ export default function Experience() {
           max-width: 600px;
           text-align: left;
         }
+        .experience_heading::after {
+          content: '';
+          display: block;
+          width: 64px;
+          height: 3px;
+          background: #FF006E;
+          margin-top: 24px;
+          border-radius: 2px;
+        }
 
         /* Lead text */
         .experience_lead { font-size: 1.0625rem; line-height: 1.6; margin-bottom: 64px; }

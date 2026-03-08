@@ -64,10 +64,15 @@ export default function Locations() {
       })
 
       map.on('load', () => {
-        // Fit all pins with more padding at bottom to push downtown toward center
+        // Center all pins with even padding
         const bounds = new maplibregl.LngLatBounds()
         locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]))
-        map.fitBounds(bounds, { padding: { top: 30, bottom: 140, left: 40, right: 40 }, duration: 0 })
+        map.fitBounds(bounds, { padding: 60, duration: 0 })
+
+        // Re-fit on resize so pins stay centered on all screen sizes
+        map.on('resize', () => {
+          map.fitBounds(bounds, { padding: 60, duration: 0 })
+        })
 
         // Add markers
         locations.forEach((loc) => {
