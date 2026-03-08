@@ -76,11 +76,9 @@ export default function Locations() {
           el.dataset.name = loc.name
           el.innerHTML = `
             <div class="locations_marker-pulse"></div>
-            <div class="locations_marker-dot"></div>
-            <div class="locations_marker-label">
-              <strong>${loc.name}</strong>
-              <span>${loc.venues} venues</span>
-            </div>
+            <svg class="locations_marker-pin" viewBox="0 0 24 32" width="24" height="32" fill="#FF006E" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 9 12 20 12 20s12-11 12-20c0-6.627-5.373-12-12-12zm0 16a4 4 0 110-8 4 4 0 010 8z"/>
+            </svg>
           `
 
           const popup = new maplibregl.Popup({
@@ -251,26 +249,24 @@ export default function Locations() {
         .locations_marker {
           position: relative;
           width: 24px;
-          height: 24px;
+          height: 32px;
           cursor: pointer;
           z-index: 1;
         }
-        .locations_marker-dot {
+        .locations_marker-pin {
           position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          background: #FF006E;
-          transform: translate(-50%, -50%);
-          box-shadow: 0 0 12px rgba(255, 0, 110, 0.6);
-          transition: transform 0.2s, box-shadow 0.2s;
+          top: 0;
+          left: 0;
+          width: 24px;
+          height: 32px;
+          filter: drop-shadow(0 0 8px rgba(255, 0, 110, 0.5));
+          transition: transform 0.2s, filter 0.2s;
+          transform-origin: bottom center;
         }
-        .locations_marker:hover .locations_marker-dot,
-        .locations_marker.is-highlighted .locations_marker-dot {
-          transform: translate(-50%, -50%) scale(1.5);
-          box-shadow: 0 0 20px rgba(255, 0, 110, 0.8);
+        .locations_marker:hover .locations_marker-pin,
+        .locations_marker.is-highlighted .locations_marker-pin {
+          transform: scale(1.3);
+          filter: drop-shadow(0 0 14px rgba(255, 0, 110, 0.8));
         }
         .locations_marker-pulse {
           position: absolute;
@@ -337,7 +333,7 @@ export default function Locations() {
           background: rgba(255, 0, 110, 0.04);
         }
         .locations_legend-icon { color: var(--color-accent); flex-shrink: 0; }
-        .locations_legend-name { font-size: 0.875rem; font-weight: 600; }
+        .locations_legend-name { font-size: 0.875rem; font-weight: 700; color: #ffffff !important; }
         .locations_legend-count { font-size: 0.75rem; }
 
         @media (min-width: 768px) {
