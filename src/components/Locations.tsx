@@ -49,7 +49,7 @@ export default function Locations() {
           layers: [{ id: 'carto-tiles', type: 'raster', source: 'carto', minzoom: 0, maxzoom: 19 }],
         },
         bounds: [[-97.76, 30.24], [-97.71, 30.41]] as any,
-        fitBoundsOptions: { padding: { top: 50, bottom: 30, left: 30, right: 30 } },
+        fitBoundsOptions: { padding: { top: 30, bottom: 80, left: 20, right: 20 } },
         minZoom: 9,
         maxZoom: 15,
         attributionControl: false,
@@ -68,7 +68,7 @@ export default function Locations() {
         const bounds = new maplibregl.LngLatBounds()
         locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]))
         const fitMap = () => {
-          map.fitBounds(bounds, { padding: { top: 50, bottom: 30, left: 30, right: 30 }, maxZoom: 12, duration: 0 })
+          map.fitBounds(bounds, { padding: { top: 30, bottom: 80, left: 20, right: 20 }, maxZoom: 12, duration: 0 })
         }
         // fitBounds on load, on resize, AND when container becomes visible
         fitMap()
