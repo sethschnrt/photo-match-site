@@ -29,32 +29,36 @@ export default function Footer() {
     <footer className="footer_component" ref={ref}>
       {/* CTA band */}
       <div className="footer_cta">
-        <div className="footer_cta-pattern" />
-        <div className="footer_cta-gradient" />
         <div className="padding-global">
-          <div className="container-medium footer_cta-content">
-            <AnimatedText
-              text="Ready to meet someone new?"
-              as="h2"
-              className="footer_cta-heading"
-            />
-            <motion.p
-              initial={{ opacity: 1 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.4, delay: 0.15 }}
-              className="footer_cta-text"
-            >
-              Find a Photo Match booth tonight. $5, a printed photo reel, and a real connection.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 1, y: 0 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.25 }}
-            >
-              <MagneticButton href="#app" className="button is-white is-large">
-                Download the App
-              </MagneticButton>
-            </motion.div>
+          <div className="container-large">
+            <div className="footer_cta-card">
+              <div className="footer_cta-pattern" />
+              <div className="footer_cta-gradient" />
+              <div className="footer_cta-content">
+                <AnimatedText
+                  text="Ready to meet someone new?"
+                  as="h2"
+                  className="footer_cta-heading"
+                />
+                <motion.p
+                  initial={{ opacity: 1 }}
+                  animate={isInView ? { opacity: 1 } : {}}
+                  transition={{ duration: 0.4, delay: 0.15 }}
+                  className="footer_cta-text"
+                >
+                  Find a Photo Match booth tonight. $5, a printed photo reel, and a real connection.
+                </motion.p>
+                <motion.div
+                  initial={{ opacity: 1, y: 0 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.4, delay: 0.25 }}
+                >
+                  <MagneticButton href="#app" className="button is-white is-large">
+                    Download the App
+                  </MagneticButton>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -104,14 +108,24 @@ export default function Footer() {
       </div>
 
       <style jsx global>{`
-        .footer_cta { position: relative; overflow: hidden; background: #0a0a0a; }
+        .footer_cta { background: #0a0a0a; padding: 48px 0; }
+        .footer_cta-card {
+          position: relative;
+          overflow: hidden;
+          border-radius: 24px;
+        }
         .footer_cta-pattern {
           position: absolute; inset: 0; pointer-events: none;
           background: url('${basePath}/assets/images/cta-bg.webp') center/cover no-repeat;
-          opacity: 0.7;
+          opacity: 0.75;
         }
-        .footer_cta-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.5) 100%); }
-        .footer_cta-content { position: relative; z-index: 1; text-align: center; padding: 80px 0; }
+        .footer_cta-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.4) 100%); }
+        .footer_cta-content { position: relative; z-index: 1; text-align: center; padding: 72px 32px; }
+        @media (min-width: 768px) {
+          .footer_cta { padding: 64px 0; }
+          .footer_cta-card { border-radius: 32px; }
+          .footer_cta-content { padding: 96px 48px; }
+        }
         .footer_cta-heading { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.0; color: white; margin-bottom: 16px; }
         .footer_cta-text { color: rgba(255,255,255,0.8); font-size: 1rem; max-width: 400px; margin: 0 auto 40px; line-height: 1.6; }
         .footer_bottom { background: #050505; padding-top: 64px; padding-bottom: 32px; }
