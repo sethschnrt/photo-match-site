@@ -144,21 +144,25 @@ export default function Hero() {
           box-shadow: 0 0 30px rgba(255, 0, 110, 0.3);
         }
 
-        /* Mobile: center content, add overlay, safe area */
+        /* Mobile: content below sign, strong bottom gradient */
         @media (max-width: 767px) {
           .section_hero {
-            align-items: center;
-            justify-content: center;
+            align-items: flex-end;
           }
           .hero_overlay {
-            background: rgba(0, 0, 0, 0.45);
+            background: linear-gradient(
+              to bottom,
+              transparent 30%,
+              rgba(10, 10, 10, 0.6) 55%,
+              rgba(10, 10, 10, 0.92) 75%,
+              #0a0a0a 100%
+            );
           }
           .hero_content-wrapper {
-            padding-bottom: env(safe-area-inset-bottom, 16px);
-            padding-top: 0;
+            padding-bottom: calc(24px + env(safe-area-inset-bottom, 16px));
           }
           .hero_bg {
-            inset: 0;
+            inset: -10% 0 0 0;
           }
         }
 
