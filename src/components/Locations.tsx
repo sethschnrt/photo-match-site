@@ -209,7 +209,7 @@ export default function Locations() {
           border-radius: 16px;
           overflow: hidden;
           border: 1px solid var(--color-border);
-          aspect-ratio: 5 / 4;
+          aspect-ratio: 1 / 1;
         }
         @media (min-width: 768px) {
           .locations_map-wrap { aspect-ratio: 16 / 10; }
