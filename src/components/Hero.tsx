@@ -47,7 +47,9 @@ export default function Hero() {
           position: relative;
           overflow: hidden;
           min-height: 100vh;
+          min-height: 100dvh;
           max-height: 100vh;
+          max-height: 100dvh;
           display: flex;
           align-items: flex-end;
         }
@@ -140,6 +142,23 @@ export default function Hero() {
           background: #E0005F;
           transform: scale(1.03);
           box-shadow: 0 0 30px rgba(255, 0, 110, 0.3);
+        }
+
+        /* Mobile: center content, add overlay, safe area */
+        @media (max-width: 767px) {
+          .section_hero {
+            align-items: center;
+          }
+          .hero_overlay {
+            background: rgba(0, 0, 0, 0.5);
+          }
+          .hero_content-wrapper {
+            padding-bottom: calc(32px + env(safe-area-inset-bottom, 16px));
+            padding-top: 64px;
+          }
+          .hero_bg {
+            inset: 0;
+          }
         }
 
         @media (min-width: 768px) {
