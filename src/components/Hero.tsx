@@ -46,7 +46,8 @@ export default function Hero() {
         .section_hero {
           position: relative;
           overflow: hidden;
-          min-height: 110vh;
+          min-height: 100vh;
+          max-height: 100vh;
           display: flex;
           align-items: flex-end;
         }
@@ -57,7 +58,7 @@ export default function Hero() {
         }
         .hero_bg-image {
           object-fit: cover;
-          object-position: center 30%;
+          object-position: center 20%;
         }
         .hero_overlay {
           position: absolute;
