@@ -22,32 +22,22 @@ export default function Hero() {
       </div>
 
       <div className="padding-global hero_content-wrapper">
-        <div className="container-large hero_bottom">
-          {/* Left side — announcement + heading + subtitle */}
+        <div className="container-large">
           <motion.div
-            className="hero_left"
+            className="hero_stack"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8, ease: [0.4, 0, 0.2, 1] }}
           >
-            <span className="hero_badge">🎉 NEW: Now on Rainey Street!</span>
-            <h1 className="hero_heading">The photo booth that finds your match.</h1>
+            <span className="hero_badge">NEW LOCATION — Now on Rainey Street</span>
+            <h1 className="hero_heading">The photo booth that<br />finds your match.</h1>
             <p className="hero_subtitle">
-              Step in, snap a photo, and see who you match with. $5 flat — no downloads needed to play.
+              Step in, snap a photo, and see who you match with.<br className="hero_br-desktop" />
+              $5 flat — no downloads needed to play.
             </p>
-          </motion.div>
-
-          {/* Right side — CTA */}
-          <motion.div
-            className="hero_right"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.1, ease: [0.4, 0, 0.2, 1] }}
-          >
             <MagneticButton href="#app" className="hero_cta-btn">
               Download the App
             </MagneticButton>
-            <p className="hero_cta-note">Available on iOS & Android</p>
           </motion.div>
         </div>
       </div>
@@ -74,9 +64,9 @@ export default function Hero() {
           inset: 0;
           background: linear-gradient(
             to bottom,
-            transparent 40%,
-            rgba(10, 10, 10, 0.3) 65%,
-            rgba(10, 10, 10, 0.85) 90%,
+            transparent 50%,
+            rgba(10, 10, 10, 0.25) 70%,
+            rgba(10, 10, 10, 0.75) 90%,
             #0a0a0a 100%
           );
         }
@@ -85,66 +75,55 @@ export default function Hero() {
           position: relative;
           z-index: 10;
           width: 100%;
-          padding-bottom: 56px;
+          padding-bottom: 64px;
         }
 
-        .hero_bottom {
-          display: flex;
-          flex-direction: column;
-          gap: 32px;
-        }
-
-        /* Left — text content */
-        .hero_left {
+        .hero_stack {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
+          max-width: 560px;
         }
 
         .hero_badge {
           display: inline-flex;
           align-items: center;
-          padding: 6px 14px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          letter-spacing: 0.04em;
-          color: #FF006E;
-          background: rgba(255, 0, 110, 0.1);
-          border: 1px solid rgba(255, 0, 110, 0.2);
+          padding: 5px 14px;
+          font-size: 0.6875rem;
+          font-weight: 400;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.7);
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 100px;
-          margin-bottom: 16px;
+          margin-bottom: 20px;
         }
 
         .hero_heading {
-          font-size: clamp(1.75rem, 4vw, 2.75rem);
+          font-size: clamp(2rem, 5vw, 3.25rem);
           font-weight: 700;
           letter-spacing: -0.03em;
-          line-height: 1.15;
+          line-height: 1.1;
           color: white;
-          margin-bottom: 12px;
-          max-width: 500px;
+          margin-bottom: 16px;
         }
 
         .hero_subtitle {
           font-size: 1rem;
           line-height: 1.6;
-          color: rgba(255, 255, 255, 0.65);
-          max-width: 420px;
+          color: rgba(255, 255, 255, 0.55);
+          margin-bottom: 32px;
         }
 
-        /* Right — CTA */
-        .hero_right {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-        }
+        .hero_br-desktop { display: none; }
 
         .hero_cta-btn {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          padding: 16px 36px;
-          font-size: 1rem;
+          padding: 14px 32px;
+          font-size: 0.9375rem;
           font-weight: 700;
           color: white;
           background: #FF006E;
@@ -160,28 +139,9 @@ export default function Hero() {
           box-shadow: 0 0 30px rgba(255, 0, 110, 0.3);
         }
 
-        .hero_cta-note {
-          font-size: 0.75rem;
-          color: rgba(255, 255, 255, 0.4);
-          margin-top: 10px;
-          padding-left: 4px;
-        }
-
-        /* Desktop: split layout */
         @media (min-width: 768px) {
-          .hero_bottom {
-            flex-direction: row;
-            align-items: flex-end;
-            justify-content: space-between;
-          }
-          .hero_right {
-            align-items: flex-end;
-            text-align: right;
-          }
-          .hero_cta-note {
-            padding-left: 0;
-            padding-right: 4px;
-          }
+          .hero_br-desktop { display: inline; }
+          .hero_heading { font-size: clamp(2.5rem, 4.5vw, 3.25rem); }
         }
       `}</style>
     </section>
