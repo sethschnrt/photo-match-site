@@ -31,6 +31,7 @@ export default function Footer() {
       <div className="footer_cta">
         <div className="footer_cta-pattern" />
         <div className="footer_cta-fade-top" />
+        <div className="footer_cta-fade-bottom" />
         <div className="footer_cta-gradient" />
         <div className="padding-global">
           <div className="container-medium footer_cta-content">
@@ -112,8 +113,13 @@ export default function Footer() {
           opacity: 0.75;
         }
         .footer_cta-fade-top {
-          position: absolute; top: 0; left: 0; right: 0; height: 120px;
-          background: linear-gradient(to bottom, #0a0a0a 0%, transparent 100%);
+          position: absolute; top: 0; left: 0; right: 0; height: 200px;
+          background: linear-gradient(to bottom, #0a0a0a 0%, rgba(10,10,10,0.8) 30%, rgba(10,10,10,0.4) 60%, rgba(10,10,10,0.1) 80%, transparent 100%);
+          z-index: 1; pointer-events: none;
+        }
+        .footer_cta-fade-bottom {
+          position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
+          background: linear-gradient(to top, #050505 0%, rgba(5,5,5,0.8) 30%, rgba(5,5,5,0.4) 60%, rgba(5,5,5,0.1) 80%, transparent 100%);
           z-index: 1; pointer-events: none;
         }
         .footer_cta-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.4) 100%); }
