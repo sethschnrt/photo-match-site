@@ -29,11 +29,7 @@ export default function Footer() {
     <footer className="footer_component" ref={ref}>
       {/* CTA band */}
       <div className="footer_cta">
-        <div className="footer_cta-pattern">
-          <div className="footer_cta-blob1" />
-          <div className="footer_cta-blob2" />
-          <div className="footer_cta-blob3" />
-        </div>
+        <div className="footer_cta-pattern" />
         <div className="footer_cta-gradient" />
         <div className="padding-global">
           <div className="container-medium footer_cta-content">
@@ -109,58 +105,12 @@ export default function Footer() {
 
       <style jsx global>{`
         .footer_cta { position: relative; overflow: hidden; background: #0a0a0a; }
-        .footer_cta-pattern { position: absolute; inset: 0; pointer-events: none; }
-        /* Abstract swirling blobs — pink version of QuickFlip style */
-        .footer_cta-blob1 {
-          position: absolute;
-          width: 700px; height: 700px;
-          top: -200px; left: -150px;
-          background: radial-gradient(ellipse at center, rgba(255, 0, 110, 0.35) 0%, rgba(180, 0, 80, 0.15) 40%, transparent 70%);
-          filter: blur(80px);
-          border-radius: 50%;
-          transform: rotate(-15deg) scaleX(1.3);
-          pointer-events: none;
+        .footer_cta-pattern {
+          position: absolute; inset: 0; pointer-events: none;
+          background: url('${basePath}/assets/images/cta-bg.webp') center/cover no-repeat;
+          opacity: 0.7;
         }
-        .footer_cta-blob2 {
-          position: absolute;
-          width: 500px; height: 500px;
-          bottom: -180px; right: -100px;
-          background: radial-gradient(ellipse at center, rgba(255, 0, 110, 0.25) 0%, rgba(200, 0, 100, 0.1) 45%, transparent 70%);
-          filter: blur(70px);
-          border-radius: 50%;
-          transform: rotate(20deg) scaleY(1.4);
-          pointer-events: none;
-        }
-        .footer_cta-blob3 {
-          position: absolute;
-          width: 300px; height: 300px;
-          top: 50%; left: 50%;
-          transform: translate(-50%, -50%);
-          background: radial-gradient(circle, rgba(255, 80, 150, 0.12) 0%, transparent 60%);
-          filter: blur(50px);
-          border-radius: 50%;
-          pointer-events: none;
-        }
-        @media (max-width: 767px) {
-          .footer_cta-blob1 {
-            width: 300px; height: 300px;
-            top: -50px; left: -30px;
-            background: radial-gradient(ellipse at center, rgba(255, 0, 110, 0.5) 0%, rgba(180, 0, 80, 0.2) 40%, transparent 70%);
-            filter: blur(40px);
-          }
-          .footer_cta-blob2 {
-            width: 250px; height: 250px;
-            bottom: -50px; right: -20px;
-            background: radial-gradient(ellipse at center, rgba(255, 0, 110, 0.4) 0%, rgba(200, 0, 100, 0.15) 45%, transparent 70%);
-            filter: blur(35px);
-          }
-          .footer_cta-blob3 {
-            width: 180px; height: 180px;
-            background: radial-gradient(circle, rgba(255, 80, 150, 0.2) 0%, transparent 60%);
-            filter: blur(30px);
-          }
-        }
-        .footer_cta-gradient { position: absolute; inset: 0; background: none; }
+        .footer_cta-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.5) 100%); }
         .footer_cta-content { position: relative; z-index: 1; text-align: center; padding: 80px 0; }
         .footer_cta-heading { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.0; color: white; margin-bottom: 16px; }
         .footer_cta-text { color: rgba(255,255,255,0.8); font-size: 1rem; max-width: 400px; margin: 0 auto 40px; line-height: 1.6; }
