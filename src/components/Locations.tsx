@@ -48,7 +48,7 @@ export default function Locations() {
           },
           layers: [{ id: 'carto-tiles', type: 'raster', source: 'carto', minzoom: 0, maxzoom: 19 }],
         },
-        center: [-97.74, 30.32] as any,
+        center: [-97.72, 30.30] as any,
         zoom: 10,
         minZoom: 9,
         maxZoom: 15,
