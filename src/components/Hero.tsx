@@ -57,7 +57,7 @@ export default function Hero() {
         }
         .hero_bg-image {
           object-fit: cover;
-          object-position: center center;
+          object-position: center 35%;
         }
         .hero_overlay {
           position: absolute;
@@ -81,8 +81,8 @@ export default function Hero() {
         .hero_stack {
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
-          max-width: 560px;
+          align-items: center;
+          text-align: center;
         }
 
         .hero_badge {
@@ -107,6 +107,7 @@ export default function Hero() {
           line-height: 1.1;
           color: white;
           margin-bottom: 16px;
+          max-width: 560px;
         }
 
         .hero_subtitle {
@@ -114,6 +115,7 @@ export default function Hero() {
           line-height: 1.6;
           color: rgba(255, 255, 255, 0.55);
           margin-bottom: 32px;
+          max-width: 480px;
         }
 
         .hero_br-desktop { display: none; }
