@@ -1,5 +1,5 @@
 'use client'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import { useState } from 'react'
 import Image from 'next/image'
 import { List, X } from '@phosphor-icons/react/dist/ssr'
@@ -14,40 +14,40 @@ const links = [
 
 export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const { scrollY } = useScroll()
 
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    setScrolled(latest > 40)
+  })
 
   return (
     <>
+      <div className="nav_spacer" />
       <motion.nav
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-        className="nav_component"
+        className={`nav_component ${scrolled ? 'is-scrolled' : ''}`}
       >
-        <div className="nav_background" />
-        <div className="nav_border" />
+        <div className="nav_pill">
+          <a href="#" className="nav_logo-link">
+            <Image src={`${basePath}/assets/logos/photo-match-logo-v2-transparent.png`} alt="Photo Match" width={200} height={200} unoptimized className="nav_logo" />
+          </a>
 
-        <div className="padding-global nav_inner">
-          <div className="container-large nav_container">
-            <a href="#" className="nav_logo-link">
-              <Image src={`${basePath}/assets/logos/photo-match-logo-v2-transparent.png`} alt="Photo Match" width={200} height={200} unoptimized className="nav_logo" />
-            </a>
+          <div className="nav_menu">
+            {links.map((link) => (
+              <a key={link.href} href={link.href} className="nav_link">
+                {link.label}
+              </a>
+            ))}
+          </div>
 
-            <div className="nav_menu">
-              {links.map((link) => (
-                <a key={link.href} href={link.href} className="nav_link">
-                  {link.label}
-                  <span className="nav_link-underline" />
-                </a>
-              ))}
-            </div>
-
-            <div className="nav_right">
-              <a href="#app" className="button is-primary nav_cta">Get the App</a>
-              <button onClick={() => setMobileOpen(!mobileOpen)} className="nav_mobile-toggle" aria-label="Toggle menu">
-                {mobileOpen ? <X size={22} weight="bold" /> : <List size={22} weight="bold" />}
-              </button>
-            </div>
+          <div className="nav_right">
+            <a href="#app" className="nav_cta">Get the App</a>
+            <button onClick={() => setMobileOpen(!mobileOpen)} className="nav_mobile-toggle" aria-label="Toggle menu">
+              {mobileOpen ? <X size={20} weight="bold" /> : <List size={20} weight="bold" />}
+            </button>
           </div>
         </div>
       </motion.nav>
@@ -95,8 +95,8 @@ export default function Navigation() {
               >
                 <a
                   href="#app"
-                  className="button is-primary is-large"
-                  style={{ marginTop: '24px' }}
+                  className="nav_cta is-large"
+                  style={{ marginTop: '24px', padding: '14px 32px', fontSize: '1rem' }}
                   onClick={() => setMobileOpen(false)}
                 >
                   Get the App
@@ -108,21 +108,112 @@ export default function Navigation() {
       </AnimatePresence>
 
       <style jsx global>{`
-        .nav_component { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }
-        .nav_background { position: absolute; inset: 0; background: #0a0a0a; opacity: 1; }
-        .nav_border { position: absolute; inset-inline: 0; bottom: 0; height: 1px; background: white; opacity: 0.06; }
-        .nav_inner { position: relative; z-index: 10; }
-        .nav_container { display: flex; align-items: center; justify-content: space-between; height: 4.25rem; max-height: 4.25rem; padding-top: 0.75rem; padding-bottom: 0.75rem; }
-        .nav_logo { height: 2.75rem; width: auto; object-fit: contain; }
-        .nav_menu { display: none; align-items: center; gap: 32px; }
-        .nav_link { font-size: 0.8125rem; position: relative; transition: color 0.2s; text-decoration: none; color: rgb(180, 184, 192); }
-        .nav_link:hover { color: var(--color-text-primary); }
-        .nav_link-underline { position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #FF006E; transition: width 0.3s ease; }
-        .nav_link:hover .nav_link-underline { width: 100%; }
-        .nav_right { display: flex; align-items: center; gap: 16px; }
-        .nav_cta { display: inline-flex; padding: 8px 16px; font-size: 12px; font-weight: 800; }
-        .nav_mobile-toggle { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: none; border: none; color: var(--color-text-secondary); cursor: pointer; transition: color 0.2s; z-index: 60; position: relative; }
-        .nav_mobile-toggle:hover { color: var(--color-text-primary); }
+        .nav_spacer { height: 0; }
+
+        .nav_component {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 50;
+          display: flex;
+          justify-content: center;
+          padding: 16px 20px;
+          transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav_component.is-scrolled {
+          padding: 10px 20px;
+        }
+
+        .nav_pill {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          max-width: 900px;
+          padding: 10px 10px 10px 16px;
+          border-radius: 100px;
+          background: rgba(15, 15, 15, 0.7);
+          backdrop-filter: blur(20px) saturate(1.4);
+          -webkit-backdrop-filter: blur(20px) saturate(1.4);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav_component.is-scrolled .nav_pill {
+          padding: 8px 8px 8px 14px;
+          background: rgba(12, 12, 12, 0.85);
+          box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+
+        .nav_logo-link { display: flex; align-items: center; flex-shrink: 0; }
+        .nav_logo {
+          height: 2.25rem;
+          width: auto;
+          object-fit: contain;
+          transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav_component.is-scrolled .nav_logo { height: 1.85rem; }
+
+        .nav_menu { display: none; align-items: center; gap: 8px; }
+        .nav_link {
+          font-size: 0.8125rem;
+          font-weight: 500;
+          padding: 6px 14px;
+          border-radius: 100px;
+          color: rgba(255, 255, 255, 0.6);
+          text-decoration: none;
+          transition: all 0.25s ease;
+          white-space: nowrap;
+        }
+        .nav_link:hover {
+          color: rgba(255, 255, 255, 0.95);
+          background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav_right { display: flex; align-items: center; gap: 10px; }
+
+        .nav_cta {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 8px 18px;
+          font-size: 0.8125rem;
+          font-weight: 700;
+          color: white;
+          background: #FF006E;
+          border-radius: 100px;
+          text-decoration: none;
+          white-space: nowrap;
+          transition: all 0.25s ease;
+          border: none;
+          cursor: pointer;
+        }
+        .nav_cta:hover {
+          background: #E0005F;
+          transform: scale(1.03);
+          box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
+        }
+
+        .nav_mobile-toggle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 100px;
+          color: rgba(255, 255, 255, 0.7);
+          cursor: pointer;
+          transition: all 0.25s ease;
+          z-index: 60;
+          position: relative;
+        }
+        .nav_mobile-toggle:hover {
+          color: white;
+          background: rgba(255, 255, 255, 0.1);
+        }
 
         /* Full-screen overlay */
         .nav_fullscreen-overlay { position: fixed; inset: 0; z-index: 55; background: #0a0a0a; display: flex; align-items: center; justify-content: center; }
@@ -133,7 +224,7 @@ export default function Navigation() {
 
         @media (min-width: 768px) {
           .nav_menu { display: flex; }
-          .nav_cta { padding: 10px 20px; font-size: 13px; }
+          .nav_cta { padding: 9px 22px; font-size: 0.8125rem; }
           .nav_mobile-toggle { display: none; }
         }
       `}</style>
