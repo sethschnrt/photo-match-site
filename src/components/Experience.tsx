@@ -173,6 +173,7 @@ export default function Experience() {
         .experience_feature {
           background: var(--color-bg-secondary);
           border: 1px solid var(--color-border);
+          border-left: 3px solid #FF006E;
           border-radius: 16px;
           padding: 40px;
           position: relative;

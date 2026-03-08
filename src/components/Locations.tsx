@@ -64,14 +64,16 @@ export default function Locations() {
       })
 
       map.on('load', () => {
-        // Center all pins with even padding
+        // Fit all pins — The Domain (lat 30.40) is far north of downtown cluster (~30.26)
+        // Use more top padding to keep downtown centered visually
         const bounds = new maplibregl.LngLatBounds()
         locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]))
-        map.fitBounds(bounds, { padding: 60, duration: 0 })
+        const pad = { top: 50, bottom: 50, left: 50, right: 50 }
+        map.fitBounds(bounds, { padding: pad, duration: 0 })
 
-        // Re-fit on resize so pins stay centered on all screen sizes
+        // Re-fit on resize
         map.on('resize', () => {
-          map.fitBounds(bounds, { padding: 60, duration: 0 })
+          map.fitBounds(bounds, { padding: pad, duration: 0 })
         })
 
         // Add markers
