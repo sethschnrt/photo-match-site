@@ -148,13 +148,14 @@ export default function Hero() {
         @media (max-width: 767px) {
           .section_hero {
             align-items: center;
+            justify-content: center;
           }
           .hero_overlay {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.45);
           }
           .hero_content-wrapper {
-            padding-bottom: calc(32px + env(safe-area-inset-bottom, 16px));
-            padding-top: 64px;
+            padding-bottom: env(safe-area-inset-bottom, 16px);
+            padding-top: 0;
           }
           .hero_bg {
             inset: 0;
