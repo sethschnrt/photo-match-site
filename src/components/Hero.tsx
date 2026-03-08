@@ -144,21 +144,17 @@ export default function Hero() {
           box-shadow: 0 0 30px rgba(255, 0, 110, 0.3);
         }
 
-        /* Mobile: content below sign, strong bottom gradient */
+        /* Mobile: centered content, heavy overlay to hide neon sign */
         @media (max-width: 767px) {
           .section_hero {
-            align-items: flex-end;
+            align-items: center;
+            justify-content: center;
           }
           .hero_overlay {
-            background: linear-gradient(
-              to bottom,
-              transparent 30%,
-              rgba(10, 10, 10, 0.6) 55%,
-              rgba(10, 10, 10, 0.92) 75%,
-              #0a0a0a 100%
-            );
+            background: rgba(0, 0, 0, 0.9);
           }
           .hero_content-wrapper {
+            padding-top: 0;
             padding-bottom: calc(24px + env(safe-area-inset-bottom, 16px));
           }
           .hero_bg {
