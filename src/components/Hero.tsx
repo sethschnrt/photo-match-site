@@ -72,7 +72,7 @@ export default function Hero() {
         .hero_bg {
           position: absolute;
           inset: 0;
-          transform: scale(1.05);
+          transform: scale(1.10);
         }
         .hero_bg-image {
           object-fit: cover;
