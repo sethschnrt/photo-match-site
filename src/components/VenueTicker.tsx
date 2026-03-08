@@ -16,9 +16,11 @@ export default function VenueTicker() {
         className="ticker_track"
       >
         {[...venues, ...venues].map((name, i) => (
-          <span key={i} className="ticker_item text-color-tertiary">
+          <span key={i} className="ticker_item">
             {name}
-            <span className="ticker_dot" />
+            <svg className="ticker_pin" viewBox="0 0 24 32" width="12" height="16" fill="#FF006E" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 9 12 20 12 20s12-11 12-20c0-6.627-5.373-12-12-12zm0 16a4 4 0 110-8 4 4 0 010 8z"/>
+            </svg>
           </span>
         ))}
       </motion.div>
@@ -26,8 +28,8 @@ export default function VenueTicker() {
       <style jsx global>{`
         .ticker_component { padding: 20px 0; overflow: hidden; border-bottom: 1px solid var(--color-border); }
         .ticker_track { display: flex; gap: 32px; white-space: nowrap; }
-        .ticker_item { font-size: 0.8125rem; display: flex; align-items: center; gap: 32px; }
-        .ticker_dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,0,110,0.3); flex-shrink: 0; }
+        .ticker_item { font-size: 0.8125rem; font-weight: 600; color: rgba(255,255,255,0.75); display: flex; align-items: center; gap: 32px; }
+        .ticker_pin { flex-shrink: 0; opacity: 0.6; }
       `}</style>
     </div>
   )
