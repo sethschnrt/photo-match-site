@@ -50,7 +50,7 @@ export default function Locations() {
         },
         center: [-97.7390, 30.2900],
         zoom: 10,
-        minZoom: 10,
+        minZoom: 9,
         maxZoom: 15,
         attributionControl: false,
         dragRotate: false,
@@ -67,13 +67,8 @@ export default function Locations() {
         // Fit all pins with padding, re-fit on resize
         const bounds = new maplibregl.LngLatBounds()
         locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]))
-        const container = mapContainer.current!
         const fitMap = () => {
-          const w = container.offsetWidth
-          const h = container.offsetHeight
-          // More padding on wider viewports to center the tall pin spread
-          // Extra top padding for marker height (pins anchor at bottom, extend ~35px up)
-          map.fitBounds(bounds, { padding: { top: 60, bottom: 30, left: 30, right: 30 }, maxZoom: 12, duration: 0 })
+          map.fitBounds(bounds, { padding: { top: 50, bottom: 30, left: 30, right: 30 }, maxZoom: 12, duration: 0 })
         }
         fitMap()
         map.on('resize', fitMap)
