@@ -14,7 +14,15 @@ export default function Hero() {
           src={`${basePath}/assets/images/neon-sign-hero.webp`}
           alt="Photo Match neon sign on bar wall"
           fill
-          className="hero_bg-image"
+          className="hero_bg-image hero_bg-desktop"
+          priority
+          unoptimized
+        />
+        <Image
+          src={`${basePath}/assets/images/hero-mobile-brick.webp`}
+          alt="Brick wall background"
+          fill
+          className="hero_bg-image hero_bg-mobile"
           priority
           unoptimized
         />
@@ -61,6 +69,9 @@ export default function Hero() {
         .hero_bg-image {
           object-fit: cover;
           object-position: center 10%;
+        }
+        .hero_bg-mobile {
+          display: none;
         }
         .hero_overlay {
           position: absolute;
@@ -144,21 +155,33 @@ export default function Hero() {
           box-shadow: 0 0 30px rgba(255, 0, 110, 0.3);
         }
 
-        /* Mobile: centered content, heavy overlay to hide neon sign */
+        /* Mobile: centered content, brick wall bg with gradient overlay */
         @media (max-width: 767px) {
           .section_hero {
             align-items: center;
             justify-content: center;
           }
+          .hero_bg-desktop {
+            display: none;
+          }
+          .hero_bg-mobile {
+            display: block;
+          }
           .hero_overlay {
-            background: rgba(0, 0, 0, 0.9);
+            background: linear-gradient(
+              to bottom,
+              transparent 20%,
+              rgba(10, 10, 10, 0.4) 50%,
+              rgba(10, 10, 10, 0.95) 75%,
+              #0a0a0a 100%
+            );
           }
           .hero_content-wrapper {
             padding-top: 0;
             padding-bottom: calc(24px + env(safe-area-inset-bottom, 16px));
           }
           .hero_bg {
-            inset: -10% 0 0 0;
+            inset: 0;
           }
         }
 
