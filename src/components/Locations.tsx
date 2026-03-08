@@ -67,7 +67,15 @@ export default function Locations() {
         // Fit all pins with padding, re-fit on resize
         const bounds = new maplibregl.LngLatBounds()
         locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]))
-        const fitMap = () => map.fitBounds(bounds, { padding: 40, maxZoom: 12, duration: 0 })
+        const container = mapContainer.current!
+        const fitMap = () => {
+          const w = container.offsetWidth
+          const h = container.offsetHeight
+          // More padding on wider viewports to center the tall pin spread
+          const vPad = Math.max(30, h * 0.08)
+          const hPad = Math.max(30, w * 0.2)
+          map.fitBounds(bounds, { padding: { top: vPad, bottom: vPad, left: hPad, right: hPad }, maxZoom: 12, duration: 0 })
+        }
         fitMap()
         map.on('resize', fitMap)
 
