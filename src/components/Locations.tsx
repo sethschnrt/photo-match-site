@@ -72,8 +72,9 @@ export default function Locations() {
           const w = container.offsetWidth
           const h = container.offsetHeight
           // More padding on wider viewports to center the tall pin spread
-          const vPad = Math.max(30, h * 0.08)
-          const hPad = Math.max(30, w * 0.2)
+          const isMobile = w < 768
+          const vPad = Math.max(20, h * 0.08)
+          const hPad = isMobile ? 20 : Math.max(30, w * 0.2)
           map.fitBounds(bounds, { padding: { top: vPad, bottom: vPad, left: hPad, right: hPad }, maxZoom: 12, duration: 0 })
         }
         fitMap()
@@ -224,7 +225,10 @@ export default function Locations() {
           border-radius: 16px;
           overflow: hidden;
           border: 1px solid var(--color-border);
-          aspect-ratio: 16 / 10;
+          aspect-ratio: 4 / 3;
+        }
+        @media (min-width: 768px) {
+          .locations_map-wrap { aspect-ratio: 16 / 10; }
         }
         .locations_maplibre { width: 100%; height: 100%; }
 
