@@ -72,10 +72,8 @@ export default function Locations() {
           const w = container.offsetWidth
           const h = container.offsetHeight
           // More padding on wider viewports to center the tall pin spread
-          const isMobile = w < 768
-          const vPad = Math.max(20, h * 0.08)
-          const hPad = isMobile ? 20 : Math.max(30, w * 0.2)
-          map.fitBounds(bounds, { padding: { top: vPad, bottom: vPad, left: hPad, right: hPad }, maxZoom: 12, duration: 0 })
+          const pad = 30
+          map.fitBounds(bounds, { padding: pad, maxZoom: 12, duration: 0 })
         }
         fitMap()
         map.on('resize', fitMap)
