@@ -48,8 +48,8 @@ export default function Locations() {
           },
           layers: [{ id: 'carto-tiles', type: 'raster', source: 'carto', minzoom: 0, maxzoom: 19 }],
         },
-        center: [-97.7400, 30.3200],
-        zoom: 11,
+        center: [-97.7350, 30.3100],
+        zoom: 11.2,
         minZoom: 10,
         maxZoom: 15,
         attributionControl: false,
@@ -64,18 +64,6 @@ export default function Locations() {
       })
 
       map.on('load', () => {
-        // Fit all pins — The Domain (lat 30.40) is far north of downtown cluster (~30.26)
-        // Use more top padding to keep downtown centered visually
-        const bounds = new maplibregl.LngLatBounds()
-        locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]))
-        const pad = { top: 50, bottom: 50, left: 50, right: 50 }
-        map.fitBounds(bounds, { padding: pad, duration: 0 })
-
-        // Re-fit on resize
-        map.on('resize', () => {
-          map.fitBounds(bounds, { padding: pad, duration: 0 })
-        })
-
         // Add markers
         locations.forEach((loc) => {
           const el = document.createElement('div')
