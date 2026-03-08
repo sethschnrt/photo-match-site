@@ -48,7 +48,7 @@ export default function Locations() {
           },
           layers: [{ id: 'carto-tiles', type: 'raster', source: 'carto', minzoom: 0, maxzoom: 19 }],
         },
-        bounds: [[-97.76, 30.24], [-97.71, 30.41]] as any,
+        bounds: [[-97.78, 30.22], [-97.69, 30.43]] as any,
         fitBoundsOptions: { padding: 30 },
         minZoom: 9,
         maxZoom: 15,
@@ -64,23 +64,6 @@ export default function Locations() {
       })
 
       map.on('load', () => {
-        // Fit all pins with padding, re-fit on resize
-        const bounds = new maplibregl.LngLatBounds()
-        locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]))
-        const fitMap = () => {
-          map.fitBounds(bounds, { padding: 30, maxZoom: 12, duration: 0 })
-        }
-        // fitBounds on load, on resize, AND when container becomes visible
-        fitMap()
-        map.on('resize', fitMap)
-        const observer = new IntersectionObserver((entries) => {
-          if (entries[0]?.isIntersecting) {
-            map.resize()
-            fitMap()
-          }
-        }, { threshold: 0.1 })
-        if (mapContainer.current) observer.observe(mapContainer.current)
-
         // Add markers
         locations.forEach((loc) => {
           const el = document.createElement('div')
