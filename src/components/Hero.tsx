@@ -37,12 +37,32 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8, ease: [0.4, 0, 0.2, 1] }}
           >
-            <span className="hero_badge">NEW LOCATION — Now on Rainey Street</span>
+            <span className="hero_badge">Where Sparks Fly IRL</span>
             <h1 className="hero_heading">The photo booth that<br />finds your match.</h1>
             <p className="hero_subtitle">
               Step in, snap a photo, and see who you match with.<br className="hero_br-desktop" />
               $5 flat — no downloads needed to play.
             </p>
+
+            {/* Phone mockup — mobile only */}
+            <div className="hero_phone-mockup">
+              <div className="hero_phone-notch" />
+              <div className="hero_phone-screen">
+                <div className="hero_phone-profiles">
+                  <div className="hero_phone-avatar hero_phone-avatar--pink" />
+                  <div className="hero_phone-heart">
+                    <svg viewBox="0 0 24 24" fill="#FF006E" width="28" height="28">
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                  </div>
+                  <div className="hero_phone-avatar hero_phone-avatar--blue" />
+                </div>
+                <p className="hero_phone-match-text">It&apos;s a Match!</p>
+                <p className="hero_phone-compat-text">94% Compatible</p>
+                <div className="hero_phone-chat-btn">Start Chatting</div>
+              </div>
+            </div>
+
             <MagneticButton href="#app" className="hero_cta-btn">
               Download the App
             </MagneticButton>
@@ -134,6 +154,11 @@ export default function Hero() {
 
         .hero_br-desktop { display: none; }
 
+        /* Phone mockup — hidden on desktop */
+        .hero_phone-mockup {
+          display: none;
+        }
+
         .hero_cta-btn {
           display: inline-flex;
           align-items: center;
@@ -155,10 +180,10 @@ export default function Hero() {
           box-shadow: 0 0 30px rgba(255, 0, 110, 0.3);
         }
 
-        /* Mobile: centered content, brick wall bg with gradient overlay */
+        /* Mobile: phone mockup layout */
         @media (max-width: 767px) {
           .section_hero {
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
           }
           .hero_bg-desktop {
@@ -170,18 +195,123 @@ export default function Hero() {
           .hero_overlay {
             background: linear-gradient(
               to bottom,
-              transparent 20%,
-              rgba(10, 10, 10, 0.4) 50%,
-              rgba(10, 10, 10, 0.95) 75%,
+              transparent 10%,
+              rgba(10, 10, 10, 0.35) 35%,
+              rgba(10, 10, 10, 0.85) 65%,
               #0a0a0a 100%
             );
           }
           .hero_content-wrapper {
             padding-top: 0;
             padding-bottom: calc(24px + env(safe-area-inset-bottom, 16px));
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            min-height: 100dvh;
           }
           .hero_bg {
             inset: 0;
+          }
+          .hero_stack {
+            justify-content: center;
+            gap: 0;
+          }
+          .hero_heading {
+            font-size: 2rem;
+            margin-bottom: 8px;
+          }
+          .hero_subtitle {
+            display: none;
+          }
+          .hero_badge {
+            margin-bottom: 12px;
+          }
+
+          /* Phone mockup styles */
+          .hero_phone-mockup {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 220px;
+            height: 440px;
+            background: #111;
+            border: 2px solid #333;
+            border-radius: 32px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(255, 0, 110, 0.3);
+            margin: 20px 0 24px 0;
+          }
+          .hero_phone-notch {
+            width: 80px;
+            height: 22px;
+            background: #000;
+            border-radius: 0 0 16px 16px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            flex-shrink: 0;
+          }
+          .hero_phone-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            width: 100%;
+            background: #1a1a1a;
+            padding: 16px 12px 20px;
+            gap: 12px;
+          }
+          .hero_phone-profiles {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+          }
+          .hero_phone-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            flex-shrink: 0;
+          }
+          .hero_phone-avatar--pink {
+            background: linear-gradient(135deg, #FF006E, #8B5CF6);
+          }
+          .hero_phone-avatar--blue {
+            background: linear-gradient(135deg, #3B82F6, #06B6D4);
+          }
+          .hero_phone-heart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+          }
+          .hero_phone-match-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            line-height: 1.2;
+          }
+          .hero_phone-compat-text {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #FF006E;
+            margin: 0;
+            line-height: 1.2;
+          }
+          .hero_phone-chat-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 28px;
+            font-size: 0.8125rem;
+            font-weight: 700;
+            color: #fff;
+            background: #FF006E;
+            border-radius: 100px;
+            margin-top: 4px;
           }
         }
 
