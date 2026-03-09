@@ -38,7 +38,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.8, ease: [0.4, 0, 0.2, 1] }}
           >
             <span className="hero_badge">Where Sparks Fly IRL</span>
-            <h1 className="hero_heading">The photo booth that<br />finds your match.</h1>
+            <h1 className="hero_heading">The photo booth that<br className="hero_br-heading" />finds your match.</h1>
             <p className="hero_subtitle">
               Step in, snap a photo, and see who you match with.<br className="hero_br-desktop" />
               $5 flat — no downloads needed to play.
@@ -134,6 +134,7 @@ export default function Hero() {
         }
 
         .hero_br-desktop { display: none; }
+        .hero_br-heading { display: none; }
 
         /* Phone mockup — hidden on desktop */
         .hero_phone-mockup {
@@ -198,6 +199,7 @@ export default function Hero() {
           .hero_heading {
             font-size: 2.35rem;
             margin-bottom: 8px;
+            text-wrap: balance;
           }
           .hero_subtitle {
             display: block;
@@ -212,6 +214,7 @@ export default function Hero() {
 
         @media (min-width: 768px) {
           .hero_br-desktop { display: inline; }
+          .hero_br-heading { display: inline; }
           .hero_heading { font-size: clamp(2.5rem, 4.5vw, 3.25rem); }
         }
       `}</style>
