@@ -38,7 +38,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.8, ease: [0.4, 0, 0.2, 1] }}
           >
             <span className="hero_badge">Where Sparks Fly IRL</span>
-            <h1 className="hero_heading">The photo booth that<br className="hero_br-heading" />finds your match.</h1>
+            <h1 className="hero_heading">The photo booth that<br className="hero_br-heading" /> finds your match.</h1>
             <p className="hero_subtitle">
               Step in, snap a photo, and see who you match with.<br className="hero_br-desktop" />
               $5 flat — no downloads needed to play.
