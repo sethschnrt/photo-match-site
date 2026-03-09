@@ -44,7 +44,7 @@ export default function Navigation() {
           </div>
 
           <div className="nav_right">
-            <a href="#app" className="nav_cta">Get the App</a>
+            <a href="#app" className="nav_cta">Download the App</a>
             <button onClick={() => setMobileOpen(!mobileOpen)} className="nav_mobile-toggle" aria-label="Toggle menu">
               {mobileOpen ? <X size={20} weight="bold" /> : <List size={20} weight="bold" />}
             </button>
@@ -96,10 +96,10 @@ export default function Navigation() {
                 <a
                   href="#app"
                   className="nav_cta is-large"
-                  style={{ marginTop: '24px', padding: '14px 32px', fontSize: '1rem' }}
+                  style={{ marginTop: '24px', padding: '14px 32px', fontSize: '0.9375rem', fontWeight: 700 }}
                   onClick={() => setMobileOpen(false)}
                 >
-                  Get the App
+                  Download the App
                 </a>
               </motion.li>
             </ul>
@@ -190,7 +190,7 @@ export default function Navigation() {
         .nav_cta:hover {
           background: #E0005F;
           transform: scale(1.03);
-          box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
+          box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
         }
 
         .nav_mobile-toggle {

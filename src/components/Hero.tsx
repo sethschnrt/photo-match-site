@@ -1,7 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import MagneticButton from './MagneticButton'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -44,9 +43,9 @@ export default function Hero() {
               $5 flat — no downloads needed to play.
             </p>
 
-            <MagneticButton href="#app" className="hero_cta-btn">
+            <a href="#app" className="hero_cta-btn">
               Download the App
-            </MagneticButton>
+            </a>
           </motion.div>
         </div>
       </div>
@@ -159,7 +158,7 @@ export default function Hero() {
         .hero_cta-btn:hover {
           background: #E0005F;
           transform: scale(1.03);
-          box-shadow: 0 0 30px rgba(255, 0, 110, 0.3);
+          box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
         }
 
         /* Mobile layout */

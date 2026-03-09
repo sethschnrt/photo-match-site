@@ -4,7 +4,6 @@ import { useRef } from 'react'
 import Image from 'next/image'
 import { InstagramLogo, TiktokLogo, XLogo } from '@phosphor-icons/react/dist/ssr'
 import AnimatedText from './AnimatedText'
-import MagneticButton from './MagneticButton'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -53,9 +52,9 @@ export default function Footer() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.25 }}
             >
-              <MagneticButton href="#app" className="button is-white is-large">
+              <a href="#app" className="footer_cta-btn">
                 Download the App
-              </MagneticButton>
+              </a>
             </motion.div>
           </div>
         </div>
@@ -126,6 +125,26 @@ export default function Footer() {
         .footer_cta-content { position: relative; z-index: 2; text-align: center; padding: 160px 0 160px; }
         .footer_cta-heading { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; color: white; margin-bottom: 16px; }
         .footer_cta-text { color: rgba(255,255,255,0.8); font-size: 1rem; max-width: 400px; margin: 0 auto 40px; line-height: 1.6; }
+        .footer_cta-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 14px 32px;
+          font-size: 0.9375rem;
+          font-weight: 700;
+          color: white;
+          background: #FF006E;
+          border-radius: 100px;
+          text-decoration: none;
+          transition: all 0.25s ease;
+          border: none;
+          cursor: pointer;
+        }
+        .footer_cta-btn:hover {
+          background: #E0005F;
+          transform: scale(1.03);
+          box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
+        }
         .footer_bottom { background: #0a0a0a; padding-top: 64px; padding-bottom: 32px; }
         .footer_bottom-inner { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 48px; }
         .footer_brand { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
