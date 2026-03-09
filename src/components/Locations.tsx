@@ -321,7 +321,7 @@ export default function Locations() {
           padding: 12px 16px;
           background: var(--color-bg-secondary);
           border: 1px solid var(--color-border);
-          border-radius: 10px;
+          border-radius: 100px;
           cursor: pointer;
           transition: border-color 0.2s, background 0.2s;
         }
