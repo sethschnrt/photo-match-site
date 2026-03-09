@@ -211,6 +211,8 @@ export default function Navigation() {
         .nav_mobile-toggle:hover {
           color: white;
           background: rgba(255, 255, 255, 0.1);
+          transform: scale(1.03);
+          box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
         }
 
         /* Full-screen overlay */

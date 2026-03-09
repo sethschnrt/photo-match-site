@@ -78,8 +78,8 @@ export default function Testimonial() {
         .testimonial_quote { font-size: clamp(1.375rem, 3vw, 1.75rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.35; text-align: center; min-height: 100px; }
         .testimonial_author { text-align: center; margin-top: 32px; font-size: 0.9375rem; }
         .testimonial_nav { display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 40px; }
-        .testimonial_arrow { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: var(--color-text-tertiary); background: none; cursor: pointer; transition: all 0.2s; }
-        .testimonial_arrow:hover { color: var(--color-text-primary); border-color: rgba(255,255,255,0.2); }
+        .testimonial_arrow { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: var(--color-text-tertiary); background: none; cursor: pointer; transition: all 0.25s ease; }
+        .testimonial_arrow:hover { color: var(--color-text-primary); border-color: rgba(255,255,255,0.2); transform: scale(1.03); box-shadow: 0 0 20px rgba(255, 0, 110, 0.2); }
         .testimonial_dots { display: flex; gap: 8px; }
         .testimonial_dot { width: 8px; height: 8px; border-radius: 50%; background: rgb(60,60,60); border: none; cursor: pointer; transition: all 0.3s; padding: 0; }
         .testimonial_dot.is-active { background: var(--color-accent); width: 24px; border-radius: 4px; }
