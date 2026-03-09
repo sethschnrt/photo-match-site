@@ -197,9 +197,8 @@ export default function Hero() {
             gap: 0;
           }
           .hero_heading {
-            font-size: 2.35rem;
+            font-size: 2.1rem;
             margin-bottom: 8px;
-            text-wrap: balance;
           }
           .hero_subtitle {
             display: block;
