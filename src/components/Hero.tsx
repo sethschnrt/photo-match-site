@@ -164,7 +164,7 @@ export default function Hero() {
         /* Mobile layout */
         @media (max-width: 767px) {
           .section_hero {
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
           }
           .hero_bg-desktop {
@@ -176,9 +176,9 @@ export default function Hero() {
           .hero_overlay {
             background: linear-gradient(
               to bottom,
-              rgba(10,10,10,0.1) 0%,
-              rgba(10,10,10,0.3) 40%,
-              rgba(10,10,10,0.85) 70%,
+              rgba(10,10,10,0.4) 0%,
+              rgba(10,10,10,0.6) 40%,
+              rgba(10,10,10,0.85) 65%,
               #0a0a0a 100%
             );
           }
@@ -200,7 +200,9 @@ export default function Hero() {
             margin-bottom: 8px;
           }
           .hero_subtitle {
-            display: none;
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
           }
           .hero_badge {
             margin-bottom: 12px;
