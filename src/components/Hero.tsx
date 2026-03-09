@@ -176,9 +176,9 @@ export default function Hero() {
           .hero_overlay {
             background: linear-gradient(
               to bottom,
-              rgba(10,10,10,0.5) 0%,
-              rgba(10,10,10,0.7) 35%,
-              rgba(10,10,10,0.9) 60%,
+              rgba(10,10,10,0.65) 0%,
+              rgba(10,10,10,0.8) 30%,
+              rgba(10,10,10,0.92) 55%,
               #0a0a0a 100%
             );
           }
