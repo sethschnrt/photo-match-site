@@ -176,9 +176,9 @@ export default function Hero() {
           .hero_overlay {
             background: linear-gradient(
               to bottom,
-              rgba(10,10,10,0.4) 0%,
-              rgba(10,10,10,0.6) 40%,
-              rgba(10,10,10,0.85) 65%,
+              rgba(10,10,10,0.5) 0%,
+              rgba(10,10,10,0.7) 35%,
+              rgba(10,10,10,0.9) 60%,
               #0a0a0a 100%
             );
           }
@@ -196,12 +196,13 @@ export default function Hero() {
             gap: 0;
           }
           .hero_heading {
-            font-size: 2rem;
+            font-size: 2.35rem;
             margin-bottom: 8px;
           }
           .hero_subtitle {
             display: block;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85);
             margin-bottom: 24px;
           }
           .hero_badge {
