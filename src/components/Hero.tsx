@@ -63,8 +63,8 @@ export default function Hero() {
         }
         .hero_bg {
           position: absolute;
-          inset: -30% 0 0 0;
-          transform: scale(1.10);
+          inset: -15% 0 0 0;
+          transform: scale(1.0);
         }
         .hero_bg-image {
           object-fit: cover;
