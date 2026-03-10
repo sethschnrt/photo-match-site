@@ -104,7 +104,7 @@ export default function ForVenues() {
             transition={{ duration: 0.4, delay: 0.6 }}
             className="for-venues_cta"
           >
-            <a href="#" className="button is-primary">Book a Demo</a>
+            <a href="#" className="button is-secondary">Learn More</a>
           </motion.div>
         </div>
       </div>
