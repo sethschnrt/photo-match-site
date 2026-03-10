@@ -54,16 +54,16 @@ export default function Hero() {
         .section_hero {
           position: relative;
           overflow: hidden;
-          min-height: 100vh;
-          min-height: 100dvh;
-          max-height: 100vh;
-          max-height: 100dvh;
+          min-height: 95vh;
+          min-height: 95dvh;
+          max-height: 95vh;
+          max-height: 95dvh;
           display: flex;
           align-items: flex-end;
         }
         .hero_bg {
           position: absolute;
-          inset: -15% 0 0 0;
+          inset: -20% 0 0 0;
           transform: scale(1.0);
         }
         .hero_bg-image {
