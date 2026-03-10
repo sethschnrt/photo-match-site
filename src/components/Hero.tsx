@@ -54,21 +54,20 @@ export default function Hero() {
         .section_hero {
           position: relative;
           overflow: hidden;
-          min-height: 95vh;
-          min-height: 95dvh;
-          max-height: 95vh;
-          max-height: 95dvh;
+          min-height: 100vh;
+          min-height: 100dvh;
+          max-height: 100vh;
+          max-height: 100dvh;
           display: flex;
           align-items: flex-end;
         }
         .hero_bg {
           position: absolute;
-          inset: -15% 0 0 0;
-          transform: scale(1.0);
+          inset: 0;
         }
         .hero_bg-image {
           object-fit: cover;
-          object-position: center 5%;
+          object-position: center 25%;
         }
         .hero_bg-mobile {
           display: none;
@@ -78,10 +77,9 @@ export default function Hero() {
           inset: 0;
           background: linear-gradient(
             to bottom,
-            transparent 50%,
-            rgba(10, 10, 10, 0.25) 70%,
-            rgba(10, 10, 10, 0.75) 90%,
-            #0a0a0a 100%
+            transparent 60%,
+            rgba(10, 10, 10, 0.15) 80%,
+            rgba(10, 10, 10, 0.4) 100%
           );
         }
 
@@ -89,7 +87,9 @@ export default function Hero() {
           position: relative;
           z-index: 10;
           width: 100%;
-          padding-bottom: 64px;
+          padding-bottom: 48px;
+          padding-top: 20px;
+          background: linear-gradient(to bottom, transparent 0%, rgba(10,10,10,0.6) 20%, rgba(10,10,10,0.95) 60%, #0a0a0a 100%);
         }
 
         .hero_stack {
