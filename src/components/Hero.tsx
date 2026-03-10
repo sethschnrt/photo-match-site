@@ -63,12 +63,12 @@ export default function Hero() {
         }
         .hero_bg {
           position: absolute;
-          inset: -35% 0 0 0;
+          inset: -15% 0 0 0;
           transform: scale(1.0);
         }
         .hero_bg-image {
           object-fit: cover;
-          object-position: center 10%;
+          object-position: center 20%;
         }
         .hero_bg-mobile {
           display: none;
