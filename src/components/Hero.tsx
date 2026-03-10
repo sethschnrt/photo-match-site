@@ -68,7 +68,7 @@ export default function Hero() {
         }
         .hero_bg-image {
           object-fit: cover;
-          object-position: center 20%;
+          object-position: center 5%;
         }
         .hero_bg-mobile {
           display: none;
