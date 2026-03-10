@@ -63,11 +63,11 @@ export default function Hero() {
         }
         .hero_bg {
           position: absolute;
-          inset: 0;
+          inset: -15% 0 0 0;
         }
         .hero_bg-image {
           object-fit: cover;
-          object-position: center top;
+          object-position: center 30%;
         }
         .hero_bg-mobile {
           display: none;
@@ -77,9 +77,9 @@ export default function Hero() {
           inset: 0;
           background: linear-gradient(
             to bottom,
-            transparent 40%,
-            rgba(10, 10, 10, 0.4) 60%,
-            rgba(10, 10, 10, 0.85) 80%,
+            transparent 50%,
+            rgba(10, 10, 10, 0.25) 70%,
+            rgba(10, 10, 10, 0.75) 90%,
             #0a0a0a 100%
           );
         }
