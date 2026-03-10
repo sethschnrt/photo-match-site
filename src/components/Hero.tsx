@@ -67,7 +67,7 @@ export default function Hero() {
         }
         .hero_bg-image {
           object-fit: cover;
-          object-position: center 25%;
+          object-position: center top;
         }
         .hero_bg-mobile {
           display: none;
@@ -77,9 +77,10 @@ export default function Hero() {
           inset: 0;
           background: linear-gradient(
             to bottom,
-            transparent 60%,
-            rgba(10, 10, 10, 0.15) 80%,
-            rgba(10, 10, 10, 0.4) 100%
+            transparent 40%,
+            rgba(10, 10, 10, 0.4) 60%,
+            rgba(10, 10, 10, 0.85) 80%,
+            #0a0a0a 100%
           );
         }
 
@@ -88,8 +89,6 @@ export default function Hero() {
           z-index: 10;
           width: 100%;
           padding-bottom: 48px;
-          padding-top: 20px;
-          background: linear-gradient(to bottom, transparent 0%, rgba(10,10,10,0.6) 20%, rgba(10,10,10,0.95) 60%, #0a0a0a 100%);
         }
 
         .hero_stack {
